@@ -30,7 +30,7 @@ df1 <- get_acs(geography = "county",
                 survey = "acs1/subject",cache_table = TRUE)
 ```
 
-### **Project Idea Update:**
+### [**Project Idea Update:**]{.underline}
 
 **Project Title**: Comparative Analysis of Population by Sex in Urban and Rural Areas Using ACS Data
 
