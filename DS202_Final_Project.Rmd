@@ -12,7 +12,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### \*\*Project Title:\*
+### \*\*Project Title: Income and earnings for the various county's in USA\*
 
 ```{r}
 #install.packages("tidycensus")
@@ -31,8 +31,6 @@ df1 <- get_acs(geography = "county",
 ```
 
 ### [**Project Idea Update:**]{.underline}
-
-**Project Title**: Comparative Analysis of Population by Sex in Urban and Rural Areas Using ACS Data
 
 #### Updated Description of the Data Set:
 
