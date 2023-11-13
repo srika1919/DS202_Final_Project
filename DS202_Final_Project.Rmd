@@ -1,6 +1,6 @@
 ---
 title: "Proposal Draft 1"
-authors: "Abhay Prasanna Rao, Srika Raja"
+authors: ["Abhay", "Srika","Neha","Esha","Niharika"]
 date: "2023-11-12"
 output: html_document
 editor_options: 
