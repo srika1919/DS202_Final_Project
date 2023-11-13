@@ -9,7 +9,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Abhay Prasanna Rao" />
 
 <meta name="date" content="2023-11-12" />
 
@@ -351,14 +350,13 @@ display: none;
 
 
 <h1 class="title toc-ignore">Proposal Draft 1</h1>
-<h4 class="author">Abhay Prasanna Rao</h4>
 <h4 class="date">2023-11-12</h4>
 
 </div>
 
 
-<div id="project-title-income-and-earnings-for-the-various-countys-in-usa" class="section level3">
-<h3>**Project Title: Income and earnings for the various county’s in
+<div id="project-title-income-and-employment-for-the-various-countys-in-usa" class="section level3">
+<h3>**Project Title: Income and employment for the various county’s in
 USA*</h3>
 <pre class="r"><code>#install.packages(&quot;tidycensus&quot;)
 library(tidycensus)</code></pre>
@@ -368,12 +366,6 @@ library(tidycensus)</code></pre>
                 year = 2021, 
                 survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
-<pre><code>## Warning: • You have not set a Census API key. Users without a key are limited to 500
-## queries per day and may experience performance limitations.
-## ℹ For best results, get a Census API key at
-## http://api.census.gov/data/key_signup.html and then supply the key to the
-## `census_api_key()` function to use it throughout your tidycensus session.
-## This warning is displayed once per session.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K200101 and caching the dataset for faster future access.</code></pre>
 </div>
 <div id="project-idea-update" class="section level3">
@@ -442,8 +434,7 @@ df1$variable &lt;- as.factor(df1$variable)</code></pre>
 <li><strong>Population Breakdown</strong>: Summarize population counts
 by sex across different regions.</li>
 </ul>
-<pre class="r"><code># Assuming the &#39;variable&#39; column contains data differentiating by sex
-library(dplyr)</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:
@@ -477,8 +468,7 @@ library(dplyr)</code></pre>
 <li><strong>Error Analysis</strong>: Evaluate the impact of margin of
 error on population estimates.</li>
 </ul>
-<pre class="r"><code># Error Analysis: Evaluate the impact of margin of error on population estimates
-error_analysis &lt;- df1 %&gt;%
+<pre class="r"><code>error_analysis &lt;- df1 %&gt;%
   filter(!is.na(moe)) %&gt;%  # Filter out rows where moe is NA
   mutate(Percent_MOE = (moe / estimate) * 100) %&gt;%  # Calculate percent MOE
   summarize(Average_MOE = mean(Percent_MOE, na.rm = TRUE))  # Average MOE
@@ -488,10 +478,8 @@ error_analysis</code></pre>
 ##   Average_MOE
 ##         &lt;dbl&gt;
 ## 1        3.26</code></pre>
-<ul>
-<li><strong>Urban vs. Rural Comparison</strong>: Initial comparison of
-population distributions in urban and rural settings based on sex.</li>
-</ul>
+<p>Further, we are going to take different variables(employment and
+income) and then combine them by the same counties.</p>
 </div>
 </div>
 

@@ -12,7 +12,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### \*\*Project Title: Income and earnings for the various county's in USA\*
+### \*\*Project Title: Income and employment for the various county's in USA\*
 
 ```{r}
 #install.packages("tidycensus")
@@ -29,6 +29,8 @@ df1 <- get_acs(geography = "county",
                 year = 2021, 
                 survey = "acs1/subject",cache_table = TRUE)
 ```
+
+
 
 
 
@@ -81,7 +83,6 @@ summary(df1)
 
 -   **Population Breakdown**: Summarize population counts by sex across different regions.
 ```{r}
-# Assuming the 'variable' column contains data differentiating by sex
 library(dplyr)
 population_breakdown <- df1 %>%
   group_by(NAME, variable) %>%
@@ -94,7 +95,7 @@ population_breakdown
 
 -   **Error Analysis**: Evaluate the impact of margin of error on population estimates.
 ```{r}
-# Error Analysis: Evaluate the impact of margin of error on population estimates
+
 error_analysis <- df1 %>%
   filter(!is.na(moe)) %>%  # Filter out rows where moe is NA
   mutate(Percent_MOE = (moe / estimate) * 100) %>%  # Calculate percent MOE
@@ -104,4 +105,4 @@ error_analysis
 
 ```
 
--   **Urban vs. Rural Comparison**: Initial comparison of population distributions in urban and rural settings based on sex.
+Further, we are going to take different variables(employment and income) and then combine them by the same counties. 
