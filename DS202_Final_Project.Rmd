@@ -20,13 +20,17 @@ library(tidycensus)
 ```
 
 ```{r}
-census_api_key("b8f1ed5fd4131df25f21be71a41509173d661d91", install = TRUE)
+#census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE,  overwrite=TRUE)
 ```
+
 
 ```{r}
 df1 <- get_acs(geography = "county", 
-                variables = "B27016", 
-                year = 2022, 
-                survey = "acs5")
+                table = "K200101", 
+                year = 2021, 
+                survey = "acs1/subject",cache_table = TRUE)
 ```
+
+
+
 

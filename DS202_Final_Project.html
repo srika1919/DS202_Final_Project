@@ -358,130 +358,16 @@ display: none;
 
 
 <div id="project-title" class="section level3">
-<h3><strong>Project Title:</strong></h3>
-<p><strong>Comparative Analysis of Urban vs. Rural Living in the United
-States</strong></p>
-</div>
-<div id="objective" class="section level3">
-<h3><strong>Objective:</strong></h3>
-<p>To examine and contrast the demographic, economic, and social
-conditions of urban and rural areas in the U.S., leveraging the
-extensive data available through the
-<strong><code>tidycensus</code></strong> package.</p>
-</div>
-<div id="data-source" class="section level3">
-<h3><strong>Data Source:</strong></h3>
-<p>U.S. Census and American Community Survey (ACS) data accessed via the
-<strong><code>tidycensus</code></strong> package in R.</p>
-</div>
-<div id="project-outline" class="section level3">
-<h3><strong>Project Outline:</strong></h3>
-<div id="introduction" class="section level4">
-<h4>Introduction</h4>
-<ul>
-<li><p>Overview of the urban-rural divide and its significance in
-societal development.</p></li>
-<li><p>Objectives and potential impacts of the analysis.</p></li>
-</ul>
-</div>
-<div id="data-acquisition-and-preprocessing" class="section level4">
-<h4>Data Acquisition and Preprocessing</h4>
-<ul>
-<li><p><strong>Data Acquisition</strong>: Instructions on retrieving
-data using <strong><code>tidycensus</code></strong>.</p>
-<pre class="r"><code>   # install.packages(&quot;tidycensus&quot;)
-library(tidycensus)</code></pre></li>
-<li><p>API Key:</p>
-<pre class="r"><code>   # census_api_key(&quot;your_api_key_here&quot;, install = TRUE)</code></pre></li>
-<li><p>Retrieve <a href="Data:\" class="uri">Data:\</a></p></li>
-</ul>
-<pre class="r"><code>#data &lt;- get_acs(geography = &quot;county&quot;, 
-#                variables = &quot;variable_code&quot;, 
-#                year = 2020, 
- #               survey = &quot;acs5&quot;)</code></pre>
-<ul>
-<li><p><strong>Data Preprocessing</strong>:</p>
-<ul>
-<li><p><strong>Cleaning</strong>: Addressing missing or inconsistent
-data.</p></li>
-<li><p><strong>Categorization</strong>: Segregating data based on urban
-and rural classifications.</p></li>
-<li><p><strong>Transformation</strong>: Adapting data for meaningful
-analysis.</p></li>
-</ul></li>
-</ul>
-</div>
-<div id="exploratory-data-analysis-eda" class="section level4">
-<h4>Exploratory Data Analysis (EDA)</h4>
-<ul>
-<li><p>Descriptive statistics to understand basic data
-characteristics.</p></li>
-<li><p>Visualizations showcasing demographic, economic, and housing
-trends.</p></li>
-<li><p>Initial identification of notable differences and similarities
-between urban and rural areas.</p></li>
-</ul>
-</div>
-<div id="in-depth-comparative-analysis" class="section level4">
-<h4>In-Depth Comparative Analysis</h4>
-<ul>
-<li><p>Examination of income levels, poverty rates, and employment
-trends.</p></li>
-<li><p>Housing market dynamics: ownership, values, and types.</p></li>
-<li><p>Educational attainment and its correlation with economic
-opportunities.</p></li>
-</ul>
-</div>
-<div id="geographic-and-social-dynamics" class="section level4">
-<h4>Geographic and Social Dynamics</h4>
-<ul>
-<li><p>Mapping and analysis of population distribution and migration
-trends.</p></li>
-<li><p>Social variables analysis: family structures, languages spoken,
-and community engagement.</p></li>
-</ul>
-</div>
-<div id="conclusion" class="section level4">
-<h4>Conclusion</h4>
-<ul>
-<li><p>Summary of key findings and their implications.</p></li>
-<li><p>Recommendations for policy and future research.</p></li>
-</ul>
-</div>
-<div id="references" class="section level4">
-<h4>References</h4>
-<ul>
-<li>Comprehensive citation of data sources and other references.</li>
-</ul>
-</div>
-</div>
-<div id="deliverables" class="section level3">
-<h3><strong>Deliverables:</strong></h3>
-<ul>
-<li><p>Detailed report with analytical findings and
-visualizations.</p></li>
-<li><p>Code repository for reproducibility and further
-exploration.</p></li>
-</ul>
-</div>
-<div id="tools-and-technologies" class="section level3">
-<h3><strong>Tools and Technologies:</strong></h3>
-<ul>
-<li><p>R programming for data analysis.</p></li>
-<li><p><strong><code>tidycensus</code></strong> for data
-acquisition.</p></li>
-<li><p>Packages like <strong><code>ggplot2</code></strong> for data
-visualization.</p></li>
-</ul>
-</div>
-<div id="skills-demonstrated" class="section level3">
-<h3><strong>Skills Demonstrated:</strong></h3>
-<ul>
-<li><p>Data acquisition and preprocessing.</p></li>
-<li><p>Statistical analysis and mapping.</p></li>
-<li><p>Understanding of urban and rural socio-economic
-dynamics.</p></li>
-</ul>
+<h3>**Project Title:*</h3>
+<pre class="r"><code>#install.packages(&quot;tidycensus&quot;)
+library(tidycensus)</code></pre>
+<pre class="r"><code>#census_api_key(Sys.getenv(&quot;CENSUS_API_KEY&quot;), install = TRUE,  overwrite=TRUE)</code></pre>
+<pre class="r"><code>df1 &lt;- get_acs(geography = &quot;county&quot;, 
+                table = &quot;K200101&quot;, 
+                year = 2021, 
+                survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K200101 and caching the dataset for faster future access.</code></pre>
 </div>
 
 
