@@ -20,7 +20,7 @@ library(tidycensus)
 ```
 
 ```{r}
-#census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE,  overwrite=TRUE)
+#census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE)
 ```
 
 ```{r}
