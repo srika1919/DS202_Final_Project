@@ -12,110 +12,21 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### **Project Title:**
+### **Project Title:*
 
-**Comparative Analysis of Urban vs. Rural Living in the United States**
-
-### **Objective:**
-
-To examine and contrast the demographic, economic, and social conditions of urban and rural areas in the U.S., leveraging the extensive data available through the **`tidycensus`** package.
-
-### **Data Source:**
-
-U.S. Census and American Community Survey (ACS) data accessed via the **`tidycensus`** package in R.
-
-### **Project Outline:**
-
-#### Introduction
-
--   Overview of the urban-rural divide and its significance in societal development.
-
--   Objectives and potential impacts of the analysis.
-
-#### Data Acquisition and Preprocessing
-
--   **Data Acquisition**: Instructions on retrieving data using **`tidycensus`**.
-
-    ```{r}
-   # install.packages("tidycensus")
-    library(tidycensus)
-
-    ```
-
--   API Key:
-
-    ```{r}
-   # census_api_key("your_api_key_here", install = TRUE)
-
-    ```
-
--   Retrieve Data:\
 ```{r}
-#data <- get_acs(geography = "county", 
-#                variables = "variable_code", 
-#                year = 2020, 
- #               survey = "acs5")
-
+#install.packages("tidycensus")
+library(tidycensus)
 ```
 
--   **Data Preprocessing**:
+```{r}
+census_api_key("b8f1ed5fd4131df25f21be71a41509173d661d91", install = TRUE)
+```
 
-    -   **Cleaning**: Addressing missing or inconsistent data.
+```{r}
+df1 <- get_acs(geography = "county", 
+                variables = "B27016", 
+                year = 2022, 
+                survey = "acs5")
+```
 
-    -   **Categorization**: Segregating data based on urban and rural classifications.
-
-    -   **Transformation**: Adapting data for meaningful analysis.
-
-#### Exploratory Data Analysis (EDA)
-
--   Descriptive statistics to understand basic data characteristics.
-
--   Visualizations showcasing demographic, economic, and housing trends.
-
--   Initial identification of notable differences and similarities between urban and rural areas.
-
-#### In-Depth Comparative Analysis
-
--   Examination of income levels, poverty rates, and employment trends.
-
--   Housing market dynamics: ownership, values, and types.
-
--   Educational attainment and its correlation with economic opportunities.
-
-#### Geographic and Social Dynamics
-
--   Mapping and analysis of population distribution and migration trends.
-
--   Social variables analysis: family structures, languages spoken, and community engagement.
-
-#### Conclusion
-
--   Summary of key findings and their implications.
-
--   Recommendations for policy and future research.
-
-#### References
-
--   Comprehensive citation of data sources and other references.
-
-### **Deliverables:**
-
--   Detailed report with analytical findings and visualizations.
-
--   Code repository for reproducibility and further exploration.
-
-### **Tools and Technologies:**
-
--   R programming for data analysis.
-
--   **`tidycensus`** for data acquisition.
-
--   Packages like **`ggplot2`** for data visualization.
-
-### **Skills Demonstrated:**
-
--   Data acquisition and preprocessing.
-
--   Statistical analysis and mapping.
-
--   Understanding of urban and rural socio-economic dynamics.
