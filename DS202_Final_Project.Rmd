@@ -1,6 +1,6 @@
 ---
 title: "Proposal Draft 1"
-author: "Abhay Prasanna Rao"
+authors: "Abhay Prasanna Rao, Srika Raja"
 date: "2023-11-12"
 output: html_document
 editor_options: 
