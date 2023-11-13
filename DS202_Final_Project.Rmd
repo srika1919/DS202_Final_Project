@@ -30,9 +30,11 @@ df1 <- get_acs(geography = "county",
                 survey = "acs1/subject",cache_table = TRUE)
 ```
 
+
+
 ### [**Project Idea Update:**]{.underline}
 
-#### Updated Description of the Data Set:
+#### [Description of the Data Set 1:]{.underline}
 
 -   **Source**: 2022 American Community Survey (ACS) 1-Year Estimates.
 
@@ -42,16 +44,64 @@ df1 <- get_acs(geography = "county",
 
 #### Adjusted Data Cleaning Steps:
 
-1.  **Address Special Symbols**: Interpret and handle symbols like '-', 'N', '(X)', 'median-', 'median+', '**', and '**\*' as per the ACS guidelines.
+1.  Inspecting the data
 
-2.  **Geographic Consistency**: Ensure alignment of geographic data with the OMB's 2020 delineations.
+    ```{r}
+    head(df1)
 
-3.  **Handle Margin of Error**: Carefully interpret and use margin of error data, especially where it's larger than the estimate itself or treated as zero.
+    ```
+
+2.  **Handle Missing Values**
+    ```{r}
+    df1 <- na.omit(df1)  # This removes rows with NA values
+    ```
+
+3.  Address Special Symbols
+```{r}
+df1[df1 == '-'] <- NA
+df1[df1 == 'N'] <- NA
+df1[df1 == '(X)'] <- NA
+```
+
+4. Standardize GEOID and Variable Names
+```{r}
+df1$GEOID <- as.factor(df1$GEOID)
+df1$variable <- as.factor(df1$variable)
+```
+
+
+
+####  
 
 #### Updated Marginal Summaries:
+```{r}
+summary(df1)
+```
+
 
 -   **Population Breakdown**: Summarize population counts by sex across different regions.
+```{r}
+# Assuming the 'variable' column contains data differentiating by sex
+library(dplyr)
+population_breakdown <- df1 %>%
+  group_by(NAME, variable) %>%
+  summarize(Total_Population = sum(estimate, na.rm = TRUE))
+
+population_breakdown
+
+```
+
 
 -   **Error Analysis**: Evaluate the impact of margin of error on population estimates.
+```{r}
+# Error Analysis: Evaluate the impact of margin of error on population estimates
+error_analysis <- df1 %>%
+  filter(!is.na(moe)) %>%  # Filter out rows where moe is NA
+  mutate(Percent_MOE = (moe / estimate) * 100) %>%  # Calculate percent MOE
+  summarize(Average_MOE = mean(Percent_MOE, na.rm = TRUE))  # Average MOE
+
+error_analysis
+
+```
 
 -   **Urban vs. Rural Comparison**: Initial comparison of population distributions in urban and rural settings based on sex.
