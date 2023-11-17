@@ -24,11 +24,42 @@ library(tidycensus)
 ```
 
 ```{r}
+#install.packages("tidycensus")
+library(tidycensus)
+```
+
+```{r}
+#census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE)
+```
+
+```{r}
+#Employment - K202301
 df1 <- get_acs(geography = "county", 
                 table = "K200101", 
                 year = 2021, 
                 survey = "acs1/subject",cache_table = TRUE)
 ```
+
+```{r}
+#Education - K201501
+df2 <-
+```
+
+```{r}
+#Citizenship - K200501
+df3 <-
+```
+
+```{r}
+#Age - K200104
+df4 <-
+```
+
+```{r}
+# Housing - K202502
+df5 <-
+```
+
 
 
 
