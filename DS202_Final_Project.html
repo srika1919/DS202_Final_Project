@@ -391,9 +391,9 @@ df1 &lt;- get_acs(geography = &quot;state&quot;,
 <pre><code>## Loading ACSSE variables for 2021 from table K202301 and caching the dataset for faster future access.</code></pre>
 <pre class="r"><code>variables_df1 &lt;- data.frame(
   variable = c(&quot;K202301_001&quot;, &quot;K202301_002&quot;, &quot;K202301_003&quot;, &quot;K202301_004&quot;, &quot;K202301_005&quot;, &quot;K202301_006&quot;, &quot;K202301_007&quot;),
-  label = c(&quot;Total&quot;, &quot;In labor force: Civilian labor force: Employed&quot;, 
-            &quot;In labor force: Civilian labor force: Unemployed&quot;, &quot;In labor force: Armed Forces&quot;, 
-            &quot;Not in labor force&quot;, &quot;Other Category 1&quot;, &quot;Other Category 2&quot;)
+  label = c(&quot;Total&quot;, &quot;Total In labor force:&quot;, 
+            &quot;Total Civilian labor force:&quot;, &quot;Employed&quot;, 
+            &quot;Unemployed&quot;, &quot;Armed Forces&quot;, &quot;Not in labor force&quot;)
 )
 # Join with variable labels
 

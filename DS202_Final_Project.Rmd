@@ -50,9 +50,9 @@ df1 <- get_acs(geography = "state",
 
 variables_df1 <- data.frame(
   variable = c("K202301_001", "K202301_002", "K202301_003", "K202301_004", "K202301_005", "K202301_006", "K202301_007"),
-  label = c("Total", "In labor force: Civilian labor force: Employed", 
-            "In labor force: Civilian labor force: Unemployed", "In labor force: Armed Forces", 
-            "Not in labor force", "Other Category 1", "Other Category 2")
+  label = c("Total", "Total In labor force:", 
+            "Total Civilian labor force:", "Employed", 
+            "Unemployed", "Armed Forces", "Not in labor force")
 )
 # Join with variable labels
 
