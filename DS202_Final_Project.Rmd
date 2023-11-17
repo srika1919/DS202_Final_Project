@@ -70,9 +70,10 @@ variables_df <- data.frame(
 df_labeled <- df1 %>%
   left_join(variables_df, by = "variable")
 
-# If the 'NAME' column in df1 actually contains state names, you can use pivot_wider to reshape the data
+# Reshape the data so that state names are rows and variable labels are columns
 df_wide <- df_labeled %>%
-  pivot_wider(names_from = NAME, values_from = estimate, id_cols = label)
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
 
 # df_wide now has states as columns and the descriptive variable labels as rows
 
@@ -91,7 +92,7 @@ df2 <- get_acs(geography = "state",
 ```{r}
 #Esha
 #Citizenship - K200501
-df3 <-
+#df3 <-
 ```
 
 ```{r}

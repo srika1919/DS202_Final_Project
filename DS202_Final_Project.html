@@ -358,15 +358,95 @@ display: none;
 <div id="project-title-income-and-employment-for-the-various-countys-in-usa" class="section level3">
 <h3>**Project Title: Income and employment for the various county’s in
 USA*</h3>
-<pre class="r"><code>#install.packages(&quot;tidycensus&quot;)
-library(tidycensus)</code></pre>
 <pre class="r"><code>#census_api_key(Sys.getenv(&quot;CENSUS_API_KEY&quot;), install = TRUE)</code></pre>
-<pre class="r"><code>df1 &lt;- get_acs(geography = &quot;county&quot;, 
-                table = &quot;K200101&quot;, 
+<pre class="r"><code>#install.packages(&quot;tidycensus&quot;)
+# Load necessary libraries
+library(tidycensus)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(tidyr)</code></pre>
+<pre class="r"><code>#Abhay
+#Employment - K202301 for 2021
+
+
+# Set your Census API key
+# census_api_key(&quot;your_key_here&quot;) # Uncomment and put your API key here
+
+
+
+# Get ACS data
+df1 &lt;- get_acs(geography = &quot;state&quot;, 
+               table = &quot;K202301&quot;, 
+               year = 2021, 
+               survey = &quot;acs1-year&quot;, 
+               cache_table = TRUE)</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K202301 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>variables_df &lt;- data.frame(
+  variable = c(&quot;K202301_001&quot;, &quot;K202301_002&quot;, &quot;K202301_003&quot;, &quot;K202301_004&quot;, &quot;K202301_005&quot;, &quot;K202301_006&quot;, &quot;K202301_007&quot;),
+  label = c(&quot;Total&quot;, &quot;In labor force: Civilian labor force: Employed&quot;, 
+            &quot;In labor force: Civilian labor force: Unemployed&quot;, &quot;In labor force: Armed Forces&quot;, 
+            &quot;Not in labor force&quot;, &quot;Other Category 1&quot;, &quot;Other Category 2&quot;)
+)
+# Join with variable labels
+
+
+# Now df_labeled will have an additional column with the variable labels
+# Load variables for ACS 2022
+# Sample mapping of variable codes to labels
+# Replace this with the actual codes and labels
+
+
+# Assuming df1 is your data frame with the estimates you&#39;ve loaded
+# Make sure to replace &#39;NAME&#39; and &#39;estimate&#39; with the actual column names from your df1
+
+# Join your data with the variable labels to get the descriptive names
+df_labeled &lt;- df1 %&gt;%
+  left_join(variables_df, by = &quot;variable&quot;)
+
+# Reshape the data so that state names are rows and variable labels are columns
+df_wide &lt;- df_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+
+# df_wide now has states as columns and the descriptive variable labels as rows</code></pre>
+<pre class="r"><code>#Neha
+#Education - K201501
+df2 &lt;- get_acs(geography = &quot;state&quot;, 
+                table = &quot;K201501&quot;, 
                 year = 2021, 
                 survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
-<pre><code>## Loading ACSSE variables for 2021 from table K200101 and caching the dataset for faster future access.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K201501 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>#Esha
+#Citizenship - K200501
+#df3 &lt;-</code></pre>
+<pre class="r"><code>#Srika
+#Age - K200104
+df4 &lt;- get_acs(geography = &quot;state&quot;, 
+                table = &quot;K200104&quot;, 
+                year = 2021, 
+                survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K200104 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>#Niharika
+# Housing - K202502
+df5 &lt;- get_acs(geography = &quot;state&quot;, 
+                table = &quot;K202502&quot;, 
+                year = 2021, 
+                survey = &quot;acs1&quot;, # removed /subject since we&#39;re referring to a specific table ID
+                cache_table = TRUE)</code></pre>
+<pre><code>## Getting data from the 2021 1-year ACS</code></pre>
+<pre><code>## The 1-year ACS provides data for geographies with populations of 65,000 and greater.</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K202502 and caching the dataset for faster future access.</code></pre>
 </div>
 <div id="project-idea-update" class="section level3">
 <h3><u><strong>Project Idea Update:</strong></u></h3>
@@ -387,14 +467,14 @@ geographic identifiers, and margin of error.</p></li>
 <li><p>Inspecting the data</p>
 <pre class="r"><code>head(df1)</code></pre>
 <pre><code>## # A tibble: 6 × 5
-##   GEOID NAME                    variable    estimate   moe
-##   &lt;chr&gt; &lt;chr&gt;                   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
-## 1 01001 Autauga County, Alabama K200101_001    59095    NA
-## 2 01001 Autauga County, Alabama K200101_002    28048   773
-## 3 01001 Autauga County, Alabama K200101_003    31047   773
-## 4 01003 Baldwin County, Alabama K200101_001   239294    NA
-## 5 01003 Baldwin County, Alabama K200101_002   115696  1401
-## 6 01003 Baldwin County, Alabama K200101_003   123598  1401</code></pre></li>
+##   GEOID NAME    variable    estimate   moe
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
+## 1 01    Alabama K202301_001  4046627  4927
+## 2 01    Alabama K202301_002  2335486 15207
+## 3 01    Alabama K202301_003  2314723 14775
+## 4 01    Alabama K202301_004  2190915 16821
+## 5 01    Alabama K202301_005   123808  8209
+## 6 01    Alabama K202301_006    20763  3134</code></pre></li>
 <li><p><strong>Handle Missing Values</strong></p>
 <pre class="r"><code>df1 &lt;- na.omit(df1)  # This removes rows with NA values</code></pre></li>
 <li><p>Address Special Symbols</p></li>
@@ -414,56 +494,48 @@ df1$variable &lt;- as.factor(df1$variable)</code></pre>
 <div id="updated-marginal-summaries" class="section level4">
 <h4>Updated Marginal Summaries:</h4>
 <pre class="r"><code>summary(df1)</code></pre>
-<pre><code>##      GEOID          NAME                  variable       estimate      
-##  01013  :   3   Length:3897        K200101_001: 103   Min.   :   7000  
-##  01019  :   3   Class :character   K200101_002:1897   1st Qu.:  16005  
-##  01025  :   3   Mode  :character   K200101_003:1897   Median :  26497  
-##  01061  :   3                                         Mean   :  82610  
-##  01087  :   3                                         3rd Qu.:  66226  
-##  01099  :   3                                         Max.   :4958636  
-##  (Other):3879                                                          
-##       moe      
-##  Min.   :  50  
-##  1st Qu.: 481  
-##  Median : 731  
-##  Mean   : 797  
-##  3rd Qu.: 999  
-##  Max.   :3968  
+<pre><code>##      GEOID         NAME                  variable     estimate       
+##  01     :  7   Length:364         K202301_001:52   Min.   :    1313  
+##  02     :  7   Class :character   K202301_002:52   1st Qu.:  193367  
+##  04     :  7   Mode  :character   K202301_003:52   Median : 1050196  
+##  05     :  7                      K202301_004:52   Mean   : 2410286  
+##  06     :  7                      K202301_005:52   3rd Qu.: 3173312  
+##  08     :  7                      K202301_006:52   Max.   :31507237  
+##  (Other):322                      K202301_007:52                     
+##       moe       
+##  Min.   :  639  
+##  1st Qu.: 4479  
+##  Median : 8223  
+##  Mean   :11033  
+##  3rd Qu.:15536  
+##  Max.   :47000  
 ## </code></pre>
 <ul>
 <li><strong>Population Breakdown</strong>: Summarize population counts
 by sex across different regions.</li>
 </ul>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>population_breakdown &lt;- df1 %&gt;%
+<pre class="r"><code>library(dplyr)
+population_breakdown &lt;- df1 %&gt;%
   group_by(NAME, variable) %&gt;%
   summarize(Total_Population = sum(estimate, na.rm = TRUE))</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;NAME&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <pre class="r"><code>population_breakdown</code></pre>
-<pre><code>## # A tibble: 3,897 × 3
-## # Groups:   NAME [1,897]
-##    NAME                             variable    Total_Population
-##    &lt;chr&gt;                            &lt;fct&gt;                  &lt;dbl&gt;
-##  1 Abbeville County, South Carolina K200101_001            24596
-##  2 Abbeville County, South Carolina K200101_002            12277
-##  3 Abbeville County, South Carolina K200101_003            12319
-##  4 Acadia Parish, Louisiana         K200101_002            27956
-##  5 Acadia Parish, Louisiana         K200101_003            29332
-##  6 Accomack County, Virginia        K200101_002            14879
-##  7 Accomack County, Virginia        K200101_003            18367
-##  8 Ada County, Idaho                K200101_002           257335
-##  9 Ada County, Idaho                K200101_003           254596
-## 10 Adair County, Missouri           K200101_002            12358
-## # ℹ 3,887 more rows</code></pre>
+<pre><code>## # A tibble: 364 × 3
+## # Groups:   NAME [52]
+##    NAME    variable    Total_Population
+##    &lt;chr&gt;   &lt;fct&gt;                  &lt;dbl&gt;
+##  1 Alabama K202301_001          4046627
+##  2 Alabama K202301_002          2335486
+##  3 Alabama K202301_003          2314723
+##  4 Alabama K202301_004          2190915
+##  5 Alabama K202301_005           123808
+##  6 Alabama K202301_006            20763
+##  7 Alabama K202301_007          1711141
+##  8 Alaska  K202301_001           571832
+##  9 Alaska  K202301_002           376965
+## 10 Alaska  K202301_003           352556
+## # ℹ 354 more rows</code></pre>
 <ul>
 <li><strong>Error Analysis</strong>: Evaluate the impact of margin of
 error on population estimates.</li>
@@ -477,7 +549,7 @@ error_analysis</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##   Average_MOE
 ##         &lt;dbl&gt;
-## 1        3.26</code></pre>
+## 1        4.25</code></pre>
 <p>Further, we are going to take different variables(employment and
 income) and then combine them by the same counties.</p>
 </div>
