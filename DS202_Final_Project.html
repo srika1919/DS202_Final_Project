@@ -391,9 +391,9 @@ df1 &lt;- get_acs(geography = &quot;state&quot;,
 <pre><code>## Loading ACSSE variables for 2021 from table K202301 and caching the dataset for faster future access.</code></pre>
 <pre class="r"><code>variables_df1 &lt;- data.frame(
   variable = c(&quot;K202301_001&quot;, &quot;K202301_002&quot;, &quot;K202301_003&quot;, &quot;K202301_004&quot;, &quot;K202301_005&quot;, &quot;K202301_006&quot;, &quot;K202301_007&quot;),
-  label = c(&quot;Total&quot;, &quot;Total In labor force:&quot;, 
-            &quot;Total Civilian labor force:&quot;, &quot;Employed&quot;, 
-            &quot;Unemployed&quot;, &quot;Armed Forces&quot;, &quot;Not in labor force&quot;)
+  label = c(&quot;Total&quot;, &quot;In labor force: Civilian labor force: Employed&quot;, 
+            &quot;In labor force: Civilian labor force: Unemployed&quot;, &quot;In labor force: Armed Forces&quot;, 
+            &quot;Not in labor force&quot;, &quot;Other Category 1&quot;, &quot;Other Category 2&quot;)
 )
 # Join with variable labels
 
@@ -454,6 +454,16 @@ df2 &lt;- get_acs(geography = &quot;state&quot;,
                 survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K201501 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>variables_df2 &lt;- data.frame(
+  variable = c(&quot;K201501_001&quot;, &quot;K201501_002&quot;, &quot;K201501_003&quot;, &quot;K201501_004&quot;, &quot;K201501_005&quot;, &quot;K201501_006&quot;, &quot;K201501_007&quot;, &quot;K201501_008&quot;),
+  label = c(&quot;Total&quot;, &quot;Less than 9th grade&quot;, &quot;9th to 12th grade,no diploma&quot;, &quot;High school graduate&quot;, &quot;Some college,no degree&quot;, &quot;Associate&#39;s degree&quot;, &quot;Bachelor&#39;s degree&quot;, &quot;Graduate or professional degree&quot;)
+)
+
+df2_labeled &lt;- df2 %&gt;%
+  left_join(variables_df2, by = &quot;variable&quot;)
+
+df2_wide &lt;- df2_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)</code></pre>
 <pre class="r"><code>#Esha
 #Citizenship - K200501
 #df3 &lt;-</code></pre>
@@ -465,6 +475,18 @@ df4 &lt;- get_acs(geography = &quot;state&quot;,
                 survey = &quot;acs1/subject&quot;,cache_table = TRUE)</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K200104 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>variables_df4 &lt;- data.frame(
+  variable = c(&quot;K200104_001&quot;, &quot;K200104_002&quot;, &quot;K200104_003&quot;, &quot;K200104_004&quot;, &quot;K200104_005&quot;, &quot;K200104_006&quot;, &quot;K200104_007&quot;, &quot;K200104_008&quot;),
+  label = c(&quot;Total&quot;, &quot;Under_18&quot;, 
+            &quot;18_to_24&quot;, &quot;25_to_34&quot;, 
+            &quot;35_to_44&quot;, &quot;45_to_54&quot;, &quot;55_to_64&quot;,&quot;Over_64&quot;)
+)
+
+df4_labeled &lt;- df4 %&gt;%
+  left_join(variables_df4, by = &quot;variable&quot;)
+
+df4_wide &lt;- df4_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)</code></pre>
 <pre class="r"><code>#Niharika
 # Housing - K202502
 df5 &lt;- get_acs(geography = &quot;state&quot;, 
@@ -476,112 +498,22 @@ df5 &lt;- get_acs(geography = &quot;state&quot;,
 <pre><code>## The 1-year ACS provides data for geographies with populations of 65,000 and greater.</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K202502 and caching the dataset for faster future access.</code></pre>
-</div>
-<div id="project-idea-update" class="section level3">
-<h3><u><strong>Project Idea Update:</strong></u></h3>
-<div id="description-of-the-data-set-1" class="section level4">
-<h4><u>Description of the Data Set 1:</u></h4>
-<ul>
-<li><p><strong>Source</strong>: 2022 American Community Survey (ACS)
-1-Year Estimates.</p></li>
-<li><p><strong>Focus</strong>: Total population by sex in different
-geographic areas.</p></li>
-<li><p><strong>Variables</strong>: Population estimates by sex,
-geographic identifiers, and margin of error.</p></li>
-</ul>
-</div>
-<div id="adjusted-data-cleaning-steps" class="section level4">
-<h4>Adjusted Data Cleaning Steps:</h4>
-<ol style="list-style-type: decimal">
-<li><p>Inspecting the data</p>
-<pre class="r"><code>head(df1)</code></pre>
-<pre><code>## # A tibble: 6 × 5
-##   GEOID NAME    variable    estimate   moe
-##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
-## 1 01    Alabama K202301_001  4046627  4927
-## 2 01    Alabama K202301_002  2335486 15207
-## 3 01    Alabama K202301_003  2314723 14775
-## 4 01    Alabama K202301_004  2190915 16821
-## 5 01    Alabama K202301_005   123808  8209
-## 6 01    Alabama K202301_006    20763  3134</code></pre></li>
-<li><p><strong>Handle Missing Values</strong></p>
-<pre class="r"><code>df1 &lt;- na.omit(df1)  # This removes rows with NA values</code></pre></li>
-<li><p>Address Special Symbols</p></li>
-</ol>
-<pre class="r"><code>df1[df1 == &#39;-&#39;] &lt;- NA
-df1[df1 == &#39;N&#39;] &lt;- NA
-df1[df1 == &#39;(X)&#39;] &lt;- NA</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Standardize GEOID and Variable Names</li>
-</ol>
-<pre class="r"><code>df1$GEOID &lt;- as.factor(df1$GEOID)
-df1$variable &lt;- as.factor(df1$variable)</code></pre>
-</div>
-<div id="section" class="section level4">
-<h4></h4>
-</div>
-<div id="updated-marginal-summaries" class="section level4">
-<h4>Updated Marginal Summaries:</h4>
-<pre class="r"><code>summary(df1)</code></pre>
-<pre><code>##      GEOID         NAME                  variable     estimate       
-##  01     :  7   Length:364         K202301_001:52   Min.   :    1313  
-##  02     :  7   Class :character   K202301_002:52   1st Qu.:  193367  
-##  04     :  7   Mode  :character   K202301_003:52   Median : 1050196  
-##  05     :  7                      K202301_004:52   Mean   : 2410286  
-##  06     :  7                      K202301_005:52   3rd Qu.: 3173312  
-##  08     :  7                      K202301_006:52   Max.   :31507237  
-##  (Other):322                      K202301_007:52                     
-##       moe       
-##  Min.   :  639  
-##  1st Qu.: 4479  
-##  Median : 8223  
-##  Mean   :11033  
-##  3rd Qu.:15536  
-##  Max.   :47000  
-## </code></pre>
-<ul>
-<li><strong>Population Breakdown</strong>: Summarize population counts
-by sex across different regions.</li>
-</ul>
-<pre class="r"><code>library(dplyr)
-population_breakdown &lt;- df1 %&gt;%
-  group_by(NAME, variable) %&gt;%
-  summarize(Total_Population = sum(estimate, na.rm = TRUE))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;NAME&#39;. You can override using the
-## `.groups` argument.</code></pre>
-<pre class="r"><code>population_breakdown</code></pre>
-<pre><code>## # A tibble: 364 × 3
-## # Groups:   NAME [52]
-##    NAME    variable    Total_Population
-##    &lt;chr&gt;   &lt;fct&gt;                  &lt;dbl&gt;
-##  1 Alabama K202301_001          4046627
-##  2 Alabama K202301_002          2335486
-##  3 Alabama K202301_003          2314723
-##  4 Alabama K202301_004          2190915
-##  5 Alabama K202301_005           123808
-##  6 Alabama K202301_006            20763
-##  7 Alabama K202301_007          1711141
-##  8 Alaska  K202301_001           571832
-##  9 Alaska  K202301_002           376965
-## 10 Alaska  K202301_003           352556
-## # ℹ 354 more rows</code></pre>
-<ul>
-<li><strong>Error Analysis</strong>: Evaluate the impact of margin of
-error on population estimates.</li>
-</ul>
-<pre class="r"><code>error_analysis &lt;- df1 %&gt;%
-  filter(!is.na(moe)) %&gt;%  # Filter out rows where moe is NA
-  mutate(Percent_MOE = (moe / estimate) * 100) %&gt;%  # Calculate percent MOE
-  summarize(Average_MOE = mean(Percent_MOE, na.rm = TRUE))  # Average MOE
+<pre class="r"><code># Define the variable codes and their respective labels for the housing dataset (df5)
+variables_df5 &lt;- data.frame(
+  variable = c(&quot;K202502_001&quot;, &quot;K202502_002&quot;, &quot;K202502_003&quot;),
+  label = c(&quot;Total&quot;, &quot;Owner Occupied&quot;, &quot;Renter Occupied&quot;)
+)
 
-error_analysis</code></pre>
-<pre><code>## # A tibble: 1 × 1
-##   Average_MOE
-##         &lt;dbl&gt;
-## 1        4.25</code></pre>
-<p>Further, we are going to take different variables(employment and
-income) and then combine them by the same counties.</p>
-</div>
+# Assuming df5 is your housing dataset
+# Reshape the data so that state names are rows
+df5_labeled &lt;- df5 %&gt;%
+  left_join(variables_df5, by = &quot;variable&quot;)  # Joining with the variable labels dataframe
+
+# Reshape the data to have state names as rows and variable labels as columns
+df5_wide &lt;- df5_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+# df5_wide will have states as rows and different housing-related variables as columns</code></pre>
 </div>
 
 
