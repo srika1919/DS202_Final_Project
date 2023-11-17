@@ -24,6 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidycensus)
 library(dplyr)
 library(tidyr)
+
 ```
 
 
@@ -198,4 +199,9 @@ df5_wide <- df5_labeled %>%
 
 
 ```
+
+```{r}
+
+```
+
 
