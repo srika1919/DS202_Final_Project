@@ -28,18 +28,8 @@ library(tidyr)
 
 
 ```{r}
-
-```
-
-```{r}
 #Abhay
 #Employment - K202301 for 2021
-
-
-# Set your Census API key
-# census_api_key("your_key_here") # Uncomment and put your API key here
-
-
 
 # Get ACS data
 df1 <- get_acs(geography = "state", 
