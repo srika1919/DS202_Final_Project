@@ -28,28 +28,6 @@ library(tidyr)
 
 
 ```{r}
-# Load variables for ACS 2022
-# Sample mapping of variable codes to labels
-# Replace this with the actual codes and labels
-variables_df <- data.frame(
-  variable = c("K202301_001", "K202301_002", "K202301_003", "K202301_004", "K202301_005", "K202301_006", "K202301_007"),
-  label = c("Total", "In labor force: Civilian labor force: Employed", 
-            "In labor force: Civilian labor force: Unemployed", "In labor force: Armed Forces", 
-            "Not in labor force", "Other Category 1", "Other Category 2")
-)
-
-# Assuming df1 is your data frame with the estimates you've loaded
-# Make sure to replace 'NAME' and 'estimate' with the actual column names from your df1
-
-# Join your data with the variable labels to get the descriptive names
-df_labeled <- df1 %>%
-  left_join(variables_df, by = "variable")
-
-# If the 'NAME' column in df1 actually contains state names, you can use pivot_wider to reshape the data
-df_wide <- df_labeled %>%
-  pivot_wider(names_from = NAME, values_from = estimate, id_cols = label)
-
-# df_wide now has states as columns and the descriptive variable labels as rows
 
 ```
 
@@ -70,11 +48,33 @@ df1 <- get_acs(geography = "state",
                survey = "acs1-year", 
                cache_table = TRUE)
 
+variables_df <- data.frame(
+  variable = c("K202301_001", "K202301_002", "K202301_003", "K202301_004", "K202301_005", "K202301_006", "K202301_007"),
+  label = c("Total", "In labor force: Civilian labor force: Employed", 
+            "In labor force: Civilian labor force: Unemployed", "In labor force: Armed Forces", 
+            "Not in labor force", "Other Category 1", "Other Category 2")
+)
 # Join with variable labels
-df_labeled <- df1 %>%
-  left_join(variables, by = c("variable" = "name"))
+
 
 # Now df_labeled will have an additional column with the variable labels
+# Load variables for ACS 2022
+# Sample mapping of variable codes to labels
+# Replace this with the actual codes and labels
+
+
+# Assuming df1 is your data frame with the estimates you've loaded
+# Make sure to replace 'NAME' and 'estimate' with the actual column names from your df1
+
+# Join your data with the variable labels to get the descriptive names
+df_labeled <- df1 %>%
+  left_join(variables_df, by = "variable")
+
+# If the 'NAME' column in df1 actually contains state names, you can use pivot_wider to reshape the data
+df_wide <- df_labeled %>%
+  pivot_wider(names_from = NAME, values_from = estimate, id_cols = label)
+
+# df_wide now has states as columns and the descriptive variable labels as rows
 
 
 ```
