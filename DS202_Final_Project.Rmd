@@ -137,6 +137,25 @@ df5 <- get_acs(geography = "state",
                 year = 2021, 
                 survey = "acs1", # removed /subject since we're referring to a specific table ID
                 cache_table = TRUE)
+
+# Define the variable codes and their respective labels for the housing dataset (df5)
+variables_df5 <- data.frame(
+  variable = c("K202502_001", "K202502_002", "K202502_003"),
+  label = c("Total", "Owner Occupied", "Renter Occupied")
+)
+
+# Assuming df5 is your housing dataset
+# Reshape the data so that state names are rows
+df5_labeled <- df5 %>%
+  left_join(variables_df5, by = "variable")  # Joining with the variable labels dataframe
+
+# Reshape the data to have state names as rows and variable labels as columns
+df5_wide <- df5_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+# df5_wide will have states as rows and different housing-related variables as columns
+
+
 ```
 
 
