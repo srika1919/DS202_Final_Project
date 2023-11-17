@@ -36,6 +36,7 @@ library(usmap)
 library(maps)
 ```
 
+## DF1 - EMPLOYMENT
 
 ```{r}
 #Abhay
@@ -79,6 +80,7 @@ df1_wide <- df1_labeled %>%
 
 
 ```
+
 ```{r}
 # Calculate employment rates
 df1_wide <- df1_wide %>%
@@ -98,6 +100,7 @@ ggplot(df1_wide, aes(x = reorder(NAME, -EmploymentRate), y = EmploymentRate)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+
 ```{r}
 # Plotting labor force participation
 ggplot(df1_wide, aes(x = NAME)) +
@@ -109,12 +112,14 @@ ggplot(df1_wide, aes(x = NAME)) +
   labs(x = "State", y = "Number of People", fill = "Category", title = "Labor Force Participation by State")
 
 ```
+
 ```{r}
 ggplot(df1_wide, aes(x = UnemploymentRate)) +
   geom_histogram(binwidth = 1, fill = "tomato", color = "black") +
   labs(x = "Unemployment Rate (%)", y = "Number of States", title = "Distribution of Unemployment Rates across States")
 
 ```
+
 ```{r}
 # Correlation analysis
 employment_data <- df1_wide %>%
@@ -127,6 +132,7 @@ library(corrplot)
 corrplot(correlation_matrix, method = "circle")
 
 ```
+
 ```{r}
 # Calculate employment rate
 # Assuming df1_wide or df6_wide has a column 'state' with state names or abbreviations
@@ -149,6 +155,12 @@ plot_usmap(data = df1_wide, values = "EmploymentRate", labels = TRUE) +
 
 
 ```
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+##  DF6 - Disabilities
 
 ```{r}
 #Abhay
@@ -198,6 +210,7 @@ ggplot(df6_wide, aes(x = reorder(NAME, -DisabilityRate), y = DisabilityRate)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+
 ```{r}
 # Select only the disability-related columns for correlation
 disability_data <- df6_wide %>%
@@ -214,6 +227,7 @@ corrplot(correlation_matrix, method = "circle")
 
 
 ```
+
 ```{r}
 # Comparative analysis of disabilities within a state (example: Iowa)
 iowa_data <- df6_wide %>%
@@ -224,6 +238,7 @@ iowa_data <- df6_wide %>%
 barplot(as.matrix(iowa_data), beside = TRUE, legend.text = TRUE, args.legend = list(x = "topright"))
 
 ```
+
 ```{r}
 # Predicting 'Ambulatory difficulty' based on other disabilities
 lm_model <- lm(`ambulatory difficulty` ~ `Hearing` + `Vision difficulty` + `cognative` + `Self-care difficulty` + `Independent living difficulty`, data = df6_wide)
@@ -232,6 +247,7 @@ lm_model <- lm(`ambulatory difficulty` ~ `Hearing` + `Vision difficulty` + `cogn
 summary(lm_model)
 lm_model
 ```
+
 ```{r}
 # K-means clustering
 #Perform a clustering analysis to identify groups of states with similar disability profiles.
@@ -248,6 +264,12 @@ pca_res <- prcomp(disability_data, scale. = TRUE)
 fviz_pca_biplot(pca_res, label = "none", col.ind = df6_wide$Cluster, addEllipses = TRUE)
 
 ```
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+##  DF 2 - Education
 
 ```{r}
 #Neha
@@ -269,12 +291,26 @@ df2_wide <- df2_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 ```
 
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+##  DF3 - Citizenship
+
 ```{r}
 #Esha
 #Citizenship - K200501
 #df3 <-
 
 ```
+
+------------------------------------------------------------------------
+
+\*\*\*
+
+------------------------------------------------------------------------
+
+## DF4 - Age
 
 ```{r}
 #Srika
@@ -322,6 +358,12 @@ ggplot(data = Mapping_age, aes(fill = estimate)) +
   theme_void()
 ```
 
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+## DF5 - Housing 
+
 ```{r}
 #Niharika
 # Housing - K202502
@@ -350,5 +392,3 @@ df5_wide <- df5_labeled %>%
 
 
 ```
-
-
