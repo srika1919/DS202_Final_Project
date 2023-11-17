@@ -81,6 +81,38 @@ df1_wide <- df1_labeled %>%
 ```
 
 ```{r}
+#Abhay
+#Disabilities - K201803
+# Get ACS data for the Disabilities dataset
+df6 <- get_acs(geography = "state", 
+               table = "K201803", 
+               year = 2021, 
+               survey = "acs1-year", 
+               cache_table = TRUE)
+
+# Assuming the variables_df6 mapping is similar to variables_df1 but for the Disabilities table
+# You need to create variables_df6 with the correct variable codes and labels for the Disabilities data
+variables_df6 <- data.frame(
+  variable = c("K201803_001", "K201803_002", "K201803_003", "K201803_004", "K201803_005", "K201803_006", "K201803_007","K201803_008","K201803_009"),
+  label = c("Total people", "Total With Disabilities", 
+            "Hearing", "Vision difficulty", 
+            "cognative", "ambulatory difficulty", 
+            "Self-care difficulty","Independent living difficulty","No Disability")
+)
+
+# Join your data with the variable labels to get the descriptive names
+df6_labeled <- df6 %>%
+  left_join(variables_df6, by = "variable")
+
+# Reshape the data so that state names are rows and variable labels are columns
+df6_wide <- df6_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+# df6_wide now has states as rows and the descriptive variable labels as columns
+
+```
+
+```{r}
 #Neha
 #Education - K201501
 df2 <- get_acs(geography = "state", 

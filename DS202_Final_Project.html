@@ -417,6 +417,35 @@ df1_wide &lt;- df1_labeled %&gt;%
 
 
 # df_wide now has states as columns and the descriptive variable labels as rows</code></pre>
+<pre class="r"><code>#Abhay
+#Disabilities - K201803
+# Get ACS data for the Disabilities dataset
+df6 &lt;- get_acs(geography = &quot;state&quot;, 
+               table = &quot;K201803&quot;, 
+               year = 2021, 
+               survey = &quot;acs1-year&quot;, 
+               cache_table = TRUE)</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K201803 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code># Assuming the variables_df6 mapping is similar to variables_df1 but for the Disabilities table
+# You need to create variables_df6 with the correct variable codes and labels for the Disabilities data
+variables_df6 &lt;- data.frame(
+  variable = c(&quot;K201803_001&quot;, &quot;K201803_002&quot;, &quot;K201803_003&quot;, &quot;K201803_004&quot;, &quot;K201803_005&quot;, &quot;K201803_006&quot;, &quot;K201803_007&quot;,&quot;K201803_008&quot;,&quot;K201803_009&quot;),
+  label = c(&quot;Total people&quot;, &quot;Total With Disabilities&quot;, 
+            &quot;Hearing&quot;, &quot;Vision difficulty&quot;, 
+            &quot;cognative&quot;, &quot;ambulatory difficulty&quot;, 
+            &quot;Self-care difficulty&quot;,&quot;Independent living difficulty&quot;,&quot;No Disability&quot;)
+)
+
+# Join your data with the variable labels to get the descriptive names
+df6_labeled &lt;- df6 %&gt;%
+  left_join(variables_df6, by = &quot;variable&quot;)
+
+# Reshape the data so that state names are rows and variable labels are columns
+df6_wide &lt;- df6_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+# df6_wide now has states as rows and the descriptive variable labels as columns</code></pre>
 <pre class="r"><code>#Neha
 #Education - K201501
 df2 &lt;- get_acs(geography = &quot;state&quot;, 
