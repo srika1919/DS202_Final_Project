@@ -24,12 +24,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidycensus)
 library(dplyr)
 library(tidyr)
-<<<<<<< HEAD
+
 #install.packages("factoextra")
 library(factoextra)
-=======
 
->>>>>>> 2d32e060b5defe4af370c68e3e1f5a22c27a694b
 ```
 
 
@@ -141,7 +139,7 @@ corrplot(correlation_matrix, method = "circle")
 
 ```
 ```{r}
-# Comparative analysis of disabilities within a state (example: California)
+# Comparative analysis of disabilities within a state (example: Iowa)
 iowa_data <- df6_wide %>%
   filter(NAME == "Iowa") %>%
  select(`Hearing`, `Vision difficulty`, `cognative`, `ambulatory difficulty`, `Self-care difficulty`, `Independent living difficulty`)
@@ -271,12 +269,5 @@ df5_wide <- df5_labeled %>%
 
 
 ```
-<<<<<<< HEAD
-=======
-
-```{r}
-
-```
 
 
->>>>>>> 2d32e060b5defe4af370c68e3e1f5a22c27a694b
