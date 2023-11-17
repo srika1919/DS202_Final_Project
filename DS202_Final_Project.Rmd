@@ -46,7 +46,10 @@ df1 <- get_acs(geography = "state",
 ```{r}
 #Neha
 #Education - K201501
-df2 <-
+df2 <- get_acs(geography = "state", 
+                table = "K201501", 
+                year = 2021, 
+                survey = "acs1/subject",cache_table = TRUE)
 ```
 
 ```{r}
