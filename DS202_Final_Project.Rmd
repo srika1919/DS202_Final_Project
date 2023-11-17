@@ -100,7 +100,10 @@ df3 <-
 ```{r}
 #Srika
 #Age - K200104
-df4 <-
+df4 <- get_acs(geography = "state", 
+                table = "K200104", 
+                year = 2021, 
+                survey = "acs1/subject",cache_table = TRUE)
 ```
 
 ```{r}
