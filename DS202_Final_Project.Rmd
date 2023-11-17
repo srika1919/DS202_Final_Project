@@ -26,9 +26,6 @@ library(dplyr)
 library(tidyr)
 ```
 
-```{r}
-#census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE)
-```
 
 ```{r}
 # Load variables for ACS 2022
@@ -109,7 +106,11 @@ df4 <- get_acs(geography = "state",
 ```{r}
 #Niharika
 # Housing - K202502
-df5 <-
+df5 <- get_acs(geography = "state", 
+                table = "K202502", 
+                year = 2021, 
+                survey = "acs1", # removed /subject since we're referring to a specific table ID
+                cache_table = TRUE)
 ```
 
 
