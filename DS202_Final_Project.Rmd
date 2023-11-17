@@ -24,9 +24,14 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidycensus)
 library(dplyr)
 library(tidyr)
+<<<<<<< HEAD
 #install.packages("factoextra")
 library(factoextra)
+=======
+
+>>>>>>> 2d32e060b5defe4af370c68e3e1f5a22c27a694b
 ```
+
 
 ```{r}
 #Abhay
@@ -203,7 +208,10 @@ df2_wide <- df2_labeled %>%
 df4 <- get_acs(geography = "state", 
                 table = "K200104", 
                 year = 2021, 
-                survey = "acs1/subject",cache_table = TRUE)
+                survey = "acs1/subject",cache_table = TRUE,
+               geometry = TRUE,
+               resolution = "20m"
+)
 variables_df4 <- data.frame(
   variable = c("K200104_001", "K200104_002", "K200104_003", "K200104_004", "K200104_005", "K200104_006", "K200104_007", "K200104_008"),
   label = c("Total", "Under_18", 
@@ -217,6 +225,22 @@ df4_labeled <- df4 %>%
 df4_wide <- df4_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
+```
+
+```{r}
+library(tidyverse)
+library(tigris)
+Mapping_age<-df4%>%
+  filter(variable=="K200104_007")%>%
+  shift_geometry()
+ggplot(data = Mapping_age, aes(fill = estimate)) + 
+  geom_sf()+
+  scale_fill_distiller(palette = "RdPu", 
+                       direction = 1) + 
+  labs(title = "Median Age by State, 2021",
+       caption = "Data source: 2021 1-year ACS, US Census Bureau",
+       fill = "ACS estimate") + 
+  theme_void()
 ```
 
 ```{r}
@@ -247,3 +271,12 @@ df5_wide <- df5_labeled %>%
 
 
 ```
+<<<<<<< HEAD
+=======
+
+```{r}
+
+```
+
+
+>>>>>>> 2d32e060b5defe4af370c68e3e1f5a22c27a694b
