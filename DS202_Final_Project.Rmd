@@ -205,10 +205,8 @@ df2_wide <- df2_labeled %>%
 #Age - K200104
 df4 <- get_acs(geography = "state", 
                 table = "K200104", 
-                year = 2021, 
-                survey = "acs1/subject",cache_table = TRUE,
-               geometry = TRUE,
-               resolution = "20m"
+                year = 2021,
+                survey = "acs1/subject",cache_table = TRUE
 )
 variables_df4 <- data.frame(
   variable = c("K200104_001", "K200104_002", "K200104_003", "K200104_004", "K200104_005", "K200104_006", "K200104_007", "K200104_008"),
@@ -228,7 +226,14 @@ df4_wide <- df4_labeled %>%
 ```{r}
 library(tidyverse)
 library(tigris)
-Mapping_age<-df4%>%
+Age_data <- get_acs(geography = "state", 
+                table = "K200104", 
+                year = 2021, 
+               geometry = TRUE,
+               resolution = "20m",
+                survey = "acs1/subject",cache_table = TRUE
+)
+Mapping_age<-Age_data%>%
   filter(variable=="K200104_007")%>%
   shift_geometry()
 ggplot(data = Mapping_age, aes(fill = estimate)) + 
