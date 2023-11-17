@@ -92,23 +92,10 @@ variables_df2 <- data.frame(
   variable = c("K201501_001", "K201501_002", "K201501_003", "K201501_004", "K201501_005", "K201501_006", "K201501_007", "K201501_008"),
   label = c("Total", "Less than 9th grade", "9th to 12th grade,no diploma", "High school graduate", "Some college,no degree", "Associate's degree", "Bachelor's degree", "Graduate or professional degree")
 )
-# Join with variable labels
 
-
-# Now df_labeled will have an additional column with the variable labels
-# Load variables for ACS 2022
-# Sample mapping of variable codes to labels
-# Replace this with the actual codes and labels
-
-
-# Assuming df1 is your data frame with the estimates you've loaded
-# Make sure to replace 'NAME' and 'estimate' with the actual column names from your df1
-
-# Join your data with the variable labels to get the descriptive names
 df2_labeled <- df2 %>%
   left_join(variables_df2, by = "variable")
 
-# Reshape the data so that state names are rows and variable labels are columns
 df2_wide <- df2_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 ```
