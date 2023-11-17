@@ -48,7 +48,7 @@ df1 <- get_acs(geography = "state",
                survey = "acs1-year", 
                cache_table = TRUE)
 
-variables_df <- data.frame(
+variables_df1 <- data.frame(
   variable = c("K202301_001", "K202301_002", "K202301_003", "K202301_004", "K202301_005", "K202301_006", "K202301_007"),
   label = c("Total", "In labor force: Civilian labor force: Employed", 
             "In labor force: Civilian labor force: Unemployed", "In labor force: Armed Forces", 
@@ -67,11 +67,11 @@ variables_df <- data.frame(
 # Make sure to replace 'NAME' and 'estimate' with the actual column names from your df1
 
 # Join your data with the variable labels to get the descriptive names
-df_labeled <- df1 %>%
-  left_join(variables_df, by = "variable")
+df1_labeled <- df1 %>%
+  left_join(variables_df1, by = "variable")
 
 # Reshape the data so that state names are rows and variable labels are columns
-df_wide <- df_labeled %>%
+df1_wide <- df1_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
 

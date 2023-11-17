@@ -389,7 +389,7 @@ df1 &lt;- get_acs(geography = &quot;state&quot;,
                cache_table = TRUE)</code></pre>
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K202301 and caching the dataset for faster future access.</code></pre>
-<pre class="r"><code>variables_df &lt;- data.frame(
+<pre class="r"><code>variables_df1 &lt;- data.frame(
   variable = c(&quot;K202301_001&quot;, &quot;K202301_002&quot;, &quot;K202301_003&quot;, &quot;K202301_004&quot;, &quot;K202301_005&quot;, &quot;K202301_006&quot;, &quot;K202301_007&quot;),
   label = c(&quot;Total&quot;, &quot;In labor force: Civilian labor force: Employed&quot;, 
             &quot;In labor force: Civilian labor force: Unemployed&quot;, &quot;In labor force: Armed Forces&quot;, 
@@ -408,11 +408,11 @@ df1 &lt;- get_acs(geography = &quot;state&quot;,
 # Make sure to replace &#39;NAME&#39; and &#39;estimate&#39; with the actual column names from your df1
 
 # Join your data with the variable labels to get the descriptive names
-df_labeled &lt;- df1 %&gt;%
-  left_join(variables_df, by = &quot;variable&quot;)
+df1_labeled &lt;- df1 %&gt;%
+  left_join(variables_df1, by = &quot;variable&quot;)
 
 # Reshape the data so that state names are rows and variable labels are columns
-df_wide &lt;- df_labeled %&gt;%
+df1_wide &lt;- df1_labeled %&gt;%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
 
