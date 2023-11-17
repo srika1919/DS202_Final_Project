@@ -34,11 +34,13 @@ library(tidycensus)
 
 ```{r}
 #Abhay
-#Employment - K202301
-df1 <- get_acs(geography = "county", 
-                table = "K200101", 
+#Employment - K202301 for 2021
+df1 <- get_acs(geography = "state", 
+                table = "K202301", 
                 year = 2021, 
-                survey = "acs1/subject",cache_table = TRUE)
+                survey = "acs1", # removed /subject since we're referring to a specific table ID
+                cache_table = TRUE)
+
 ```
 
 ```{r}
