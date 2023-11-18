@@ -300,7 +300,26 @@ df2_wide <- df2_labeled %>%
 ```{r}
 #Esha
 #Citizenship - K200501
-#df3 <-
+
+df3<- get_acs(
+  geography = "state", 
+  table = "K200501", 
+  year = 2021, 
+  survey = "acs1/subject", 
+  cache_table = TRUE
+)
+
+variables_df3 <- data.frame(
+  variable = c("K200501_001", "K200501_002"),  
+  label = c("U.S. citizen", "Not a U.S. citizen")  
+)
+
+df3_labeled <- df3 %>%
+  left_join(variables_df3, by = "variable")
+
+df3_wide <- df3_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
 
 ```
 
