@@ -341,9 +341,15 @@ df4 <- get_acs(geography = "state",
 )
 variables_df4 <- data.frame(
   variable = c("K200104_001", "K200104_002", "K200104_003", "K200104_004", "K200104_005", "K200104_006", "K200104_007", "K200104_008"),
+<<<<<<< HEAD
   label = c("Total", "Under_18years", 
             "18_to_24years", "25_to_34years", 
             "35_to_44years", "45_to_54years", "55_to_64years","Over_64years")
+=======
+  label = c("Total", "Age_under_18", 
+            "Age_18_to_24", "Age_25_to_34", 
+            "Age_35_to_44", "Age_45_to_54", "Age_55_to_64","Age_over_64")
+>>>>>>> 00a109c2d1cae0b53f49b5d7b57272e7d99c68d6
 )
 
 df4_labeled <- df4 %>%
