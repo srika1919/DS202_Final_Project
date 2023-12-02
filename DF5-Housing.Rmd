@@ -1,0 +1,96 @@
+---
+title: "DF5-Housing"
+author: "Abhay Prasanna Rao"
+date: "2023-12-02"
+output: html_document
+---
+
+```{r setup_housing, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+------------------------------------------------------------------------
+
+## DF5 - Housing
+
+```{r}
+#Niharika
+# Housing - K202502
+df5 <- get_acs(geography = "state", 
+                table = "K202502", 
+                year = 2021, 
+                survey = "acs1", # removed /subject since we're referring to a specific table ID
+                cache_table = TRUE)
+
+# Define the variable codes and their respective labels for the housing dataset (df5)
+variables_df5 <- data.frame(
+  variable = c("K202502_001", "K202502_002", "K202502_003"),
+  label = c("Total", "Owner Occupied", "Renter Occupied")
+)
+
+# Assuming df5 is your housing dataset
+# Reshape the data so that state names are rows
+df5_labeled <- df5 %>%
+  left_join(variables_df5, by = "variable")  # Joining with the variable labels dataframe
+
+# Reshape the data to have state names as rows and variable labels as columns
+df5_wide <- df5_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+# df5_wide will have states as rows and different housing-related variables as columns
+
+
+```
+
+```{r}
+# Assuming df5_wide is your dataset for housing
+# Install necessary libraries if not installed
+# install.packages("ggplot2")
+# install.packages("scales")
+
+library(ggplot2)
+library(scales)
+
+# Melt the data to long format for easy plotting
+df5_long <- tidyr::gather(df5_wide, key = "Housing_Category", value = "Count", -NAME)
+
+# Calculate the percentage for each category within each state
+df5_long <- df5_long %>%
+  group_by(NAME, Housing_Category) %>%
+  summarize(Percentage = sum(Count) / sum(df5_long$Count) * 100)
+
+# Define colors for each category
+category_colors <- c("Owner Occupied" = "steelblue", "Renter Occupied" = "salmon", "Total" = "lightgreen")
+
+# Create a bar plot for Owner Occupied with color
+ggplot(df5_long[df5_long$Housing_Category == "Owner Occupied", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Owner Occupied Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+# Create a bar plot for Renter Occupied with color
+ggplot(df5_long[df5_long$Housing_Category == "Renter Occupied", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Renter Occupied Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+# Create a bar plot for Total with color
+ggplot(df5_long[df5_long$Housing_Category == "Total", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Total Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+
+```
+

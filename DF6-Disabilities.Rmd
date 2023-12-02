@@ -1,0 +1,137 @@
+---
+title: "DF6-Disabilities"
+author: "Abhay Prasanna Rao"
+date: "2023-12-02"
+output: html_document
+---
+
+```{r setup_disabilities, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+#install.packages("tidycensus")
+# Load necessary libraries
+library(tidycensus)
+library(dplyr)
+library(tidyr)
+
+#install.packages("factoextra")
+library(factoextra)
+
+#install.packages("ggplot2")
+#install.packages("usmap")
+#install.packages("maps")
+library(ggplot2)
+library(usmap)
+library(maps)
+```
+
+
+## DF6 - Disabilities
+
+```{r}
+#Abhay
+#Disabilities - K201803
+# Get ACS data for the Disabilities dataset
+df6 <- get_acs(geography = "state", 
+               table = "K201803", 
+               year = 2021, 
+               survey = "acs1-year", 
+               cache_table = TRUE)
+
+# Assuming the variables_df6 mapping is similar to variables_df1 but for the Disabilities table
+# You need to create variables_df6 with the correct variable codes and labels for the Disabilities data
+variables_df6 <- data.frame(
+  variable = c("K201803_001", "K201803_002", "K201803_003", "K201803_004", "K201803_005", "K201803_006", "K201803_007","K201803_008","K201803_009"),
+  label = c("Total_people", "Total With Disabilities", 
+            "Hearing", "Vision difficulty", 
+            "cognative", "ambulatory difficulty", 
+            "Self-care difficulty","Independent living difficulty","No Disability")
+)
+
+# Join your data with the variable labels to get the descriptive names
+df6_labeled <- df6 %>%
+  left_join(variables_df6, by = "variable")
+
+# Reshape the data so that state names are rows and variable labels are columns
+df6_wide <- df6_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+df6_wide
+
+# df6_wide now has states as rows and the descriptive variable labels as columns
+
+```
+
+```{r}
+# Calculate percentages
+df6_wide <- df6_wide %>%
+  mutate(DisabilityRate = `Total With Disabilities` / `Total_people` * 100)
+
+# Plotting with ggplot2
+library(ggplot2)
+
+ggplot(df6_wide, aes(x = reorder(NAME, -DisabilityRate), y = DisabilityRate)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "State", y = "Disability Rate (%)", title = "Disability Rates by State") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+```{r}
+# Select only the disability-related columns for correlation
+disability_data <- df6_wide %>%
+  select(`Hearing`, `Vision difficulty`, `cognative`, `ambulatory difficulty`, `Self-care difficulty`, `Independent living difficulty`)
+
+# Compute correlation matrix
+correlation_matrix <- cor(disability_data, use = "complete.obs")  # use = "complete.obs" handles missing values
+
+# Check if corrplot is installed; if not, install it
+if (!require(corrplot)) install.packages("corrplot")
+
+library(corrplot)
+corrplot(correlation_matrix, method = "circle")
+
+
+```
+
+```{r}
+# Comparative analysis of disabilities within a state (example: Iowa)
+iowa_data <- df6_wide %>%
+  filter(NAME == "Iowa") %>%
+ select(`Hearing`, `Vision difficulty`, `cognative`, `ambulatory difficulty`, `Self-care difficulty`, `Independent living difficulty`)
+
+# Plotting the data for Iowa
+barplot(as.matrix(iowa_data), beside = TRUE, legend.text = TRUE, args.legend = list(x = "topright"))
+
+```
+
+```{r}
+# Predicting 'Ambulatory difficulty' based on other disabilities
+lm_model <- lm(`ambulatory difficulty` ~ `Hearing` + `Vision difficulty` + `cognative` + `Self-care difficulty` + `Independent living difficulty`, data = df6_wide)
+
+# Summary of the linear model
+summary(lm_model)
+lm_model
+```
+
+```{r}
+# K-means clustering
+#Perform a clustering analysis to identify groups of states with similar disability profiles.
+
+
+# K-means clustering with 3 centers
+set.seed(123)  # For reproducibility
+clusters <- kmeans(disability_data, centers = 3)
+
+# Add cluster assignment to the data
+df6_wide$Cluster <- as.factor(clusters$cluster)
+
+pca_res <- prcomp(disability_data, scale. = TRUE)
+fviz_pca_biplot(pca_res, label = "none", col.ind = df6_wide$Cluster, addEllipses = TRUE)
+
+```
+
+------------------------------------------------------------------------

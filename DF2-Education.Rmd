@@ -1,0 +1,132 @@
+---
+title: "DF2-Education"
+author: "Abhay Prasanna Rao"
+date: "2023-12-02"
+output: html_document
+---
+
+```{r setup_education, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## DF 2 - Education
+
+```{r}
+#Neha
+#Education - K201501
+df2 <- get_acs(geography = "state", 
+                table = "K201501", 
+                year = 2021, 
+                survey = "acs1/subject",cache_table = TRUE)
+
+variables_df2 <- data.frame(
+  variable = c("K201501_001", "K201501_002", "K201501_003", "K201501_004", "K201501_005", "K201501_006", "K201501_007", "K201501_008"),
+  label = c("Education_Total_students", "Education_Below_9th grade", "Education_9th to 12th grade_no diploma", "Education_High_school_graduate", "Education_Some college_no degree", "Education_Associate's_degree", "Education_Bachelor's_degree", "Education_Graduate_professional degree")
+)
+
+df2_labeled <- df2 %>%
+  left_join(variables_df2, by = "variable")
+
+df2_wide <- df2_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+```
+**Exploratory Data Analysis (EDA)**
+
+```{r}
+# Ensure necessary libraries are installed and loaded
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("tidyr")) install.packages("tidyr")
+library(ggplot2)
+library(tidyr)
+
+# Convert df2_wide to long format
+df2_long <- df2_wide %>%
+  gather(key = "Education_Level", value = "Count", -NAME)
+
+# Plotting the distribution of each education level across states
+ggplot(df2_long, aes(x = NAME, y = Count, fill = Education_Level)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Distribution of Education Levels across States", 
+       x = "State", 
+       y = "Count")
+
+```
+**Exploratory Data Analysis (EDA)** based on percentage
+
+```{r}
+# Ensure necessary libraries are installed and loaded
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("tidyr")) install.packages("tidyr")
+if (!require("dplyr")) install.packages("dplyr")
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Convert df2_wide to long format
+df2_long <- df2_wide %>%
+  gather(key = "Education_Level", value = "Count", -NAME)
+
+# Calculate total count for each state
+df2_long <- df2_long %>%
+  group_by(NAME) %>%
+  mutate(Total = sum(Count)) %>%
+  ungroup()
+
+# Calculate the percentage
+df2_long <- df2_long %>%
+  mutate(Percentage = (Count / Total) * 100)
+
+# Plotting the distribution of each education level across states as a percentage
+ggplot(df2_long, aes(x = NAME, y = Percentage, fill = Education_Level)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Percentage Distribution of Education Levels across States", 
+       x = "State", 
+       y = "Percentage")
+
+```
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Convert df2_wide to long format
+df2_long <- df2_wide %>%
+  gather(key = "Education_Level", value = "Count", -NAME)
+
+# Calculate total count for each state
+df2_long <- df2_long %>%
+  group_by(NAME) %>%
+  mutate(Total = sum(Count)) %>%
+  ungroup()
+
+# Calculate the percentage
+df2_long <- df2_long %>%
+  mutate(Percentage = (Count / Total) * 100)
+
+# Iterate over each unique education level
+for(level in unique(df2_long$Education_Level)) {
+  # Filter data for the current level
+  df_subset <- df2_long %>% 
+    filter(Education_Level == level)
+
+  # Generate and print the plot
+  p <- ggplot(df_subset, aes(x = NAME, y = Percentage, fill = Education_Level)) +
+    geom_bar(stat = "identity") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(title = paste("Percentage Distribution of", level, "across States"), 
+         x = "State", 
+         y = "Percentage")
+
+  print(p)
+}
+
+```
+
+
+
+------------------------------------------------------------------------

@@ -1,0 +1,42 @@
+---
+title: "DF3-Citizenship"
+author: "Abhay Prasanna Rao"
+date: "2023-12-02"
+output: html_document
+---
+
+```{r setup_citizenship, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## DF3 - Citizenship
+
+```{r}
+#Esha
+#Citizenship - K200501
+
+df3<- get_acs(
+  geography = "state", 
+  table = "K200501", 
+  year = 2021, 
+  survey = "acs1/subject", 
+  cache_table = TRUE
+)
+
+variables_df3 <- data.frame(
+  variable = c("K200501_001", "K200501_002","K200501_003"),  
+  label = c("Total","U.S. citizen", "Not a U.S. citizen")  
+)
+
+df3_labeled <- df3 %>%
+  left_join(variables_df3, by = "variable")
+
+df3_wide <- df3_labeled %>%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
+
+
+```
+
+------------------------------------------------------------------------
