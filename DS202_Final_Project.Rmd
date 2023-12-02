@@ -625,24 +625,69 @@ for (i in names(merged_data)) {
 3.  **Correlation Analysis**
 
     -   Calculate correlation matrices for the variables related to employment, education, age, etc., to identify strong correlations.
+```{r}
+# Correlation Matrix
+correlation_matrix <- cor(merged_data[, sapply(merged_data, is.numeric)], use = "complete.obs")
+corrplot::corrplot(correlation_matrix, method = "circle")
+
+```
+
 
 4.  **Statistical Testing**
 
     -   Conduct hypothesis testing (e.g., t-tests, ANOVA) to determine if differences in employment rates across different groups (like age groups, educational levels) are statistically significant.
+    
+```{r}
+# Example: ANOVA for comparing Employment across different Education Levels
+anova_result <- aov(Employed ~ Education_Bachelor's_degree + Education_High_school_graduate, data=merged_data)
+summary(anova_result)
+
+```
+
 
 5.  **Predictive Modeling**
 
     -   Build regression models to predict employment rates based on other variables.
 
     -   Explore other predictive models if applicable (e.g., decision trees, random forests).
+```{r}
+# Linear Regression Model
+lm_model <- lm(Employed ~ ., data = merged_data)
+summary(lm_model)
+
+# Decision Tree Model
+library(rpart)
+dt_model <- rpart(Employed ~ ., data = merged_data, method = "anova")
+summary(dt_model)
+
+```
 
 6.  **Clustering Analysis**
 
     -   Use k-means or hierarchical clustering to find patterns or groups in the data based on socio-economic factors.
+```{r}
+# K-means clustering
+set.seed(123)
+km_model <- kmeans(merged_data[, c("Employed", "Education_Bachelor's_degree", "Age_25_to_34")], centers = 3)
+merged_data$Cluster <- km_model$cluster
+
+# PCA for cluster visualization
+library(factoextra)
+pca_res <- prcomp(merged_data[, c("Employed", "Education_Bachelor's_degree", "Age_25_to_34")], scale. = TRUE)
+fviz_pca_biplot(pca_res, label = "none", col.ind = merged_data$Cluster, addEllipses = TRUE)
+
+```
 
 7.  **Data Visualization and Mapping**
 
     -   Create comprehensive visualizations and maps to represent the findings. For instance, use **`ggplot2`** and **`usmap`** for spatial data representation.
+```{r}
+# Employment Rate Map
+plot_usmap(data = merged_data, values = "Employed", labels = TRUE) +
+  scale_fill_continuous(name = "Employment Rate (%)", label = scales::percent_format()) +
+  labs(title = "Employment Rate by State in 2021")
+
+```
 
 8.  **Interpretation and Conclusion**
 
