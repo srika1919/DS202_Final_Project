@@ -412,6 +412,8 @@ df5_wide <- df5_labeled %>%
 
 ```
 
+
+
 # Plan for Data Exploration
 
 -   What we have done so far:
@@ -427,3 +429,11 @@ df5_wide <- df5_labeled %>%
     -   Disabilities
 -   We are trying to see the relationship for the various with the employment fo reach state in the US.
 -   We are planning to make some visualization like the above drafts which could inform the audience about the factors affecting the employment in various states in the US.
+
+```{r}
+merged_data <- df1_wide %>%
+  left_join(df2_wide, by = "NAME") %>%
+  left_join(df3_wide, by = "NAME")%>%
+  left_join(df4_wide, by = "NAME")%>%
+  left_join(df5_wide, by = "NAME")
+```
