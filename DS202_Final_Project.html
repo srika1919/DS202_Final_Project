@@ -664,8 +664,8 @@ df3&lt;- get_acs(
 <pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
 <pre><code>## Loading ACSSE variables for 2021 from table K200501 and caching the dataset for faster future access.</code></pre>
 <pre class="r"><code>variables_df3 &lt;- data.frame(
-  variable = c(&quot;K200501_001&quot;, &quot;K200501_002&quot;),  
-  label = c(&quot;U.S. citizen&quot;, &quot;Not a U.S. citizen&quot;)  
+  variable = c(&quot;K200501_001&quot;, &quot;K200501_002&quot;,&quot;K200501_003&quot;),  
+  label = c(&quot;Total&quot;,&quot;U.S. citizen&quot;, &quot;Not a U.S. citizen&quot;)  
 )
 
 df3_labeled &lt;- df3 %&gt;%
@@ -743,6 +743,8 @@ df4_wide &lt;- df4_labeled %&gt;%
   |===========================================                           |  61%
   |                                                                            
   |=================================================                     |  70%
+  |                                                                            
+  |=======================================================               |  79%
   |                                                                            
   |=============================================================         |  87%
   |                                                                            
@@ -848,55 +850,35 @@ colnames(merged_data)</code></pre>
 ## [15] &quot;Education_Graduate_professional degree&quot;
 ## [16] &quot;U.S. citizen&quot;                          
 ## [17] &quot;Not a U.S. citizen&quot;                    
-## [18] &quot;NA&quot;                                    
-## [19] &quot;Age_under_18&quot;                          
-## [20] &quot;Age_18_to_24&quot;                          
-## [21] &quot;Age_25_to_34&quot;                          
-## [22] &quot;Age_35_to_44&quot;                          
-## [23] &quot;Age_45_to_54&quot;                          
-## [24] &quot;Age_55_to_64&quot;                          
-## [25] &quot;Age_over_64&quot;                           
-## [26] &quot;Total&quot;                                 
-## [27] &quot;Owner Occupied&quot;                        
-## [28] &quot;Renter Occupied&quot;                       
-## [29] &quot;Total people&quot;                          
-## [30] &quot;Total With Disabilities&quot;               
-## [31] &quot;Hearing&quot;                               
-## [32] &quot;Vision difficulty&quot;                     
-## [33] &quot;cognative&quot;                             
-## [34] &quot;ambulatory difficulty&quot;                 
-## [35] &quot;Self-care difficulty&quot;                  
-## [36] &quot;Independent living difficulty&quot;         
-## [37] &quot;No Disability&quot;                         
-## [38] &quot;DisabilityRate&quot;                        
-## [39] &quot;Cluster&quot;</code></pre>
+## [18] &quot;Age_under_18&quot;                          
+## [19] &quot;Age_18_to_24&quot;                          
+## [20] &quot;Age_25_to_34&quot;                          
+## [21] &quot;Age_35_to_44&quot;                          
+## [22] &quot;Age_45_to_54&quot;                          
+## [23] &quot;Age_55_to_64&quot;                          
+## [24] &quot;Age_over_64&quot;                           
+## [25] &quot;Owner Occupied&quot;                        
+## [26] &quot;Renter Occupied&quot;                       
+## [27] &quot;Total people&quot;                          
+## [28] &quot;Total With Disabilities&quot;               
+## [29] &quot;Hearing&quot;                               
+## [30] &quot;Vision difficulty&quot;                     
+## [31] &quot;cognative&quot;                             
+## [32] &quot;ambulatory difficulty&quot;                 
+## [33] &quot;Self-care difficulty&quot;                  
+## [34] &quot;Independent living difficulty&quot;         
+## [35] &quot;No Disability&quot;                         
+## [36] &quot;DisabilityRate&quot;                        
+## [37] &quot;Cluster&quot;</code></pre>
+<div id="section" class="section level3">
+<h3><strong>************************</strong></h3>
+</div>
 <div id="title" class="section level3">
-<h3><strong>************************ Title</strong></h3>
-<p><strong>“Socio-Economic Factors Influencing Employment in the United
-States: A Comprehensive State-by-State Analysis”</strong></p>
-</div>
-<div id="thesis" class="section level3">
-<h3><strong>Thesis</strong></h3>
-<p>This project aims to analyze the impact of various socio-economic
-factors such as education, age, citizenship status, housing, and
-disabilities on employment rates across different states in the United
-States. Using data from the American Community Survey (ACS) 2021, the
-study will employ statistical techniques to identify correlations,
-trends, and patterns, thereby providing insights into the multifaceted
-nature of employment dynamics in the US.<br />
-</p>
-<p><br />
-<br />
-Based on your project description and the data you’ve gathered and
-processed so far, let’s define a suitable title, thesis, and a roadmap
-for the next steps of your data science project in R.</p>
-</div>
-<div id="title-1" class="section level3">
 <h3><strong>Title</strong></h3>
 <p><strong>“Socio-Economic Factors Influencing Employment in the United
 States: A Comprehensive State-by-State Analysis”</strong></p>
 </div>
-<div id="thesis-1" class="section level3">
+<div id="thesis" class="section level3">
 <h3><strong>Thesis</strong></h3>
 <p>This project aims to analyze the impact of various socio-economic
 factors such as education, age, citizenship status, housing, and
