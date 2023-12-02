@@ -281,7 +281,7 @@ df2 <- get_acs(geography = "state",
 
 variables_df2 <- data.frame(
   variable = c("K201501_001", "K201501_002", "K201501_003", "K201501_004", "K201501_005", "K201501_006", "K201501_007", "K201501_008"),
-  label = c("Total", "Less than 9th grade", "9th to 12th grade,no diploma", "High school graduate", "Some college,no degree", "Associate's degree", "Bachelor's degree", "Graduate or professional degree")
+  label = c("Education_Total_students", "Education_Below_9th grade", "Education_9th to 12th grade_no diploma", "Education_High_school_graduate", "Education_Some college_no degree", "Education_Associate's_degree", "Education_Bachelor's_degree", "Education_Graduate_professional degree")
 )
 
 df2_labeled <- df2 %>%
