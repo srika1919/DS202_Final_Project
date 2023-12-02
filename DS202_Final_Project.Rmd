@@ -163,7 +163,11 @@ corrplot(correlation_matrix, method = "circle")
 ggplot(normalized_data, aes(x = `Education_Bachelors_degree`, y = EmploymentRate)) +
   geom_point() +
   geom_smooth(method = "lm") +
+<<<<<<< HEAD
   labs(title = "Relation between Bachelors Degree Holders and Employment Rate", x = "Percentage of Bachelor's Degree Holders", y = "Employment Rate")
+=======
+  labs(title = "Relation between Bachelors Degree Holders and Employment Rate", x = "Percentage of Bachelors Degree Holders", y = "Employment Rate")
+>>>>>>> ee5a5f1a72a779bb546f27b106b93accdbcbee5d
 
 ```
 ```{r}
