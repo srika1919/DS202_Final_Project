@@ -46,28 +46,18 @@ variables_df1 <- data.frame(
             "Unemployed", "In Armed Forces", 
             "Not in labor force")
 )
-# Join with variable labels
 
 
-# Now df_labeled will have an additional column with the variable labels
-# Load variables for ACS 2022
-# Sample mapping of variable codes to labels
-# Replace this with the actual codes and labels
 
-
-# Assuming df1 is your data frame with the estimates you've loaded
-# Make sure to replace 'NAME' and 'estimate' with the actual column names from your df1
-
-# Join your data with the variable labels to get the descriptive names
+# Joining the data with the variable labels to get the descriptive names
 df1_labeled <- df1 %>%
   left_join(variables_df1, by = "variable")
 
-# Reshape the data so that state names are rows and variable labels are columns
+# Reshapeing the data so that state names are rows and variable labels are columns
 df1_wide <- df1_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
 
-# df_wide now has states as columns and the descriptive variable labels as rows
 
 
 ```
@@ -125,17 +115,11 @@ corrplot(correlation_matrix, method = "circle")
 ```
 
 ```{r}
-# Calculate employment rate
-# Assuming df1_wide or df6_wide has a column 'state' with state names or abbreviations
-# Calculate the metric you want to plot (for example, Employment Rate)
 
-
-# Assuming df1_wide has full state names in the 'NAME' column
 # Convert state names to abbreviations
 state_abbreviations <- state.abb[match(df1_wide$NAME, state.name)]
 df1_wide$state <- state_abbreviations
 
-# Ensure you have calculated the metric you want to plot (e.g., Employment Rate)
 df1_wide$EmploymentRate <- df1_wide$`Employed` / df1_wide$Total * 100
 
 # Plot the map with employment rate
