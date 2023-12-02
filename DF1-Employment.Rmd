@@ -73,76 +73,76 @@ df1_wide <- df1_labeled %>%
 ```
 
 ```{r}
-# # Calculate employment rates
-# df1_wide <- df1_wide %>%
-#   mutate(
-#     EmploymentRate = `In labor force: Civilian labor force: Employed` / `Total` * 100,
-#     UnemploymentRate = `In labor force: Civilian labor force: Unemployed` / `Total` * 100,
-#     NotInLaborForceRate = `Not in labor force` / `Total` * 100
-#   )
-# 
-# # Plotting employment rates
-# library(ggplot2)
-# 
-# ggplot(df1_wide, aes(x = reorder(NAME, -EmploymentRate), y = EmploymentRate)) +
-#   geom_bar(stat = "identity", fill = "steelblue") +
-#   labs(x = "State", y = "Employment Rate (%)", title = "Employment Rates by State") +
-#   theme_minimal() +
-#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+# Calculate employment rates
+df1_wide <- df1_wide %>%
+  mutate(
+    EmploymentRate = `Employed` / `Total` * 100,
+    UnemploymentRate = `Unemployed` / `Total` * 100,
+    NotInLaborForceRate = `Not in labor force` / `Total` * 100
+  )
+
+# Plotting employment rates
+library(ggplot2)
+
+ggplot(df1_wide, aes(x = reorder(NAME, -EmploymentRate), y = EmploymentRate)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "State", y = "Employment Rate (%)", title = "Employment Rates by State") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
 ```{r}
-# # Plotting labor force participation
-# ggplot(df1_wide, aes(x = NAME)) +
-#   geom_bar(aes(y = `In labor force: Civilian labor force: Employed`, fill = "Employed"), stat = "identity") +
-#   geom_bar(aes(y = `In labor force: Civilian labor force: Unemployed`, fill = "Unemployed"), stat = "identity") +
-#   geom_bar(aes(y = `In labor force: Armed Forces`, fill = "Armed Forces"), stat = "identity") +
-#   scale_fill_manual(values = c("Employed" = "green", "Unemployed" = "red", "Armed Forces" = "blue")) +
-#   theme(axis.text.x = element_text(angle = 90)) +
-#   labs(x = "State", y = "Number of People", fill = "Category", title = "Labor Force Participation by State")
+# Plotting labor force participation
+ggplot(df1_wide, aes(x = NAME)) +
+  geom_bar(aes(y = `Employed`, fill = "Employed"), stat = "identity") +
+  geom_bar(aes(y = `Unemployed`, fill = "Unemployed"), stat = "identity") +
+  geom_bar(aes(y = `In Armed Forces`, fill = "Armed Forces"), stat = "identity") +
+  scale_fill_manual(values = c("Employed" = "green", "Unemployed" = "red", "Armed Forces" = "blue")) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(x = "State", y = "Number of People", fill = "Category", title = "Labor Force Participation by State")
 
 ```
 
 ```{r}
-# ggplot(df1_wide, aes(x = UnemploymentRate)) +
-#   geom_histogram(binwidth = 1, fill = "tomato", color = "black") +
-#   labs(x = "Unemployment Rate (%)", y = "Number of States", title = "Distribution of Unemployment Rates across States")
+ggplot(df1_wide, aes(x = UnemploymentRate)) +
+  geom_histogram(binwidth = 1, fill = "tomato", color = "black") +
+  labs(x = "Unemployment Rate (%)", y = "Number of States", title = "Distribution of Unemployment Rates across States")
 
 ```
 
 ```{r}
-# # Correlation analysis
-# employment_data <- df1_wide %>%
-#   select(`In labor force: Civilian labor force: Employed`, `In labor force: Civilian labor force: Unemployed`, `In labor force: Armed Forces`, `Not in labor force`)
-# 
-# correlation_matrix <- cor(employment_data, use = "complete.obs")
-# 
-# # Visualize the correlation matrix
-# library(corrplot)
-# corrplot(correlation_matrix, method = "circle")
+# Correlation analysis
+employment_data <- df1_wide %>%
+  select(`Employed`, `Unemployed`, `In Armed Forces`, `Not in labor force`)
+
+correlation_matrix <- cor(employment_data, use = "complete.obs")
+
+# Visualize the correlation matrix
+library(corrplot)
+corrplot(correlation_matrix, method = "circle")
 
 ```
 
 ```{r}
-# # Calculate employment rate
-# # Assuming df1_wide or df6_wide has a column 'state' with state names or abbreviations
-# # Calculate the metric you want to plot (for example, Employment Rate)
-# 
-# 
-# # Assuming df1_wide has full state names in the 'NAME' column
-# # Convert state names to abbreviations
-# state_abbreviations <- state.abb[match(df1_wide$NAME, state.name)]
-# df1_wide$state <- state_abbreviations
-# 
-# # Ensure you have calculated the metric you want to plot (e.g., Employment Rate)
-# df1_wide$EmploymentRate <- df1_wide$`In labor force: Civilian labor force: Employed` / df1_wide$Total * 100
-# 
-# # Plot the map with employment rate
-# plot_usmap(data = df1_wide, values = "EmploymentRate", labels = TRUE) +
-#   scale_fill_continuous(name = "Employment Rate (%)", label = scales::percent_format()) +
-#   theme(legend.position = "right") +
-#   labs(title = "Employment Rate by State in 2021")
+# Calculate employment rate
+# Assuming df1_wide or df6_wide has a column 'state' with state names or abbreviations
+# Calculate the metric you want to plot (for example, Employment Rate)
+
+
+# Assuming df1_wide has full state names in the 'NAME' column
+# Convert state names to abbreviations
+state_abbreviations <- state.abb[match(df1_wide$NAME, state.name)]
+df1_wide$state <- state_abbreviations
+
+# Ensure you have calculated the metric you want to plot (e.g., Employment Rate)
+df1_wide$EmploymentRate <- df1_wide$`Employed` / df1_wide$Total * 100
+
+# Plot the map with employment rate
+plot_usmap(data = df1_wide, values = "EmploymentRate", labels = TRUE) +
+  scale_fill_continuous(name = "Employment Rate (%)", label = scales::percent_format()) +
+  theme(legend.position = "right") +
+  labs(title = "Employment Rate by State in 2021")
 
 
 ```

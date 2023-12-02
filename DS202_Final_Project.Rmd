@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-### \*\*Project Title: Income and employment for the various county's in USA\*
 
 
 
@@ -104,101 +103,89 @@ sum(is.na(merged_data))
 merged_data <- merged_data %>% 
   mutate_at(vars(-group_cols()), ~ifelse(is.na(.), median(., na.rm = TRUE), .))
 
-# Normalizing the data (example: Min-Max Scaling)
-normalize <- function(x) {
-  return ((x - min(x)) / (max(x) - min(x)))
+
+```
+```{r}
+#Check for Missing Values
+# Checking the number of missing values in each column
+summarize_missing_data <- function(data) {
+  sapply(data, function(x) sum(is.na(x)))
 }
 
-merged_data_normalized <- as.data.frame(lapply(merged_data[, sapply(merged_data, is.numeric)], normalize))
+missing_data_summary <- summarize_missing_data(merged_data)
+missing_data_summary
 
 ```
 
 
-2.  **Exploratory Data Analysis (EDA)**
-
-    -   Generate summary statistics and visualizations for each dataset to understand distributions and detect outliers.
-
-    -   Explore the relationships between different variables using scatter plots, box plots, etc.
-    
 ```{r}
-# Summary Statistics
-summary(merged_data)
-
-# Load necessary library
-library(ggplot2)
-library(rlang)
-
-# Loop through each column in the dataframe
-for (i in names(merged_data)) {
-  # Convert column name to a symbol
-  col_sym <- sym(i)
-
-  # Check if the column is numeric for histograms
-  if (is.numeric(merged_data[[i]])) {
-    p <- ggplot(merged_data, aes(x = !!col_sym)) + 
-      geom_histogram(bins = 30, fill = "blue", color = "black") +
-      theme_minimal() +
-      labs(title = paste("Histogram of", i), x = i, y = "Frequency")
-    
-  # If not numeric, use bar plot for categorical data
-  } else {
-    p <- ggplot(merged_data, aes(x = !!col_sym)) +
-      geom_bar(fill = "blue", color = "black") +
-      theme_minimal() +
-      labs(title = paste("Bar Plot of", i), x = i, y = "Count") +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x labels for readability
+# Handling missing values
+handle_missing_values <- function(data) {
+  for (col in colnames(data)) {
+    if (is.numeric(data[[col]])) {
+      data[[col]] <- ifelse(is.na(data[[col]]), median(data[[col]], na.rm = TRUE), data[[col]])
+    }
+    # Add other conditions if needed for categorical data
   }
-
-  # Print the plot
-  print(p)
+  return(data)
 }
 
-
+merged_data <- handle_missing_values(merged_data)
 
 ```
 
-
-3.  **Correlation Analysis**
-
-    -   Calculate correlation matrices for the variables related to employment, education, age, etc., to identify strong correlations.
 ```{r}
-# Correlation Matrix
-correlation_matrix <- cor(merged_data[, sapply(merged_data, is.numeric)], use = "complete.obs")
-corrplot::corrplot(correlation_matrix, method = "circle")
+# Function to normalize only numeric columns
+normalize_data <- function(data) {
+  for (col in colnames(data)) {
+    if (is.numeric(data[[col]])) {
+      min_val <- min(data[[col]], na.rm = TRUE)
+      max_val <- max(data[[col]], na.rm = TRUE)
+      data[[col]] <- (data[[col]] - min_val) / (max_val - min_val)
+    }
+  }
+  return(data)
+}
+
+# Apply the normalization function to the merged_data
+normalized_data <- normalize_data(merged_data)
 
 ```
 
+```{r}
+# Create a new dataset with only numeric columns
+numeric_data <- normalized_data[sapply(normalized_data, is.numeric)]
 
-4.  **Statistical Testing**
+# Compute the correlation matrix
+correlation_matrix <- cor(numeric_data, use = "complete.obs")
 
-    -   Conduct hypothesis testing (e.g., t-tests, ANOVA) to determine if differences in employment rates across different groups (like age groups, educational levels) are statistically significant.
-    
-
-
-
-5.  **Predictive Modeling**
-
-    -   Build regression models to predict employment rates based on other variables.
-
-    -   Explore other predictive models if applicable (e.g., decision trees, random forests).
+# Use corrplot to visualize
+library(corrplot)
+corrplot(correlation_matrix, method = "circle")
 
 
-6.  **Clustering Analysis**
 
-    -   Use k-means or hierarchical clustering to find patterns or groups in the data based on socio-economic factors.
+```
 
+```{r}
+# Example: Comparing Education and Employment Rates
+ggplot(normalized_data, aes(x = `Education_Bachelor's_degree`, y = EmploymentRate)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Relation between Bachelor's Degree Holders and Employment Rate", x = "Percentage of Bachelor's Degree Holders", y = "Employment Rate")
 
-7.  **Data Visualization and Mapping**
+```
+```{r}
+#Perform statistical tests (e.g., t-tests, ANOVA) to see if differences in socio-economic factors among states are statistically significant.
+# Example: T-test for comparing employment rates in states with high vs low education levels
+high_education_states <- normalized_data$`Education_Bachelor's_degree` > median(normalized_data$`Education_Bachelor's_degree`)
+t.test(normalized_data$EmploymentRate ~ high_education_states)
 
-    -   Create comprehensive visualizations and maps to represent the findings. For instance, use **`ggplot2`** and **`usmap`** for spatial data representation.
+```
+```{r}
+# Linear regression model as an example
+model <- lm(EmploymentRate ~ ., data = normalized_data)
+summary(model)
 
+```
 
-8.  **Interpretation and Conclusion**
-
-    -   Interpret the results from the statistical analyses and models.
-
-    -   Draw conclusions about the socio-economic factors affecting employment.
-
-9.  **Reporting**
-
-    -   Compile the results and interpretations into a final report or presentation.
