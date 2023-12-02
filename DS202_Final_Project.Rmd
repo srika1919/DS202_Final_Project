@@ -160,16 +160,16 @@ corrplot(correlation_matrix, method = "circle")
 
 ```{r}
 # Example: Comparing Education and Employment Rates
-ggplot(normalized_data, aes(x = `Education_Bachelor's_degree`, y = EmploymentRate)) +
+ggplot(normalized_data, aes(x = `Education_Bachelors_degree`, y = EmploymentRate)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  labs(title = "Relation between Bachelor's Degree Holders and Employment Rate", x = "Percentage of Bachelor's Degree Holders", y = "Employment Rate")
+  labs(title = "Relation between Bachelors Degree Holders and Employment Rate", x = "Percentage of Bachelor's Degree Holders", y = "Employment Rate")
 
 ```
 ```{r}
 #Perform statistical tests (e.g., t-tests, ANOVA) to see if differences in socio-economic factors among states are statistically significant.
 # Example: T-test for comparing employment rates in states with high vs low education levels
-high_education_states <- normalized_data$`Education_Bachelor's_degree` > median(normalized_data$`Education_Bachelor's_degree`)
+high_education_states <- normalized_data$`Education_Bachelors_degree` > median(normalized_data$`Education_Bachelors_degree`)
 t.test(normalized_data$EmploymentRate ~ high_education_states)
 
 ```
