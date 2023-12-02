@@ -509,6 +509,56 @@ df5_wide <- df5_labeled %>%
 
 
 ```
+```{r}
+# Assuming df5_wide is your dataset for housing
+# Install necessary libraries if not installed
+# install.packages("ggplot2")
+# install.packages("scales")
+
+library(ggplot2)
+library(scales)
+
+# Melt the data to long format for easy plotting
+df5_long <- tidyr::gather(df5_wide, key = "Housing_Category", value = "Count", -NAME)
+
+# Calculate the percentage for each category within each state
+df5_long <- df5_long %>%
+  group_by(NAME, Housing_Category) %>%
+  summarize(Percentage = sum(Count) / sum(df5_long$Count) * 100)
+
+# Define colors for each category
+category_colors <- c("Owner Occupied" = "steelblue", "Renter Occupied" = "salmon", "Total" = "lightgreen")
+
+# Create a bar plot for Owner Occupied with color
+ggplot(df5_long[df5_long$Housing_Category == "Owner Occupied", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Owner Occupied Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+# Create a bar plot for Renter Occupied with color
+ggplot(df5_long[df5_long$Housing_Category == "Renter Occupied", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Renter Occupied Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+# Create a bar plot for Total with color
+ggplot(df5_long[df5_long$Housing_Category == "Total", ], aes(x = reorder(NAME, Percentage), y = Percentage, fill = Housing_Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "State", y = "Percentage", title = "Percentage of Total Housing by State") +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  scale_fill_manual(values = category_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+
+```
+
 
 # Plan for Data Exploration
 
