@@ -310,8 +310,8 @@ df3<- get_acs(
 )
 
 variables_df3 <- data.frame(
-  variable = c("K200501_001", "K200501_002"),  
-  label = c("U.S. citizen", "Not a U.S. citizen")  
+  variable = c("K200501_001", "K200501_002","K200501_003"),  
+  label = c("Total","U.S. citizen", "Not a U.S. citizen")  
 )
 
 df3_labeled <- df3 %>%
