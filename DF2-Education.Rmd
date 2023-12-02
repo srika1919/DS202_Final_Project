@@ -89,7 +89,6 @@ ggplot(df2_long, aes(x = NAME, y = Percentage, fill = Education_Level)) +
 
 ```
 ```{r}
-# Load necessary libraries
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -98,34 +97,44 @@ library(dplyr)
 df2_long <- df2_wide %>%
   gather(key = "Education_Level", value = "Count", -NAME)
 
-# Calculate total count for each state
-df2_long <- df2_long %>%
+# Calculate total count for each state only once
+total_counts <- df2_long %>%
   group_by(NAME) %>%
-  mutate(Total = sum(Count)) %>%
-  ungroup()
+  summarize(Total = sum(Count)) 
 
-# Calculate the percentage
+# Join with original data to add the Total column
+df2_long <- df2_long %>%
+  left_join(total_counts, by = "NAME")
+
+# Calculate the percentage for each education level
 df2_long <- df2_long %>%
   mutate(Percentage = (Count / Total) * 100)
 
-# Iterate over each unique education level
-for(level in unique(df2_long$Education_Level)) {
-  # Filter data for the current level
-  df_subset <- df2_long %>% 
-    filter(Education_Level == level)
+# Create graphs for each educational level
+unique_levels <- unique(df2_long$Education_Level)
+plots <- list()
 
-  # Generate and print the plot
+for (level in unique_levels) {
+  df_subset <- filter(df2_long, Education_Level == level)
+
   p <- ggplot(df_subset, aes(x = NAME, y = Percentage, fill = Education_Level)) +
     geom_bar(stat = "identity") +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     labs(title = paste("Percentage Distribution of", level, "across States"), 
          x = "State", 
-         y = "Percentage")
+         y = "Percentage") +
+    guides(fill = guide_legend(title = "Education Level"))
 
-  print(p)
+  plots[[level]] <- p
+}
+
+# Print plots (optional)
+for (plot in plots) {
+  print(plot)
 }
 
 ```
+
 
 
 
