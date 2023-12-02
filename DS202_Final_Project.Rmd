@@ -412,8 +412,6 @@ df5_wide <- df5_labeled %>%
 
 ```
 
-
-
 # Plan for Data Exploration
 
 -   What we have done so far:
@@ -435,5 +433,6 @@ merged_data <- df1_wide %>%
   left_join(df2_wide, by = "NAME") %>%
   left_join(df3_wide, by = "NAME")%>%
   left_join(df4_wide, by = "NAME")%>%
-  left_join(df5_wide, by = "NAME")
+  left_join(df5_wide, by = "NAME")%>%
+  left_join(df6_wide, by = "NAME")
 ```

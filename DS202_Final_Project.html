@@ -658,7 +658,26 @@ df2_wide &lt;- df2_labeled %&gt;%
 <h2>DF3 - Citizenship</h2>
 <pre class="r"><code>#Esha
 #Citizenship - K200501
-#df3 &lt;-</code></pre>
+
+df3&lt;- get_acs(
+  geography = &quot;state&quot;, 
+  table = &quot;K200501&quot;, 
+  year = 2021, 
+  survey = &quot;acs1/subject&quot;, 
+  cache_table = TRUE
+)</code></pre>
+<pre><code>## Getting data from the ACS 1-year Supplemental Estimates.  Data are available for geographies with populations of 20,000 and greater.</code></pre>
+<pre><code>## Loading ACSSE variables for 2021 from table K200501 and caching the dataset for faster future access.</code></pre>
+<pre class="r"><code>variables_df3 &lt;- data.frame(
+  variable = c(&quot;K200501_001&quot;, &quot;K200501_002&quot;),  
+  label = c(&quot;U.S. citizen&quot;, &quot;Not a U.S. citizen&quot;)  
+)
+
+df3_labeled &lt;- df3 %&gt;%
+  left_join(variables_df3, by = &quot;variable&quot;)
+
+df3_wide &lt;- df3_labeled %&gt;%
+  pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)</code></pre>
 <hr />
 <p>***</p>
 <hr />
@@ -713,23 +732,25 @@ df4_wide &lt;- df4_labeled %&gt;%
   |                                                                            
   |                                                                      |   0%
   |                                                                            
-  |======                                                                |   9%
+  |=                                                                     |   1%
   |                                                                            
-  |============                                                          |  17%
+  |=======                                                               |  10%
   |                                                                            
-  |========================                                              |  35%
+  |=============                                                         |  18%
   |                                                                            
-  |===============================                                       |  44%
+  |===================                                                   |  27%
   |                                                                            
-  |=====================================                                 |  52%
+  |=====================================                                 |  53%
   |                                                                            
-  |=================================================                     |  70%
+  |===========================================                           |  62%
   |                                                                            
-  |=======================================================               |  79%
+  |=================================================                     |  71%
   |                                                                            
-  |=============================================================         |  87%
+  |========================================================              |  79%
   |                                                                            
-  |===================================================================   |  96%
+  |==============================================================        |  88%
+  |                                                                            
+  |====================================================================  |  97%
   |                                                                            
   |======================================================================| 100%</code></pre>
 <pre class="r"><code>Mapping_age&lt;-Age_data%&gt;%
@@ -776,6 +797,38 @@ df5_wide &lt;- df5_labeled %&gt;%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
 # df5_wide will have states as rows and different housing-related variables as columns</code></pre>
+</div>
+<div id="plan-for-data-exploration" class="section level1">
+<h1>Plan for Data Exploration</h1>
+<ul>
+<li>What we have done so far:
+<ul>
+<li>Pulled the required ACS 2021 1 year data using a API call</li>
+<li>Cleaned the data</li>
+<li>Transformed to long format and formatted the table by focusing on
+the estimates we will be using.</li>
+</ul></li>
+<li>We took the ACS 1 year data for the variables:
+<ul>
+<li>EMPLOYMENT</li>
+<li>Education</li>
+<li>Citizenship</li>
+<li>Housing</li>
+<li>Age</li>
+<li>Disabilities</li>
+</ul></li>
+<li>We are trying to see the relationship for the various with the
+employment fo reach state in the US.</li>
+<li>We are planning to make some visualization like the above drafts
+which could inform the audience about the factors affecting the
+employment in various states in the US.</li>
+</ul>
+<pre class="r"><code>merged_data &lt;- df1_wide %&gt;%
+  left_join(df2_wide, by = &quot;NAME&quot;) %&gt;%
+  left_join(df3_wide, by = &quot;NAME&quot;)%&gt;%
+  left_join(df4_wide, by = &quot;NAME&quot;)%&gt;%
+  left_join(df5_wide, by = &quot;NAME&quot;)%&gt;%
+  left_join(df6_wide, by = &quot;NAME&quot;)</code></pre>
 </div>
 
 
