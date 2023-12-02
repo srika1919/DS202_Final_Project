@@ -36,6 +36,42 @@ df3_labeled <- df3 %>%
 df3_wide <- df3_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
+# Load necessary libraries
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Convert df3_wide to long format
+df3_long <- df3_wide %>%
+  gather(key = "Citizenship", value = "Count", -NAME)
+
+# Calculate total count for each state
+df3_long <- df3_long %>%
+  group_by(NAME) %>%
+  mutate(Total = sum(Count)) %>%
+  ungroup()
+
+# Calculate the percentage
+df3_long <- df3_long %>%
+  mutate(Percentage = (Count / Total) * 100)
+
+# Iterate over each unique citizenship category
+for (category in unique(df3_long$Citizenship)) {
+  # Filter data for the current citizenship category
+  df3_subset <- df3_long %>% 
+    filter(Citizenship == category)
+
+  # Generate and print the plot for citizenship
+  p <- ggplot(df3_subset, aes(x = NAME, y = Percentage, fill = Citizenship)) +
+    geom_bar(stat = "identity") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(title = paste("Percentage Distribution of", category, "across States"), 
+         x = "State", 
+         y = "Percentage")
+
+  print(p)
+}
+
 
 ```
 

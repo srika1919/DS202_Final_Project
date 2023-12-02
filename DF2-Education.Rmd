@@ -23,7 +23,7 @@ df2 <- get_acs(geography = "state",
 
 variables_df2 <- data.frame(
   variable = c("K201501_001", "K201501_002", "K201501_003", "K201501_004", "K201501_005", "K201501_006", "K201501_007", "K201501_008"),
-  label = c("Education_Total_students", "Education_Below_9th grade", "Education_9th to 12th grade_no diploma", "Education_High_school_graduate", "Education_Some college_no degree", "Education_Associate's_degree", "Education_Bachelor's_degree", "Education_Graduate_professional degree")
+  label = c("Education_Total_students", "Education_Below_9th grade", "Education_9th to 12th grade_no diploma", "Education_High_school_graduate", "Education_Some college_no degree", "Education_Associates_degree", "Education_Bachelors_degree", "Education_Graduate_professional degree")
 )
 
 df2_labeled <- df2 %>%
@@ -135,6 +135,30 @@ for (plot in plots) {
 
 ```
 
+```{r}
+df2_percentages <- df2_wide %>%
+  mutate(
+    `Education_Below_9th grade_Percentage` = `Education_Below_9th grade` / Education_Total_students * 100,
+    `Education_9th to 12th grade_no diploma_Percentage` = `Education_9th to 12th grade_no diploma` / Education_Total_students * 100,
+    Education_High_school_graduate_Percentage = Education_High_school_graduate / Education_Total_students * 100,
+    `Education_Some college_no degree_Percentage` = `Education_Some college_no degree` / Education_Total_students * 100,
+    Education_Associates_degree_Percentage = Education_Associates_degree / Education_Total_students * 100,
+    Education_Bachelors_degree_Percentage = Education_Bachelors_degree / Education_Total_students * 100,
+    `Education_Graduate_professional degree_Percentage` = `Education_Graduate_professional degree` / Education_Total_students * 100
+  )
+percentage_columns <- grep("_Percentage$", names(df2_percentages), value = TRUE)
+df2_long <- df2_percentages %>%
+  pivot_longer(cols = percentage_columns, names_to = "Age_Group", values_to = "Percentage")
+ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentage, fill = Age_Group)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Age Distribution by State",
+       x = "State",
+       y = "Percentage of Total Population",
+       fill = "Age Group") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  scale_fill_viridis_d()  # Adjust the color scale as needed
+```
 
 
 
