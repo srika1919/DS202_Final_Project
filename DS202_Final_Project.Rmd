@@ -283,11 +283,8 @@ library(dplyr)
 library(tidyr)
 library(viridis)
 
-# Assuming your data is already loaded into a dataframe named your_data_frame
-# If not, load your data like this:
-# your_data_frame <- read.csv("path_to_your_data.csv")
 
-X_variable <- "Employed"
+X_variable <- "EmploymentRate"
 Y_variables <- c("Education_Bachelors_degree", "Education_Graduate_professional degree", "Education_Below_9th grade", "Education_High_school_graduate")
 
 # Convert data from wide to long format for easier plotting
@@ -308,7 +305,6 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
 
 print(plot)
 
-
-
 ```
+
 
