@@ -213,18 +213,6 @@ ggplot(correlation_df, aes(x = reorder(Variable, Correlation), y = Correlation))
 
 ```
 
-```{r}
-library(dplyr)
-library(ggplot2)
-library(corrplot)
-
-# Calculating correlations
-corr_matrix <- cor(rounded_correlation_matrix)
-
-# Plotting the heatmap
-corrplot(corr_matrix, method = "color")
-
-```
 
 ### **Alignment with Thesis**
 
