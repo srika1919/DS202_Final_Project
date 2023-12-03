@@ -213,6 +213,18 @@ ggplot(correlation_df, aes(x = reorder(Variable, Correlation), y = Correlation))
 
 ```
 
+```{r}
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+
+# Calculating correlations
+corr_matrix <- cor(rounded_correlation_matrix)
+
+# Plotting the heatmap
+corrplot(corr_matrix, method = "color")
+
+```
 
 ### **Alignment with Thesis**
 
@@ -271,8 +283,11 @@ library(dplyr)
 library(tidyr)
 library(viridis)
 
+# Assuming your data is already loaded into a dataframe named your_data_frame
+# If not, load your data like this:
+# your_data_frame <- read.csv("path_to_your_data.csv")
 
-X_variable <- "EmploymentRate"
+X_variable <- "Employed"
 Y_variables <- c("Education_Bachelors_degree", "Education_Graduate_professional degree", "Education_Below_9th grade", "Education_High_school_graduate")
 
 # Convert data from wide to long format for easier plotting
@@ -293,83 +308,22 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
 
 print(plot)
 
+
+
 ```
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(viridis)
+# Assuming 'merged_data' is your merged dataset with employment and housing information
+# Assuming 'ggplot2' is already loaded
 
-
-X_variable <- "Employed"
-Y_variables <- c("U.S. citizen","Not a U.S. citizen")
-
-# Convert data from wide to long format for easier plotting
-long_data <- merged_data %>%
-  select(all_of(c(X_variable, Y_variables))) %>%
-  gather(key = "variable", value = "value", -all_of(X_variable))
-
-# Create the scatter plot
-plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "variable")) +
+# Create a scatter plot
+ggplot(merged_data, aes(x = `Owner Occupied`, y = EmploymentRate)) +
   geom_point() +
-  scale_color_viridis_d() + # Use a colorful scale
-  theme_minimal() + # Minimalist theme
-  labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
-       x = "Employed Rate",
-       y = "Value") +
-  theme(plot.title = element_text(hjust = 0.5), # Center the title
-        axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
+  geom_smooth(method = "lm") +
+  labs(title = "Correlation between Owner-Occupied Housing and Employment Rate",
+       x = "Percentage of Owner-Occupied Housing",
+       y = "Employment Rate") +
+  theme_minimal()
 
-print(plot)
-```
-
-```{r}
-X_variable <- "Employed"
-Y_variables <- c("Age_under_18", 
-            "Age_18_to_24", "Age_25_to_34", 
-            "Age_35_to_44", "Age_45_to_54", "Age_55_to_64","Age_over_64")
-
-# Convert data from wide to long format for easier plotting
-long_data <- merged_data %>%
-  select(all_of(c(X_variable, Y_variables))) %>%
-  gather(key = "variable", value = "value", -all_of(X_variable))
-
-# Create the scatter plot
-plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "variable")) +
-  geom_point() +
-  scale_color_viridis_d() + # Use a colorful scale
-  theme_minimal() + # Minimalist theme
-  labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
-       x = "Employed Rate",
-       y = "Value") +
-  theme(plot.title = element_text(hjust = 0.5), # Center the title
-        axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
-
-print(plot)
-```
-```{r}
-X_variable <- "Employed"
-Y_variables <- c("Total With Disabilities", 
-            "Hearing", "Vision difficulty", 
-            "cognative", "ambulatory difficulty", 
-            "Self-care difficulty","Independent living difficulty","No Disability")
-# Convert data from wide to long format for easier plotting
-long_data <- merged_data %>%
-  select(all_of(c(X_variable, Y_variables))) %>%
-  gather(key = "variable", value = "value", -all_of(X_variable))
-
-# Create the scatter plot
-plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "variable")) +
-  geom_point() +
-  scale_color_viridis_d() + # Use a colorful scale
-  theme_minimal() + # Minimalist theme
-  labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
-       x = "Employed Rate",
-       y = "Value") +
-  theme(plot.title = element_text(hjust = 0.5), # Center the title
-        axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
-
-print(plot)
 ```
 ```{r}
 library(ggplot2)
