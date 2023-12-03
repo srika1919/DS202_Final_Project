@@ -36,6 +36,8 @@ library(factoextra)
 library(ggplot2)
 library(usmap)
 library(maps)
+
+install.packages("plotly")
 ```
 
 # Plan for Data Exploration
@@ -159,6 +161,29 @@ ggplot(normalized_data, aes(x = `Education_Bachelors_degree`, y = EmploymentRate
 
 
 ```
+
+```{r}
+# Assuming 'merged_data' is your merged dataset with employment and housing information
+# Assuming 'plotly' and 'dplyr' are already loaded
+
+# Load the plotly library
+library(plotly)
+
+# Create an interactive scatter plot
+plotly_scatter <- merged_data %>%
+  plot_ly(x = ~`Owner Occupied`, y = ~EmploymentRate, text = ~NAME, mode = "markers") %>%
+  add_markers(marker = list(color = "blue", size = 10)) %>%
+  layout(title = "Interactive Scatter Plot: Housing vs. Employment",
+         xaxis = list(title = "Percentage of Owner-Occupied Housing"),
+         yaxis = list(title = "Employment Rate"),
+         hovermode = "closest")
+
+# Show the interactive plot
+plotly_scatter
+
+
+```
+
 
 ```{r}
 numeric_columns <- sapply(merged_data, is.numeric)
