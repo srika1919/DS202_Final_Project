@@ -287,7 +287,7 @@ This can inform policymakers and stakeholders in developing targeted strategies 
 library(plotly)
 library(dplyr)
 
-X_variable <- "UeEmployed"
+X_variable <- "Unemployed"
 Y_variables <- c("Education_Bachelors_degree", "Education_Graduate_professional degree", "Education_Below_9th grade", "Education_High_school_graduate")
 
 # Convert data from wide to long format for easier plotting
@@ -297,7 +297,7 @@ long_data <- merged_data %>%
 
 # Create an interactive scatter plot
 plotly_scatter <- long_data %>%
-  plot_ly(x = ~Employed, y = ~value, text = ~variable, mode = "markers", color = ~variable) %>%
+  plot_ly(x = ~Unemployed, y = ~value, text = ~variable, mode = "markers", color = ~variable) %>%
   add_markers(marker = list(size = 10)) %>%
   layout(title = "Interactive Scatter Plot: Un-Employed vs. Education Levels",
          xaxis = list(title = "Un-Employed"),
