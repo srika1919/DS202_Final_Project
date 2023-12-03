@@ -351,10 +351,13 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
   labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
        x = "Number of Unemployed",
        y = "Value") +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(labels = scales::comma) +
   theme(plot.title = element_text(hjust = 0.5), # Center the title
         axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
 
-print(plot)
+plotly_plot <- ggplotly(plot)
+print(plotly_plot)
 
 ```
 ```{r}
