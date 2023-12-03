@@ -16,10 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, child=c('DF1-Employment.Rmd','DF2-Education.Rmd','DF3-Citizenship.Rmd','DF4-Age.Rmd','DF5-Housing.Rmd','DF6-Disabilities.Rmd')}
 ```
 
-
-
-
-
 ```{r}
 #census_api_key(Sys.getenv("CENSUS_API_KEY"), install = TRUE)
 ```
@@ -41,9 +37,6 @@ library(ggplot2)
 library(usmap)
 library(maps)
 ```
-
-
-
 
 # Plan for Data Exploration
 
@@ -76,8 +69,6 @@ merged_data <- merged_data[, !(names(merged_data) %in% columns_to_drop)]
 colnames(merged_data)
 ```
 
-
-
 ### **Title**
 
 **"Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"**
@@ -95,7 +86,6 @@ Using data from the American Community Survey (ACS) 2021, the study will employ 
 
     -   Normalize the data if required for better comparison.
 
-
 ```{r}
 #Check for Missing Values
 # Checking the number of missing values in each column
@@ -107,7 +97,6 @@ missing_data_summary <- summarize_missing_data(merged_data)
 missing_data_summary
 
 ```
-
 
 ```{r}
 # Handling missing values
@@ -171,7 +160,6 @@ ggplot(normalized_data, aes(x = `Education_Bachelors_degree`, y = EmploymentRate
 
 ```
 
-
 ```{r}
 numeric_columns <- sapply(merged_data, is.numeric)
 numeric_data <- merged_data[, numeric_columns]
@@ -194,3 +182,97 @@ library(knitr)
 kable(rounded_correlation_matrix)
 ```
 
+```{r}
+# Assuming 'correlation_matrix' is your correlation matrix
+employment_correlations <- correlation_matrix["EmploymentRate", ]
+
+# Remove the correlation of EmploymentRate with itself
+employment_correlations <- employment_correlations[employment_correlations != 1]
+
+# Convert to data frame for plotting
+correlation_df <- data.frame(
+  Variable = names(employment_correlations),
+  Correlation = employment_correlations
+)
+
+
+```
+
+```{r}
+library(ggplot2)
+
+# Plotting
+ggplot(correlation_df, aes(x = reorder(Variable, Correlation), y = Correlation)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +  # Flips the coordinates to make the plot horizontal
+  labs(title = "Correlation of Various Factors with Employment Rate",
+       x = "Variable",
+       y = "Correlation with Employment Rate") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+
+# Calculating correlations
+corr_matrix <- cor(rounded_correlation_matrix)
+
+# Plotting the heatmap
+corrplot(corr_matrix, method = "color")
+
+```
+
+### **Alignment with Thesis**
+
+1.  **Education and Employment:**
+
+    -   The strong positive correlations between higher education levels (like 'Bachelors Degree' and 'Graduate Professional Degree') and labor force participation align perfectly with your thesis.
+        This suggests that higher educational attainment is a critical socio-economic factor influencing employment rates.
+
+2.  **Age Dynamics in Employment:**
+
+    -   The varied correlations across different age brackets ('Age_under_18' through 'Age_over_64') with labor force variables reflect the complex impact of age on employment.
+        This is in line with your aim to explore how different age demographics influence employment rates across states.
+
+3.  **Citizenship and Employment Rates:**
+
+    -   The correlation data includes 'U.S.
+        Citizen' and 'Not a U.S.
+        Citizen', indicating the significant role of citizenship status in employment dynamics, as your thesis proposes to investigate.
+
+4.  **Housing Status:**
+
+    -   The correlations between 'Owner Occupied' and 'Renter Occupied' with labor force and educational variables suggest that housing status might be an important socio-economic factor affecting employment, which aligns with the scope of your study.
+
+5.  **Impact of Disabilities on Employment:**
+
+    -   The relationship between 'DisabilityRate' and employment-related variables ('EmploymentRate', 'UnemploymentRate', 'NotInLaborForceRate') aligns with your project's aim to understand how disabilities influence employment rates.
+
+### **Project-Specific Conclusions**
+
+-   **Educational Attainment as a Driving Force:**
+
+    -   The data suggests that in the U.S., states with higher levels of educational attainment might see higher employment rates, supporting the idea that investment in education could be key to boosting employment.
+
+-   **Age-Related Employment Trends:**
+
+    -   The study could reveal how employment trends vary with age across different states, highlighting the need for age-specific economic and workforce development strategies.
+
+-   **Role of Citizenship in Workforce Participation:**
+
+    -   The correlations indicate that citizenship status can significantly impact employment, suggesting a potential area of policy focus for improving workforce integration.
+
+-   **Housing as an Indicator of Employment Status:**
+
+    -   The link between housing status and employment might offer insights into how housing security or instability impacts employment opportunities in different states.
+
+-   **Disabilities and Labor Force Inclusion:**
+
+    -   The negative correlation between disability rates and employment rates underlines the challenges faced by individuals with disabilities in the labor market, suggesting a need for more inclusive employment policies.
+
+Overall, your analysis using ACS 2021 data is poised to offer comprehensive insights into how various socio-economic factors affect employment rates across the United States, in line with your project's thesis.
+This can inform policymakers and stakeholders in developing targeted strategies to enhance employment opportunities for diverse populations in different states.
