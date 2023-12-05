@@ -283,16 +283,11 @@ Overall, your analysis using ACS 2021 data is poised to offer comprehensive insi
 This can inform policymakers and stakeholders in developing targeted strategies to enhance employment opportunities for diverse populations in different states.
 
 ```{r}
-library(ggplot2)
+# Load the plotly and dplyr libraries
+library(plotly)
 library(dplyr)
-library(tidyr)
-library(viridis)
 
-# Assuming your data is already loaded into a dataframe named your_data_frame
-# If not, load your data like this:
-# your_data_frame <- read.csv("path_to_your_data.csv")
-
-X_variable <- "Employed"
+X_variable <- "Unemployed"
 Y_variables <- c("Education_Bachelors_degree", "Education_Graduate_professional degree", "Education_Below_9th grade", "Education_High_school_graduate")
 
 # Convert data from wide to long format for easier plotting
@@ -300,18 +295,18 @@ long_data <- merged_data %>%
   select(all_of(c(X_variable, Y_variables))) %>%
   gather(key = "variable", value = "value", -all_of(X_variable))
 
-# Create the scatter plot
-plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "variable")) +
-  geom_point() +
-  scale_color_viridis_d() + # Use a colorful scale
-  theme_minimal() + # Minimalist theme
-  labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
-       x = "Employed Rate",
-       y = "Value") +
-  theme(plot.title = element_text(hjust = 0.5), # Center the title
-        axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
+# Create an interactive scatter plot
+plotly_scatter <- long_data %>%
+  plot_ly(x = ~Unemployed, y = ~value, text = ~variable, mode = "markers", color = ~variable) %>%
+  add_markers(marker = list(size = 10)) %>%
+  layout(title = "Interactive Scatter Plot: Un-Employed vs. Education Levels",
+         xaxis = list(title = "Un-Employed"),
+         yaxis = list(title = "Value"),
+         hovermode = "closest")
 
-print(plot)
+# Show the interactive plot
+plotly_scatter
+
 
 
 
@@ -356,10 +351,13 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
   labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
        x = "Number of Unemployed",
        y = "Value") +
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_continuous(labels = scales::comma) +
   theme(plot.title = element_text(hjust = 0.5), # Center the title
         axis.text.x = element_text(angle = 45, hjust = 1)) # Slant x-axis labels
 
-print(plot)
+plotly_plot <- ggplotly(plot)
+print(plotly_plot)
 
 ```
 ```{r}
@@ -373,9 +371,9 @@ library(plotly)
 plotly_scatter <- merged_data %>%
   plot_ly(x = ~`Owner Occupied`, y = ~Unemployed, text = ~NAME, mode = "markers") %>%
   add_markers(marker = list(color = "blue", size = 10)) %>%
-  layout(title = "Interactive Scatter Plot: Housing vs. Employment",
+  layout(title = "Interactive Scatter Plot: Housing vs. Un-Employment",
          xaxis = list(title = "Percentage of Owner-Occupied Housing"),
-         yaxis = list(title = "Employment Rate"),
+         yaxis = list(title = "Un-Employment"),
          hovermode = "closest")
 
 # Show the interactive plot
