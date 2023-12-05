@@ -15,3 +15,63 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, child=c('DF1-Employment.Rmd','DF2-Education.Rmd','DF3-Citizenship.Rmd','DF4-Age.Rmd','DF5-Housing.Rmd','DF6-Disabilities.Rmd')}
 ```
+
+------------------------------------------------------------------------
+
+#  [Part 1]{.underline}
+
+## Title
+
+#### "Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"
+
+## **Authors**
+
+1.  Abhay Prasanna Rao
+
+2.  Srika Raja
+
+3.  Neha
+
+4.  Esha
+
+5.  Niharika
+
+## **Abstract (TL;DR)**
+
+This project investigates the impact of socio-economic factors on employment rates across U.S. states.
+Utilizing ACS 2021 data, we explore relationships between employment and variables like education, citizenship, and housing.
+Key findings include significant correlations that inform employment dynamics in the U.S.
+
+## **Motivation**
+
+We aim to analyze various socio-economic factors influencing employment in the U.S.
+This study is crucial for understanding how different aspects like education, age, and housing contribute to employment rates, thereby aiding policymakers and researchers.
+
+## Summary
+
+We have imported data set from the ACS survey.
+We have 6 child RMD files for this project which has the data analysis for the Employment, Education, Citizenship, Age, Housing, Disabilities Data Set (ACS 2021).\
+Further, we started exploring each data set in detail and then we started combining each data set with the employment to see what results we can expect.
+We did find many direct relationships with each data set on employment data set.
+We have put our concluding results in the Final Report to help us stand by with our conclusions.
+
+# [Part 2: ]{.underline}
+
+## Data Sets
+
+The below data sets are from data.census.gov [ United States Census Bureau].
+We shortlisted it based on ACS 2021, inclusive for all states in United States.
+
+1.  Employment - K202301
+
+2.  Education - K201501
+
+3.  Citizenship - K200501
+
+4.  Age - K200104
+
+5.  Housing - K202502
+
+6.  Disabilities - K201803
+
+## 
