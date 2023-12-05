@@ -40,21 +40,6 @@ library(maps)
 #install.packages("plotly")
 ```
 
-# Plan for Data Exploration
-
--   What we have done so far:
-    -   Pulled the required ACS 2021 1 year data using a API call
-    -   Cleaned the data
-    -   Transformed to long format and formatted the table by focusing on the estimates we will be using.
--   We took the ACS 1 year data for the variables:
-    -   EMPLOYMENT
-    -   Education
-    -   Citizenship
-    -   Housing
-    -   Age
-    -   Disabilities
--   We are trying to see the relationship for the various with the employment fo reach state in the US.
--   We are planning to make some visualization like the above drafts which could inform the audience about the factors affecting the employment in various states in the US.
 
 ```{r}
 merged_data <- df1_wide %>%
