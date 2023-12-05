@@ -328,3 +328,28 @@ plotly_scatter
 
 
 ```
+
+```{r}
+library(plotly)
+library(dplyr)
+
+# Assuming 'merged_data' is your data frame and it contains columns 
+#"U.S. citizen", "Not a U.S. citizen"
+
+# Create an interactive scatter plot
+plotly_scatter <- merged_data %>%
+  plot_ly() %>%
+  add_trace(x = ~`U.S. citizen`, y = ~Unemployed, type = 'scatter', mode = 'markers', 
+            marker = list(color = 'blue', size = 10), name = 'U.S. Citizen') %>%
+  add_trace(x = ~`Not a U.S. citizen`, y = ~Unemployed, type = 'scatter', mode = 'markers', 
+            marker = list(color = 'red', size = 10), name = 'Not a U.S. Citizen') %>%
+  layout(title = 'Interactive Scatter Plot: Unemployment vs Citizenship Status',
+         xaxis = list(title = 'Citizenship Status'),
+         yaxis = list(title = 'Unemployment'),
+         hovermode = 'closest')
+
+# Show the interactive plot
+plotly_scatter
+
+```
+
