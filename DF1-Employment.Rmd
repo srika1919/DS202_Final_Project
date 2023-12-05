@@ -120,7 +120,7 @@ corrplot(correlation_matrix, method = "circle")
 state_abbreviations <- state.abb[match(df1_wide$NAME, state.name)]
 df1_wide$state <- state_abbreviations
 
-df1_wide$EmploymentRate <- df1_wide$`Employed` / df1_wide$Total * 100
+df1_wide$EmploymentRate <- df1_wide$`Employed` / df1_wide$Total *100
 
 # Plot the map with employment rate
 plot_usmap(data = df1_wide, values = "EmploymentRate", labels = TRUE) +
