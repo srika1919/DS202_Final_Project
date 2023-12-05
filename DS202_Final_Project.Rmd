@@ -301,7 +301,7 @@ library(plotly)
 
 # Create an interactive scatter plot
 plotly_scatter <- merged_data %>%
-  plot_ly(x = ~`Owner Occupied`, y = ~Unemployed, text = ~NAME, mode = "markers") %>%
+  plot_ly(x = ~`Owner Occupied`, y = ~Employed, text = ~NAME, mode = "markers") %>%
   add_markers(marker = list(color = "blue", size = 10)) %>%
   layout(title = "Interactive Scatter Plot: Housing vs. Un-Employment",
          xaxis = list(title = "Percentage of Owner-Occupied Housing"),
