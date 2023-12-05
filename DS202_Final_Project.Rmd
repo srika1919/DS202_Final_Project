@@ -37,7 +37,7 @@ library(ggplot2)
 library(usmap)
 library(maps)
 
-install.packages("plotly")
+#install.packages("plotly")
 ```
 
 # Plan for Data Exploration
@@ -231,56 +231,6 @@ corrplot(corr_matrix, method = "color")
 
 ```
 
-### **Alignment with Thesis**
-
-1.  **Education and Employment:**
-
-    -   The strong positive correlations between higher education levels (like 'Bachelors Degree' and 'Graduate Professional Degree') and labor force participation align perfectly with your thesis.
-        This suggests that higher educational attainment is a critical socio-economic factor influencing employment rates.
-
-2.  **Age Dynamics in Employment:**
-
-    -   The varied correlations across different age brackets ('Age_under_18' through 'Age_over_64') with labor force variables reflect the complex impact of age on employment.
-        This is in line with your aim to explore how different age demographics influence employment rates across states.
-
-3.  **Citizenship and Employment Rates:**
-
-    -   The correlation data includes 'U.S.
-        Citizen' and 'Not a U.S.
-        Citizen', indicating the significant role of citizenship status in employment dynamics, as your thesis proposes to investigate.
-
-4.  **Housing Status:**
-
-    -   The correlations between 'Owner Occupied' and 'Renter Occupied' with labor force and educational variables suggest that housing status might be an important socio-economic factor affecting employment, which aligns with the scope of your study.
-
-5.  **Impact of Disabilities on Employment:**
-
-    -   The relationship between 'DisabilityRate' and employment-related variables ('EmploymentRate', 'UnemploymentRate', 'NotInLaborForceRate') aligns with your project's aim to understand how disabilities influence employment rates.
-
-### **Project-Specific Conclusions**
-
--   **Educational Attainment as a Driving Force:**
-
-    -   The data suggests that in the U.S., states with higher levels of educational attainment might see higher employment rates, supporting the idea that investment in education could be key to boosting employment.
-
--   **Age-Related Employment Trends:**
-
-    -   The study could reveal how employment trends vary with age across different states, highlighting the need for age-specific economic and workforce development strategies.
-
--   **Role of Citizenship in Workforce Participation:**
-
-    -   The correlations indicate that citizenship status can significantly impact employment, suggesting a potential area of policy focus for improving workforce integration.
-
--   **Housing as an Indicator of Employment Status:**
-
-    -   The link between housing status and employment might offer insights into how housing security or instability impacts employment opportunities in different states.
-
--   **Disabilities and Labor Force Inclusion:**
-
-    -   The negative correlation between disability rates and employment rates underlines the challenges faced by individuals with disabilities in the labor market, suggesting a need for more inclusive employment policies.
-
-Overall, your analysis using ACS 2021 data is poised to offer comprehensive insights into how various socio-economic factors affect employment rates across the United States, in line with your project's thesis.
-This can inform policymakers and stakeholders in developing targeted strategies to enhance employment opportunities for diverse populations in different states.
 
 ```{r}
 # Load the plotly and dplyr libraries
@@ -331,9 +281,6 @@ library(dplyr)
 library(tidyr)
 library(viridis)
 
-# Assuming your data is already loaded into a dataframe named your_data_frame
-# If not, load your data like this:
-# your_data_frame <- read.csv("path_to_your_data.csv")
 
 X_variable <- "Unemployed"
 Y_variables <- c("Age_18_to_24", "Age_25_to_34", "Age_45_to_54", "Age_55_to_64")
@@ -348,7 +295,7 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
   geom_point() +
   scale_color_viridis_d() + # Use a colorful scale
   theme_minimal() + # Minimalist theme
-  labs(title = "Scatter Plots of Various Education Levels vs Employed Rate",
+  labs(title = "Scatter Plots of Various Age vs Un-Employed Rate",
        x = "Number of Unemployed",
        y = "Value") +
   scale_y_continuous(labels = scales::comma) +
