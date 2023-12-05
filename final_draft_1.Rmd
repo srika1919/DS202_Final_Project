@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-```{r, child=c('DF1-Employment.Rmd','DF2-Education.Rmd','DF3-Citizenship.Rmd','DF4-Age.Rmd','DF5-Housing.Rmd','DF6-Disabilities.Rmd')}
+```{}
 ```
 
 ------------------------------------------------------------------------
