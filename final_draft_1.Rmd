@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ------------------------------------------------------------------------
 
-#  [Part 1]{.underline}
+# [Part 1]{.underline}
 
 ## Title
 
@@ -55,7 +55,7 @@ Further, we started exploring each data set in detail and then we started combin
 We did find many direct relationships with each data set on employment data set.
 We have put our concluding results in the Final Report to help us stand by with our conclusions.
 
-# [Part 2: ]{.underline}
+# [Part 2:]{.underline}
 
 ## Data Sets
 
@@ -64,14 +64,80 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
 
 1.  Employment - K202301
 
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+
 2.  Education - K201501
+
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
 
 3.  Citizenship - K200501
 
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+
 4.  Age - K200104
+
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
 
 5.  Housing - K202502
 
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+
 6.  Disabilities - K201803
+
+    | Variable | Description | Range |
+    |----------|-------------|-------|
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
+    |          |             |       |
 
 ## 
