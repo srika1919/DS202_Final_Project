@@ -9,7 +9,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
@@ -64,80 +64,88 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
 
 1.  Employment - K202301
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    | Variable              | Description                          |
+    |-----------------------|--------------------------------------|
+    | Total                 | Total Employment Data                |
+    | In Labor Force        | Total People in Labor Force          |
+    | Civilian labor force: | Total People in Civilian Labor Force |
+    | Employed              | Total People Employed                |
+    | Unemployed            | Total People Unemployed              |
+    | In Armed Forces       | Total People in Armed Forces         |
+    | Not in labor force    | Total People not in Labor Force      |
 
 2.  Education - K201501
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    +--------------------------------------------+-----------------------------------------+
+    | Variable                                   | Description                             |
+    +============================================+=========================================+
+    | 1.  Education_Total_students               | Total Students in the Education Survery |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_Below_9th grade              |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_9th to 12th grade_no diploma |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_High_school_graduate         |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_Some college_no degree       |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_Associates_degree            |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_Bachelors_degree             |                                         |
+    +--------------------------------------------+-----------------------------------------+
+    | 1.  Education_Graduate_professional degree |                                         |
+    +--------------------------------------------+-----------------------------------------+
 
 3.  Citizenship - K200501
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    | Variable | Description |
+    |----------|-------------|
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
 
 4.  Age - K200104
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    | Variable | Description |
+    |----------|-------------|
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
 
 5.  Housing - K202502
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    | Variable | Description |
+    |----------|-------------|
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
 
 6.  Disabilities - K201803
 
-    | Variable | Description | Range |
-    |----------|-------------|-------|
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
-    |          |             |       |
+    | Variable | Description |
+    |----------|-------------|
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
+    |          |             |
 
 ## 
