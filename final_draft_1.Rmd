@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-```{}
+```         
 ```
 
 ------------------------------------------------------------------------
@@ -57,7 +57,7 @@ We have put our concluding results in the Final Report to help us stand by with 
 
 # [Part 2:]{.underline}
 
-## Data Sets
+## Data Sets and Variables
 
 The below data sets are from data.census.gov [ United States Census Bureau].
 We shortlisted it based on ACS 2021, inclusive for all states in United States.
@@ -76,76 +76,55 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
 
 2.  Education - K201501
 
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | Variable                                   | Description                                                                  |
-    +============================================+==============================================================================+
-    | 1.  Education_Total_students               | Total Students in the Education Survery                                      |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_Below_9th grade              | Number of students who have completed 9th grade                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_9th to 12th grade_no diploma | Number of students who have completed 9th grade to 12th grade but no diploma |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_High_school_graduate         |                                                                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_Some college_no degree       |                                                                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_Associates_degree            |                                                                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_Bachelors_degree             |                                                                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
-    | 1.  Education_Graduate_professional degree |                                                                              |
-    +--------------------------------------------+------------------------------------------------------------------------------+
+    | Variable                               | Description                                                                  |
+    |----------------------------------------|------------------------------------------------------------------------------|
+    | Education_Total_students               | Total Students in the Education Survery                                      |
+    | Education_Below_9th grade              | Number of students who have completed 9th grade                              |
+    | Education_9th to 12th grade_no diploma | Number of students who have completed 9th grade to 12th grade but no diploma |
+    | Education_High_school_graduate         | Number of high school graduate students                                      |
+    | Education_Some college_no degree       | Number of people enrolled into some college but have not acquired a degree   |
+    | Education_Associates_degree            | Number of people with associates degree                                      |
+    | Education_Bachelors_degree             | Number of people with bachelors degree                                       |
+    | Education_Graduate_professional degree | Number of people with Graduate Degree                                        |
 
 3.  Citizenship - K200501
 
-    | Variable | Description |
-    |----------|-------------|
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
+    | Variable           | Description                              |
+    |--------------------|------------------------------------------|
+    | Total              | Total Number of people in survey         |
+    | U.S. citizen       | Number of US citizen in the survery      |
+    | Not a U.S. citizen | Number of Non US Citizens in the survery |
 
 4.  Age - K200104
 
-    | Variable | Description |
-    |----------|-------------|
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
+    | Variable      | Description                                  |
+    |---------------|----------------------------------------------|
+    | Total_age     | Total number of people in the age data frame |
+    | Age_under_18  | Total number of under 18 people              |
+    | "Age_18_to_24 | People between 18 to 24                      |
+    | Age_25_to_34  | People between 25 to 34                      |
+    | Age_35_to_44  | People between 35 to 44                      |
+    | Age_45_to_54  | People between 45 to 54                      |
+    | Age_55_to_64  | People between 55 to 64                      |
+    | Age_over_64   | People over 64                               |
 
 5.  Housing - K202502
 
-    | Variable | Description |
-    |----------|-------------|
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
+    | Variable        | Description                                    |
+    |-----------------|------------------------------------------------|
+    | Total           | Total Number of People in housing data frame   |
+    | Owner Occupied  | Total Number of people who have their own home |
+    | Renter Occupied | Total Number of people who are renting a place |
 
 6.  Disabilities - K201803
 
-    | Variable | Description |
-    |----------|-------------|
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-    |          |             |
-
-## 
+    | Variable                | Description                     |
+    |-------------------------|---------------------------------|
+    | Total_people            | Total Poeple in the data frame  |
+    | Total With Disabilities | Total with disabilities         |
+    | Hearing                 | Total with hearing problem      |
+    | Vision difficulty       | Total with vision problem       |
+    | cognative               | Total with cognative problem    |
+    | ambulatory difficulty   | Total with ambulatory difficlty |
+    | Self-care difficulty    | Total with self care difficulty |
+    | No Disability           | Total without disabilities      |

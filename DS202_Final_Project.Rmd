@@ -338,3 +338,14 @@ plotly_scatter
 
 ```
 
+```{r}
+ggplot(merged_data, aes(x=reorder(state, EmploymentRate), y=EmploymentRate)) +
+  geom_bar(stat="identity") +
+  coord_flip() +
+  labs(title="State-wise Employment Rates",
+       x="State",
+       y="Employment Rate")
+
+
+```
+
