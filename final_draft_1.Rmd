@@ -62,7 +62,7 @@ We have put our concluding results in the Final Report to help us stand by with 
 The below data sets are from data.census.gov [ United States Census Bureau].
 We shortlisted it based on ACS 2021, inclusive for all states in United States.
 
-1.  Employment - K202301
+1.  [Employment - K202301]{.underline}
 
     | Variable              | Description                          |
     |-----------------------|--------------------------------------|
@@ -74,10 +74,10 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | In Armed Forces       | Total People in Armed Forces         |
     | Not in labor force    | Total People not in Labor Force      |
 
-2.  Education - K201501
+2.  [Education - K201501]{.underline}
 
     | Variable                               | Description                                                                  |
-    |----------------------------------------|------------------------------------------------------------------------------|
+    |--------------------------|----------------------------------------------|
     | Education_Total_students               | Total Students in the Education Survery                                      |
     | Education_Below_9th grade              | Number of students who have completed 9th grade                              |
     | Education_9th to 12th grade_no diploma | Number of students who have completed 9th grade to 12th grade but no diploma |
@@ -87,7 +87,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | Education_Bachelors_degree             | Number of people with bachelors degree                                       |
     | Education_Graduate_professional degree | Number of people with Graduate Degree                                        |
 
-3.  Citizenship - K200501
+3.  [Citizenship - K200501]{.underline}
 
     | Variable           | Description                              |
     |--------------------|------------------------------------------|
@@ -95,7 +95,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | U.S. citizen       | Number of US citizen in the survery      |
     | Not a U.S. citizen | Number of Non US Citizens in the survery |
 
-4.  Age - K200104
+4.  [Age - K200104]{.underline}
 
     | Variable      | Description                                  |
     |---------------|----------------------------------------------|
@@ -108,7 +108,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | Age_55_to_64  | People between 55 to 64                      |
     | Age_over_64   | People over 64                               |
 
-5.  Housing - K202502
+5.  [Housing - K202502]{.underline}
 
     | Variable        | Description                                    |
     |-----------------|------------------------------------------------|
@@ -116,7 +116,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | Owner Occupied  | Total Number of people who have their own home |
     | Renter Occupied | Total Number of people who are renting a place |
 
-6.  Disabilities - K201803
+6.  [Disabilities - K201803]{.underline}
 
     | Variable                | Description                     |
     |-------------------------|---------------------------------|
@@ -128,3 +128,31 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | ambulatory difficulty   | Total with ambulatory difficlty |
     | Self-care difficulty    | Total with self care difficulty |
     | No Disability           | Total without disabilities      |
+
+# [Part 3]{.underline}
+
+## Results
+
+1.  Employment vs Education
+2.  Employment Vs Housing
+3.  Citizenship Vs Employmennt
+
+## **Conclusions**
+
+This study provides insights into the socio-economic factors affecting employment in the U.S.
+Limitations include data scope and potential biases.
+Future work could explore more granular data and additional variables.
+
+# [Part 4]{.underline}
+
+## **Data Source**
+
+1.  Data from the American Community Survey (ACS) 2021.
+2.  Scripts for data cleaning and analysis are included in the repository.
+3.  6 Child RMD files included in the repo, which support the DS202_final_project.rmd file
+
+## **References**
+
+-   American Community Survey (ACS)
+
+-    United States Census Bureau (data.census.gov)
