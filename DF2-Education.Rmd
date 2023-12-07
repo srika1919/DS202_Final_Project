@@ -146,14 +146,14 @@ percentage_columns <- grep("_Percentage$", names(df2_percentages), value = TRUE)
 df2_long <- df2_percentages %>%
   pivot_longer(cols = percentage_columns, names_to = "Age_Group", values_to = "Percentage")
 ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentage, fill = Age_Group)) +
-  geom_bar(stat = "identity", position = "stack") +
+  geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Age Distribution by State",
        x = "State",
        y = "Percentage of Total Population",
        fill = "Age Group") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  scale_fill_viridis_d()  # Adjust the color scale as needed
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+ 
 ```
 
 
