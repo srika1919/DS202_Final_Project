@@ -12,9 +12,8 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE)
 
 ```
+
 ```{r, child=c('DS202_Final_Project.Rmd')}
-```
-```         
 ```
 
 ------------------------------------------------------------------------
@@ -135,6 +134,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
 ## Results
 
 1.  Employment vs Education
+
 ```{r}
 library(ggplot2)
 ggplot(merged_data, aes(x=reorder(state, EmploymentRate), y=EmploymentRate)) +
@@ -147,6 +147,7 @@ ggplot(merged_data, aes(x=reorder(state, EmploymentRate), y=EmploymentRate)) +
 ```
 
 2.  Employment Vs Housing
+
 ```{r}
 # Reshaping data: 'Employed', 'Owner Occupied', and 'Renter Occupied' need to be in long format
 long_data <- merged_data %>%
@@ -166,8 +167,8 @@ ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
 
 ```
 
-
 3.  Citizenship Vs Employmennt
+
 ```{r}
 
 # Reshaping data: 'Employed', 'U.S. citizen', and 'Not a U.S. citizen' need to be in long format
@@ -188,7 +189,6 @@ ggplot(long_data_citizenship, aes(x = NAME, y = Employed, fill = CitizenshipStat
 
 ```
 
-
 ## **Conclusions**
 
 This study provides insights into the socio-economic factors affecting employment in the U.S.
@@ -207,5 +207,4 @@ Future work could explore more granular data and additional variables.
 
 -   American Community Survey (ACS)
 
--    United States Census Bureau (data.census.gov)
-
+-   United States Census Bureau (data.census.gov)
