@@ -165,13 +165,22 @@ ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional de
 
 ```
 ```{r}
-ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_percentage, mean), y = Education_High_school_graduate_percentage)) +
+ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Percentage, mean), y = Education_High_school_graduate_Percentage)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   labs(title = "Education Distribution by State",
        x = "State",
-       y = "Percentage of people with graduate level degree)")
+       y = "Percentage of people with High_School level degree)")
 
+
+```
+```{r}
+ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percentage, mean), y = Education_Bachelors_degree_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Education Distribution by State",
+       x = "State",
+       y = "Percentage of people with Bachelors level degree)")
 
 ```
 
