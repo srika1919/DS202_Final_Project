@@ -13,8 +13,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-```{r, child=c('DS202_Final_Project.Rmd')}
-```
 
 ------------------------------------------------------------------------
 
@@ -128,6 +126,9 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | ambulatory difficulty   | Total with ambulatory difficlty |
     | Self-care difficulty    | Total with self care difficulty |
     | No Disability           | Total without disabilities      |
+
+```{r, child=c('DS202_Final_Project.Rmd')}
+```
 
 # [Part 3]{.underline}
 
