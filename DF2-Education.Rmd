@@ -57,10 +57,6 @@ ggplot(df2_long, aes(x = NAME, y = Count, fill = Education_Level)) +
 **Exploratory Data Analysis (EDA)** based on percentage
 
 ```{r}
-# Ensure necessary libraries are installed and loaded
-if (!require("ggplot2")) install.packages("ggplot2")
-if (!require("tidyr")) install.packages("tidyr")
-if (!require("dplyr")) install.packages("dplyr")
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -150,14 +146,42 @@ percentage_columns <- grep("_Percentage$", names(df2_percentages), value = TRUE)
 df2_long <- df2_percentages %>%
   pivot_longer(cols = percentage_columns, names_to = "Age_Group", values_to = "Percentage")
 ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentage, fill = Age_Group)) +
-  geom_bar(stat = "identity", position = "stack") +
+  geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Age Distribution by State",
        x = "State",
        y = "Percentage of Total Population",
        fill = "Age Group") +
   theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+ 
+```
+```{r}
+ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional degree_Percentage`, mean), y = `Education_Graduate_professional degree_Percentage`)) +
+  geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  scale_fill_viridis_d()  # Adjust the color scale as needed
+  labs(title = "Education Distribution by State",
+       x = "State",
+       y = "Percentage of people with graduate level degree)")
+
+```
+```{r}
+ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Percentage, mean), y = Education_High_school_graduate_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Education Distribution by State",
+       x = "State",
+       y = "Percentage of people with High_School level degree)")
+
+
+```
+```{r}
+ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percentage, mean), y = Education_Bachelors_degree_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Education Distribution by State",
+       x = "State",
+       y = "Percentage of people with Bachelors level degree)")
+
 ```
 
 

@@ -8,7 +8,7 @@ editor_options:
     wrap: sentence
 ---
 
-```{r setup, include=FALSE}
+```{r setup_1, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
@@ -293,20 +293,18 @@ print(plotly_plot)
 
 ```
 ```{r}
-# Assuming 'merged_data' is your merged dataset with employment and housing information
-# Assuming 'plotly' and 'dplyr' are already loaded
-
 # Load the plotly library
 library(plotly)
+library(dplyr)
 
-# Create an interactive scatter plot
 plotly_scatter <- merged_data %>%
-  plot_ly(x = ~`Owner Occupied`, y = ~Employed, text = ~NAME, mode = "markers") %>%
-  add_markers(marker = list(color = "blue", size = 10)) %>%
-  layout(title = "Interactive Scatter Plot: Housing vs. Un-Employment",
+  plot_ly(x = ~`Owner Occupied`, y = ~UnemploymentRate, text = ~NAME, mode = "markers") %>%
+  add_markers(marker = list(color = "blue", size = 10, opacity = 0.7)) %>%
+  layout(title = "Interactive Scatter Plot: Owner-Occupied Housing vs. Unemployment Rate",
          xaxis = list(title = "Percentage of Owner-Occupied Housing"),
-         yaxis = list(title = "Un-Employment"),
-         hovermode = "closest")
+         yaxis = list(title = "Unemployment Rate (%)"),
+         hovermode = "closest") %>%
+  add_annotations(text = ~NAME, x = ~`Owner Occupied`, y = ~UnemploymentRate, showarrow = FALSE)
 
 # Show the interactive plot
 plotly_scatter
@@ -367,4 +365,50 @@ plotly_scatter
 
 ```
 
+<<<<<<< HEAD
 >>>>>>> 3d1a98e856b47e7ed665ce4e4625aed9a9b7af48
+=======
+```{r}
+ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
+  geom_point() +
+  geom_smooth(method=lm) +
+  labs(title="Disability Rate vs. Employment Rate",
+       x="Disability Rate",
+       y="Employment Rate")
+
+```
+```{r}
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Assuming your dataset is named 'merged_data'
+# Adjust column names as per your dataset
+
+# Reshaping data: 'Employed', 'Owner Occupied', and 'Renter Occupied' need to be in long format
+long_data <- merged_data %>%
+  select(NAME, Employed, `Owner Occupied`, `Renter Occupied`) %>%
+  pivot_longer(cols = c(`Owner Occupied`, `Renter Occupied`), names_to = "HousingType", values_to = "HousingValue") %>%
+  arrange(NAME)
+
+# Now create the grouped bar chart
+ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Employed Individuals vs States by Housing Type",
+       x = "State",
+       y = "Number of Employed Individuals",
+       fill = "Housing Type") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels for better readability
+
+
+```
+
+```{r}
+head(merged_data)
+```
+
+
+
+>>>>>>> fed45e5207dff832cfae8b022225be759650beaa
