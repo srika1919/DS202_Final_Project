@@ -39,6 +39,7 @@ df4_wide <- df4_labeled %>%
 
 ```
 ```{r}
+library (plotly)
 df4_percentages <- df4_wide %>%
   mutate(
     Age_under_18_Percentage = Age_under_18 / Total_age * 100,
@@ -52,21 +53,24 @@ df4_percentages <- df4_wide %>%
 percentage_columns <- grep("_Percentage$", names(df4_percentages), value = TRUE)
 df4_long <- df4_percentages %>%
   pivot_longer(cols = percentage_columns, names_to = "Age_Group", values_to = "Percentage")
-ggplot(df4_long, aes(x = reorder(NAME, -Total_age), y = Percentage, fill = Age_Group)) +
-  geom_bar(stat = "identity", position = "stack") +
+plot<-ggplot(df4_long, aes(x = reorder(NAME, -Total_age), y = Percentage, fill = Age_Group)) +
+  geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Age Distribution by State",
        x = "State",
        y = "Percentage of Total Population",
        fill = "Age Group") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  scale_fill_viridis_d()  # Adjust the color scale as needed
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+ggplotly(plot)
 ```
 
+
 ```{r}
-# Load necessary libraries if not already loaded
 library(ggplot2)
 library(tidyr)
+library(dplyr)
+library(RColorBrewer)
 
 # Calculate percentages for each age group
 df4_percentages <- df4_wide %>%
@@ -88,7 +92,7 @@ df4_long <- df4_percentages %>%
   pivot_longer(cols = percentage_columns, names_to = "Age_Group", values_to = "Percentage")
 
 # Create a facet grid for each age group
-ggplot(df4_long, aes(x = reorder(NAME, -Total_age), y = Percentage, fill = Age_Group)) +
+ggplot(df4_long, aes(x = reorder(NAME, Percentage, mean), y = Percentage, fill = Age_Group)) +
   geom_bar(stat = "identity", position = "stack") +
   facet_grid(Age_Group ~ ., scales = "free_y") +
   labs(title = "Age Distribution by State",
@@ -97,31 +101,43 @@ ggplot(df4_long, aes(x = reorder(NAME, -Total_age), y = Percentage, fill = Age_G
        fill = "Age Group") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  scale_fill_viridis_d()  # Adjust the color scale as needed
+  theme(axis.text.y = element_text(vjust = 0.5, hjust = 1)) +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(strip.text = element_blank(),
+        strip.text.y = element_blank())  # Remove axis titles on the left
+
 
 ```
 
 ```{r}
-library(tidyverse)
-library(tigris)
-Age_data <- get_acs(geography = "state", 
-                table = "K200104", 
-                year = 2021, 
-               geometry = TRUE,
-               resolution = "20m",
-                survey = "acs1/subject",cache_table = TRUE
-)
-Mapping_age<-Age_data%>%
-  filter(variable=="K200104_007")%>%
-  shift_geometry()
-ggplot(data = Mapping_age, aes(fill = estimate)) + 
-  geom_sf()+
-  scale_fill_distiller(palette = "RdPu", 
-                       direction = 1) + 
-  labs(title = "Median Age by State, 2021",
-       caption = "Data source: 2021 1-year ACS, US Census Bureau",
-       fill = "ACS estimate") + 
-  theme_void()
+library(ggplot2)
+
+ggplot(df4_percentages, aes(x = reorder(NAME, Age_25_to_34_Percentage, mean), y = Age_25_to_34_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Age Distribution by State",
+       x = "State",
+       y = "Percentage of Population (Age 25-34)")
+
+```
+
+```{r}
+
+ggplot(df4_percentages, aes(x = reorder(NAME, Age_35_to_44_Percentage, mean), y = Age_35_to_44_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Age Distribution by State",
+       x = "State",
+       y = "Percentage of Population (Age 35-44)")
+```
+```{r}
+
+ggplot(df4_percentages, aes(x = reorder(NAME, Age_45_to_54_Percentage, mean), y = Age_45_to_54_Percentage)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Age Distribution by State",
+       x = "State",
+       y = "Percentage of Population (Age 45-54)")
 ```
 
 ------------------------------------------------------------------------
