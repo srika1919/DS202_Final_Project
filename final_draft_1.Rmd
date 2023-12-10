@@ -143,15 +143,15 @@ library(tidyr)
 
 # Reshaping data: Education levels need to be in long format
 long_data_education <- merged_data %>%
-  select(NAME, Employed,`Education_Below_9th grade`) %>%
-  pivot_longer(cols = c(`Education_Below_9th grade`), names_to = "EducationLevel", values_to = "EducationValue") %>%
+  select(NAME, Employed,`Education_Bachelors_degree`) %>%
+  pivot_longer(cols = c(`Education_Bachelors_degree`), names_to = "EducationLevel", values_to = "EducationValue") %>%
   arrange(NAME)
 
 # Now create the plot
 ggplot(long_data_education, aes(x = EducationValue, y = Employed, color = EducationLevel)) +
   geom_point() +
   labs(title = "Employment vs Education Levels",
-       x = "Number of Individuals with Education Level",
+       x = "Number of Individuals in the survey",
        y = "Number of Employed Individuals",
        color = "Education Level") +
   theme_minimal() +
@@ -159,6 +159,7 @@ ggplot(long_data_education, aes(x = EducationValue, y = Employed, color = Educat
 
 
 ```
+The scatter plot labeled "Employment vs Education Levels" shows a positive correlation between the number of individuals with a Bachelor's degree and the number of employed individuals. As I examine the plot, I notice that as the number of individuals with a Bachelor's degree increases, so does the number of employed individuals, suggesting that higher education levels may be associated with better employment outcomes. The data points seem to form a rising trend, especially noticeable in the lower to middle range of the number of individuals surveyed. However, towards the higher end of the scale, the increase in employment with respect to the number of Bachelor's degree holders becomes less pronounced. This could imply diminishing returns of higher education on employment at a certain point, or it might reflect a saturation of highly educated individuals in the job market
 
 2.  Employment Vs Housing
 
@@ -180,6 +181,7 @@ ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels for better readability
 
 ```
+The bar chart titled "Employed Individuals vs States by Housing Type" displays a comparison of employed individuals in various U.S. states, differentiated by housing type—owner occupied versus renter occupied. As I analyze the chart, I observe that in most states, the number of employed individuals living in owner-occupied housing is higher than those in renter-occupied housing. This could suggest a correlation between home ownership and employment status, which may be due to a variety of economic and social factors, such as the stability that home ownership can provide or the possibility that employed individuals have a higher purchasing power to buy homes. Notably, in states like California and Texas, the bars representing owner-occupied housing are significantly taller, which might reflect a combination of high employment rates and a culture or economy that favors home ownership. On the other hand, the District of Columbia stands out with a higher proportion of employed individuals in renter-occupied housing, which could reflect urban real estate trends where renting is more common due to high property costs or lifestyle choices. Overall, the graph suggests a complex relationship between employment and housing type, influenced by state-specific economic conditions and housing markets.
 
 3.  Citizenship Vs Employmennt
 
@@ -202,6 +204,7 @@ ggplot(long_data_citizenship, aes(x = NAME, y = Employed, fill = CitizenshipStat
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels for better readability
 
 ```
+The bar chart, titled "Employed Individuals vs States by Citizenship Status," shows the number of employed individuals in each state, categorized by whether they are U.S. citizens or not. Looking at the chart, I see that U.S. citizens make up the majority of employed individuals in every state, which is to be expected given the larger population of citizens versus non-citizens. However, the proportion of employed non-citizens is noticeable, especially in states like California and Texas, which may reflect these states' larger immigrant populations and their contributions to the workforce. The data also shows that in states like the District of Columbia, the number of employed non-citizens is relatively high compared to the total employed population, indicating diverse labor pools in these areas. This graph underscores the significant role that non-citizens play in the U.S. labor market, particularly in states with large urban centers or industries that attract foreign workers.
 
 ## **Conclusions**
 
