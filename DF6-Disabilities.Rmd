@@ -79,6 +79,7 @@ ggplot(df6_wide, aes(x = reorder(NAME, -DisabilityRate), y = DisabilityRate)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+In the bar chart titled "Disability Rates by State," I notice a striking range of disability rates across the U.S. states and territories. Puerto Rico has the highest rate, over 20%, which is significantly higher than any state, while states such as West Virginia, Mississippi, and Alabama also have high rates, each above 15%. In stark contrast, Utah, New Jersey, California, and the District of Columbia are at the lower end of the spectrum, with rates around or below 10%. This variation suggests that factors like healthcare access, occupation-related risks, and demographic differences could play a role in these rates. From a policy standpoint, it seems crucial that states with higher disability rates may need to prioritize services and support systems for disabled individuals. However, I'm aware that the chart doesn't break down the type or severity of disabilities, which would be essential for a more nuanced understanding and effective policy-making.
 
 ```{r}
 # Select only the disability-related columns for correlation
@@ -108,30 +109,9 @@ barplot(as.matrix(iowa_data), beside = TRUE, legend.text = TRUE, args.legend = l
 
 ```
 
-```{r}
-# Predicting 'Ambulatory difficulty' based on other disabilities
-lm_model <- lm(`ambulatory difficulty` ~ `Hearing` + `Vision difficulty` + `cognative` + `Self-care difficulty` + `Independent living difficulty`, data = df6_wide)
-
-# Summary of the linear model
-summary(lm_model)
-lm_model
-```
-
-```{r}
-# K-means clustering
-#Perform a clustering analysis to identify groups of states with similar disability profiles.
+The bar chart presents a comparison of different types of disabilities among residents of Iowa, with 'Ambulatory difficulty' being the most prevalent. This suggests that mobility impairments are a significant challenge for a large number of Iowans. 'Independent living difficulty' also represents a substantial portion, indicating that many individuals may struggle with daily activities without assistance. Interestingly, 'Vision difficulty' is the least common disability, which may reflect effective preventive care or accessibility to vision correction. 'Hearing' and 'Cognitive' disabilities fall in the middle range, signifying that while they are less common than mobility and independent living issues, they still affect a considerable number of people. This gives us a indepth analysis for each specific state. Similarly we can find for other states and dive deeper into the analysis.
 
 
-# K-means clustering with 3 centers
-set.seed(123)  # For reproducibility
-clusters <- kmeans(disability_data, centers = 3)
 
-# Add cluster assignment to the data
-df6_wide$Cluster <- as.factor(clusters$cluster)
-
-pca_res <- prcomp(disability_data, scale. = TRUE)
-fviz_pca_biplot(pca_res, label = "none", col.ind = df6_wide$Cluster, addEllipses = TRUE)
-
-```
 
 ------------------------------------------------------------------------

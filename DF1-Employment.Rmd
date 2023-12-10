@@ -82,6 +82,9 @@ ggplot(df1_wide, aes(x = reorder(NAME, -EmploymentRate), y = EmploymentRate)) +
 
 ```
 
+[Interpretations:]{.underline}\
+High Employment States: The states at the far left, such as Nebraska, Minnesota, and Iowa, show the highest employment rates, each appearing to exceed 60%. Low Employment States: On the right side, Puerto Rico, West Virginia, and Mississippi have the lowest employment rates depicted, with Puerto Rico showing a rate significantly lower than all states, possibly below 40%. Variability: The chart shows that there is a significant variability in employment rates across different states and territories. This could be due to a variety of factors such as economic policies, industrial diversity, population demographics, and educational attainment levels.
+
 ```{r}
 # Plotting labor force participation
 ggplot(df1_wide, aes(x = NAME)) +
@@ -94,12 +97,16 @@ ggplot(df1_wide, aes(x = NAME)) +
 
 ```
 
+The above bar chart shows the number of people who are employed, in armed forces or unemployed for each state. We can observe that bigger cities like california, new york, texas etc have the highest number of people who are employed. We can also notice that unemployment while compared to employment is less in each city.
+
 ```{r}
 ggplot(df1_wide, aes(x = UnemploymentRate)) +
   geom_histogram(binwidth = 1, fill = "tomato", color = "black") +
   labs(x = "Unemployment Rate (%)", y = "Number of States", title = "Distribution of Unemployment Rates across States")
 
 ```
+
+The above graph shows the unployment rates across different states. We can observe that most number of states have an unemployment rate between 1-4.5%
 
 ```{r}
 # Correlation analysis
@@ -133,3 +140,4 @@ plot_usmap(data = df1_wide, values = "EmploymentRate", labels = TRUE) +
 
 ------------------------------------------------------------------------
 
+The above chart shows the distribution of employment rates in the form of a map of the united states for better visualization. We can see that states like UT,NE,MN have the highest employment rates.

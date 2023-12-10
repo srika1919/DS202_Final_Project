@@ -87,4 +87,4 @@ print(renter_plot)
 
 
 ```
-
+The above two bar charts show's us the distrubution of precentage of renter and owner occupied housing by state. We can see that states like district of columbia, new york, california have the highest number of people who rent the houses. And, states like west virginia, maine, michigan have high number of people who own their own property.
