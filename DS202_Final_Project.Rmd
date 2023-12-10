@@ -362,32 +362,6 @@ ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
        y="Employment Rate")
 
 ```
-```{r}
 
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
-# Assuming your dataset is named 'merged_data'
-# Adjust column names as per your dataset
-
-# Reshaping data: 'Employed', 'Owner Occupied', and 'Renter Occupied' need to be in long format
-long_data <- merged_data %>%
-  select(NAME, Employed, `Owner Occupied`, `Renter Occupied`) %>%
-  pivot_longer(cols = c(`Owner Occupied`, `Renter Occupied`), names_to = "HousingType", values_to = "HousingValue") %>%
-  arrange(NAME)
-
-# Now create the grouped bar chart
-ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  labs(title = "Employed Individuals vs States by Housing Type",
-       x = "State",
-       y = "Number of Employed Individuals",
-       fill = "Housing Type") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels for better readability
-
-
-```
 
 
