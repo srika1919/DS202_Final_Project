@@ -177,7 +177,7 @@ ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
        y = "Number of Employed Individuals",
        fill = "Housing Type") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels for better readability
 
 ```
 
@@ -199,7 +199,7 @@ ggplot(long_data_citizenship, aes(x = NAME, y = Employed, fill = CitizenshipStat
        y = "Number of Employed Individuals",
        fill = "Citizenship Status") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Rotate x-axis labels for better readability
 
 ```
 

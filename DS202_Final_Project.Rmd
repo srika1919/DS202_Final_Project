@@ -109,16 +109,16 @@ normalized_data <- normalize_data(merged_data)
 ```
 
 ```{r}
-# Create a new dataset with only numeric columns
-numeric_data <- normalized_data[sapply(normalized_data, is.numeric)]
-
-# Compute the correlation matrix
-correlation_matrix <- cor(numeric_data, use = "complete.obs")
-
-# Use corrplot to visualize
-library(corrplot)
-corrplot(correlation_matrix, method = "circle")
-
+# # Create a new dataset with only numeric columns
+# numeric_data <- normalized_data[sapply(normalized_data, is.numeric)]
+# 
+# # Compute the correlation matrix
+# correlation_matrix <- cor(numeric_data, use = "complete.obs")
+# 
+# # Use corrplot to visualize
+# library(corrplot)
+# corrplot(correlation_matrix, method = "circle")
+# 
 
 
 ```
@@ -192,15 +192,15 @@ correlation_df <- data.frame(
 ```
 
 ```{r}
-library(dplyr)
-library(ggplot2)
-library(corrplot)
-
-# Calculating correlations
-corr_matrix <- cor(rounded_correlation_matrix)
-
-# Plotting the heatmap
-corrplot(corr_matrix, method = "color")
+# library(dplyr)
+# library(ggplot2)
+# library(corrplot)
+# 
+# # Calculating correlations
+# corr_matrix <- cor(rounded_correlation_matrix)
+# 
+# # Plotting the heatmap
+# corrplot(corr_matrix, method = "color")
 
 ```
 
