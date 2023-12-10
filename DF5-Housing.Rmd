@@ -13,9 +13,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ------------------------------------------------------------------------
 
-## DF5 - Housing
+## Housing
 
-```{r}
+```{r,message=FALSE}
 #Niharika
 # Housing - K202502
 df5 <- get_acs(geography = "state", 
@@ -44,7 +44,7 @@ df5_wide <- df5_labeled %>%
 
 ```
 
-```{r}
+```{r,message=FALSE}
 library(dplyr)
 library(tidyr)
 library(ggplot2)

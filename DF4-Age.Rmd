@@ -9,13 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-------------------------------------------------------------------------
 
-## Age as a Factor Affecting Employment
+## Age
 
 Age is one of the important social factor which affects the job market. Employers may discriminate against older workers, believing them to be less productive, adaptable, or tech-savvy. This can lead to age bias in hiring and promotion practices, affecting older workers' job opportunities.Younger workers may be willing to accept lower wages than older workers, making them more cost-effective for employers. Contradistinction in some fields older workers often have decades of experience and accumulated wisdom in their field, making them valuable assets to any team. They may have a deeper understanding of industry trends, protocols, and best practices, leading to better problem-solving and decision-making skills. Due to their experience and expertise, older workers may require less training than younger colleagues, saving employers time and resources.
 
-```{r}
+```{r,message=FALSE}
 #Srika
 #Age - K200104
 df4 <- get_acs(geography = "state", 
@@ -39,7 +38,7 @@ df4_wide <- df4_labeled %>%
 
 ```
 
-```{r}
+```{r,message=FALSE}
 library (plotly)
 df4_percentages <- df4_wide %>%
   mutate(
@@ -68,7 +67,7 @@ ggplotly(plot)
 
 The above plot shows the Percentage of total population in a particular age group in the state.We can also observe that the proportion of population in each state in age groups over 64 year and under 18 years are higher compared to the other age groups.That is expected because the interval in that category is bigger than the others which are 10 years interval.
 
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -117,7 +116,7 @@ The above plot facets by the proportion of population a particular age group.Mos
 
 Workers in their prime years, defined by the government as 25-54 years.This age has started dropping in most parts of the country since the late 1960s, with steeper declines during recessionary periods.In 1969, the labor force participation rate of men ages 25 to 54 was 96 percent, and in 2015, the rate was under 89 percent according to US bureau of labor statistics. So, the following graphs are intended to focus on this prime working age group in states of US in 2021.
 
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_25_to_34_Percentage, mean), y = Age_25_to_34_Percentage)) +
@@ -157,7 +156,7 @@ The above graph focuses on the proportion of population in the age group 25 to 3
 
     -   Wyoming
 
-```{r}
+```{r,message=FALSE}
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_35_to_44_Percentage, mean), y = Age_35_to_44_Percentage)) +
   geom_bar(stat = "identity",fill = "#1f78b4") +
@@ -197,7 +196,7 @@ The above graph focuses on the proportion of population in the age group 35 to 4
 
     -   Maine
 
-```{r}
+```{r,message=FALSE}
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_45_to_54_Percentage, mean), y = Age_45_to_54_Percentage)) +
   geom_bar(stat = "identity",fill = "#1f78b4") +
@@ -237,7 +236,7 @@ The above graph focuses on the proportion of population in the age group 45 to 5
 
     -   Nebraska
 
-```{r}
+```{r,message=FALSE}
 df4_percentages$PrimeWorkingPopulation<-df4_percentages$Age_45_to_54_Percentage+ df4_percentages$Age_35_to_44_Percentage+df4_percentages$Age_25_to_34_Percentage
 
 ggplot(df4_percentages, aes(x = reorder(NAME, PrimeWorkingPopulation, mean), y = PrimeWorkingPopulation)) +

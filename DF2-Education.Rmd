@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ------------------------------------------------------------------------
 
-## DF 2 - Education
+## Education
 
-```{r}
+```{r,message=FALSE}
 #Neha
 #Education - K201501
 df2 <- get_acs(geography = "state", 
@@ -34,7 +34,7 @@ df2_wide <- df2_labeled %>%
 ```
 **Exploratory Data Analysis (EDA)**
 
-```{r}
+```{r,message=FALSE}
 # Ensure necessary libraries are installed and loaded
 if (!require("ggplot2")) install.packages("ggplot2")
 if (!require("tidyr")) install.packages("tidyr")
@@ -56,7 +56,7 @@ ggplot(df2_long, aes(x = NAME, y = Count, fill = Education_Level)) +
 ```
 **Exploratory Data Analysis (EDA)** based on percentage
 
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -84,7 +84,7 @@ ggplot(df2_long, aes(x = NAME, y = Percentage, fill = Education_Level)) +
        y = "Percentage")
 
 ```
-```{r}
+```{r,message=FALSE}
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -131,7 +131,7 @@ for (plot in plots) {
 
 ```
 
-```{r}
+```{r,message=FALSE}
 df2_percentages <- df2_wide %>%
   mutate(
     `Education_Below_9th grade_Percentage` = `Education_Below_9th grade` / Education_Total_students * 100,
@@ -155,7 +155,7 @@ ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentag
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
  
 ```
-```{r}
+```{r,message=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional degree_Percentage`, mean), y = `Education_Graduate_professional degree_Percentage`)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
@@ -164,7 +164,7 @@ ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional de
        y = "Percentage of people with graduate level degree)")
 
 ```
-```{r}
+```{r,message=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Percentage, mean), y = Education_High_school_graduate_Percentage)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
@@ -174,7 +174,7 @@ ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Perc
 
 
 ```
-```{r}
+```{r,message=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percentage, mean), y = Education_Bachelors_degree_Percentage)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
