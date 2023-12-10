@@ -53,7 +53,6 @@ merged_data <- df1_wide %>%
 columns_to_drop <- c('Total.x', 'Total.y', 'Total.x.x', 'Total.y.y')
 merged_data <- merged_data[, !(names(merged_data) %in% columns_to_drop)]
 
-colnames(merged_data)
 ```
 
 ### **Title**
@@ -70,7 +69,7 @@ summarize_missing_data <- function(data) {
 }
 
 missing_data_summary <- summarize_missing_data(merged_data)
-missing_data_summary
+
 
 ```
 
@@ -150,7 +149,7 @@ correlation_matrix <- cor(numeric_data)
 rounded_correlation_matrix <- round(correlation_matrix, digits = 2)
 
 # Print the rounded correlation matrix
-print(rounded_correlation_matrix)
+#print(rounded_correlation_matrix)
 # Install the knitr package if not already installed
 # install.packages("knitr")
 
