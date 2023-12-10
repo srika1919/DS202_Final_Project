@@ -135,7 +135,7 @@ ggplot(normalized_data, aes(x = `Education_Bachelors_degree`, y = EmploymentRate
 
 
 ```
-
+The plot suggests a positive correlation where states with a higher percentage of Bachelor's degree holders tend to have higher employment rates, although the relationship does not appear to be very strong. The spread of the data points is quite broad, especially in the middle range of the percentage of Bachelor's degree holders, which implies there are other factors at play influencing employment rates beyond just higher education attainment. The confidence interval, shown by the shaded area, is quite wide, indicating a significant variation in the employment rate at any given level of Bachelor's degree holders. This leads me to think that while education is an important factor in employment, it is certainly not the only one, and state-specific economic policies, industries, and other socioeconomic factors might also play crucial roles.
 
 
 
@@ -178,17 +178,16 @@ correlation_df <- data.frame(
 ```
 
 ```{r}
-library(ggplot2)
 
-# Plotting
-ggplot(correlation_df, aes(x = reorder(Variable, Correlation), y = Correlation)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  coord_flip() +  # Flips the coordinates to make the plot horizontal
-  labs(title = "Correlation of Various Factors with Employment Rate",
-       x = "Variable",
-       y = "Correlation with Employment Rate") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+# # Plotting
+# ggplot(correlation_df, aes(x = reorder(Variable, Correlation), y = Correlation)) +
+#   geom_bar(stat = "identity", fill = "steelblue") +
+#   coord_flip() +  # Flips the coordinates to make the plot horizontal
+#   labs(title = "Correlation of Various Factors with Employment Rate",
+#        x = "Variable",
+#        y = "Correlation with Employment Rate") +
+#   theme_minimal() +
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 ```
 
@@ -222,7 +221,7 @@ long_data <- merged_data %>%
 # Create an interactive scatter plot
 plotly_scatter <- long_data %>%
   plot_ly(x = ~Unemployed, y = ~value, text = ~variable, mode = "markers", color = ~variable) %>%
-  add_markers(marker = list(size = 10)) %>%
+  add_markers(marker = list()) %>%
   layout(title = "Interactive Scatter Plot: Un-Employed vs. Education Levels",
          xaxis = list(title = "Un-Employed"),
          yaxis = list(title = "Value"),
