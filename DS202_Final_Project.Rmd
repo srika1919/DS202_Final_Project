@@ -60,18 +60,7 @@ colnames(merged_data)
 
 **"Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"**
 
-### **Thesis**
 
-This project aims to analyze the impact of various socio-economic factors such as education, age, citizenship status, housing, and disabilities on employment rates across different states in the United States.
-Using data from the American Community Survey (ACS) 2021, the study will employ statistical techniques to identify correlations, trends, and patterns, thereby providing insights into the multifaceted nature of employment dynamics in the US.
-
-### **Roadmap and Code for Next Steps**
-
-1.  **Data Exploration and Cleaning**
-
-    -   Continue with data cleaning and handling missing values.
-
-    -   Normalize the data if required for better comparison.
 
 ```{r}
 #Check for Missing Values
@@ -311,7 +300,7 @@ plotly_scatter
 
 
 ```
-<<<<<<< HEAD
+
 ```{r}
 # Load the plotly and dplyr libraries
 library(plotly)
@@ -339,7 +328,6 @@ plotly_scatter <- long_data %>%
 # Show the interactive plot
 plotly_scatter
 ```
-=======
 
 ```{r}
 library(plotly)
@@ -365,9 +353,6 @@ plotly_scatter
 
 ```
 
-<<<<<<< HEAD
->>>>>>> 3d1a98e856b47e7ed665ce4e4625aed9a9b7af48
-=======
 ```{r}
 ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
   geom_point() +
@@ -405,10 +390,4 @@ ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
 
 ```
 
-```{r}
-head(merged_data)
-```
 
-
-
->>>>>>> fed45e5207dff832cfae8b022225be759650beaa
