@@ -311,6 +311,35 @@ plotly_scatter
 
 
 ```
+<<<<<<< HEAD
+```{r}
+# Load the plotly and dplyr libraries
+library(plotly)
+library(dplyr)
+
+# Assuming your data frame is named 'merged_data'
+
+X_variable <- "Unemployed"
+Y_variables <- c("Total With Disabilities", "No Disability")
+
+# Convert data from wide to long format for easier plotting
+long_data <- merged_data %>%
+  select(all_of(c(X_variable, Y_variables))) %>%
+  gather(key = "variable", value = "value", -all_of(X_variable))
+
+# Create an interactive scatter plot
+plotly_scatter <- long_data %>%
+  plot_ly(x = ~Unemployed, y = ~value, text = ~variable, mode = "markers", color = ~variable) %>%
+  add_markers(marker = list(size = 10)) %>%
+  layout(title = "Interactive Scatter Plot: Un-Employed vs. Disability Status",
+         xaxis = list(title = "Un-Employed"),
+         yaxis = list(title = "Value"),
+         hovermode = "closest")
+
+# Show the interactive plot
+plotly_scatter
+```
+=======
 
 ```{r}
 library(plotly)
@@ -336,6 +365,9 @@ plotly_scatter
 
 ```
 
+<<<<<<< HEAD
+>>>>>>> 3d1a98e856b47e7ed665ce4e4625aed9a9b7af48
+=======
 ```{r}
 ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
   geom_point() +
@@ -379,3 +411,4 @@ head(merged_data)
 
 
 
+>>>>>>> fed45e5207dff832cfae8b022225be759650beaa

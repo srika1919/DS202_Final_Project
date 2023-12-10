@@ -73,6 +73,8 @@ for (category in unique(df3_long$Citizenship)) {
 }
 
 
-```
 
+
+```
+The ratio of US Citizens vs Non-US Citizens varies greatly across various states in the U.S. as you can observe from the graph above.In general there is a trend observed that , states with lesser US citizens have a lower employment rate.
 ------------------------------------------------------------------------
