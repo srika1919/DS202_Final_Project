@@ -9,11 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-
-
 ------------------------------------------------------------------------
 
-## DF4 - Age
+## Age as a Factor Affecting Employment
+
+Age is one of the important social factor which affects the job market. Employers may discriminate against older workers, believing them to be less productive, adaptable, or tech-savvy. This can lead to age bias in hiring and promotion practices, affecting older workers' job opportunities.Younger workers may be willing to accept lower wages than older workers, making them more cost-effective for employers. Contradistinction in some fields older workers often have decades of experience and accumulated wisdom in their field, making them valuable assets to any team. They may have a deeper understanding of industry trends, protocols, and best practices, leading to better problem-solving and decision-making skills. Due to their experience and expertise, older workers may require less training than younger colleagues, saving employers time and resources.
 
 ```{r}
 #Srika
@@ -38,6 +38,7 @@ df4_wide <- df4_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 
 ```
+
 ```{r}
 library (plotly)
 df4_percentages <- df4_wide %>%
@@ -65,6 +66,7 @@ plot<-ggplot(df4_long, aes(x = reorder(NAME, -Total_age), y = Percentage, fill =
 ggplotly(plot)
 ```
 
+The above plot shows the Percentage of total population in a particular age group in the state.We can also observe that the proportion of population in each state in age groups over 64 year and under 18 years are higher compared to the other age groups.That is expected because the interval in that category is bigger than the others which are 10 years interval.
 
 ```{r}
 library(ggplot2)
@@ -109,11 +111,17 @@ ggplot(df4_long, aes(x = reorder(NAME, Percentage, mean), y = Percentage, fill =
 
 ```
 
+The above plot facets by the proportion of population a particular age group.Most of the times all the states have almost the same proportion of people in the different age groups.From this graph we can find if some state is an outlier for any age group.For example if we look at the district of Columbia we can see that it has a different trend compared to the other states of US in almost all the age groups.
+
+### Prime Working Age Group
+
+Workers in their prime years, defined by the government as 25-54 years.This age has started dropping in most parts of the country since the late 1960s, with steeper declines during recessionary periods.In 1969, the labor force participation rate of men ages 25 to 54 was 96 percent, and in 2015, the rate was under 89 percent according to US bureau of labor statistics. So, the following graphs are intended to focus on this prime working age group in states of US in 2021.
+
 ```{r}
 library(ggplot2)
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_25_to_34_Percentage, mean), y = Age_25_to_34_Percentage)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity",fill = "#1f78b4") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   labs(title = "Age Distribution by State",
        x = "State",
@@ -121,19 +129,78 @@ ggplot(df4_percentages, aes(x = reorder(NAME, Age_25_to_34_Percentage, mean), y 
 
 ```
 
+The above graph focuses on the proportion of population in the age group 25 to 34 years in the different states of the US. Important inferences from this graph:
+
+-   We see that District of Columbia is a outlier compared to the trend from rest of the country.
+
+-   It is important that we look at the top five state in this graph because we see more or less the same state but in a different order when we look at the other categories of prime working ages. The top 5 states with more population in this age is:
+
+    -   Colorado
+
+    -   Alaska
+
+    -   Washington
+
+    -   California
+
+    -   Utah
+
+-   The 5 state with the lowest proportion of population in this age group:
+
+    -   West Virginia
+
+    -   Vermont
+
+    -   Maine
+
+    -   Mississippi
+
+    -   Wyoming
+
 ```{r}
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_35_to_44_Percentage, mean), y = Age_35_to_44_Percentage)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity",fill = "#1f78b4") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   labs(title = "Age Distribution by State",
        x = "State",
        y = "Percentage of Population (Age 35-44)")
 ```
+
+The above graph focuses on the proportion of population in the age group 35 to 44 years in the different states of the US.This graph shows a pattern similar to the previous graph. Important inferences from this graph:
+
+-   We see that District of Columbia is a outlier compared to the trend from rest of the country in this age group too.
+
+-   It is important that we look at the top five state in this graph because we see more or less the same state but in a different order when we look at the other categories of prime working ages. The top 5 states with more population in this age is:
+
+    -   Colorado
+
+    -   Washington
+
+    -   Alaska
+
+    -   Texas
+
+    -   Oregon
+
+    -   Utah
+
+-   The 5 state with the lowest proportion of population in this age group:
+
+    -   New Hampshire
+
+    -   Michigan
+
+    -   Vermont
+
+    -   Delaware
+
+    -   Maine
+
 ```{r}
 
 ggplot(df4_percentages, aes(x = reorder(NAME, Age_45_to_54_Percentage, mean), y = Age_45_to_54_Percentage)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity",fill = "#1f78b4") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   labs(title = "Age Distribution by State",
        x = "State",
@@ -141,3 +208,54 @@ ggplot(df4_percentages, aes(x = reorder(NAME, Age_45_to_54_Percentage, mean), y 
 ```
 
 ------------------------------------------------------------------------
+
+The above graph focuses on the proportion of population in the age group 45 to 54 years in the different states of the US.This graph shows a pattern that is a little different from the previous 2 graphs which suggest why the declining age of prime working group is a rising issue in the US. Important inferences from this graph:
+
+-   We see that District of Columbia is not a outlier in this age group.
+
+-   It is important that we look at the top five state in this graph because we see more or less the same state but in a different order when we look at the other categories of prime working ages. The top 5 states with more population in this age is:
+
+    -   New Jersey
+
+    -   Georgia
+
+    -   New Hampshire
+
+    -   North Carolina
+
+    -   Connecticuit
+
+-   The 5 state with the lowest proportion of population in this age group:
+
+    -   North Dakota
+
+    -   South Dakota
+
+    -   Utah
+
+    -   Montana
+
+    -   Nebraska
+
+```{r}
+df4_percentages$PrimeWorkingPopulation<-df4_percentages$Age_45_to_54_Percentage+ df4_percentages$Age_35_to_44_Percentage+df4_percentages$Age_25_to_34_Percentage
+
+ggplot(df4_percentages, aes(x = reorder(NAME, PrimeWorkingPopulation, mean), y = PrimeWorkingPopulation)) +
+  geom_bar(stat = "identity",fill = "#1f78b4") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  labs(title = "Age Distribution by State",
+       x = "State",
+       y = "Percentage of Prime Working Population")
+```
+
+This graph attempts to look at all the prime working ages at once. We see overall the top 5 state are:
+
+-   Colorado
+
+-   Washington
+
+-   California
+
+-   Nevada
+
+-   Texas
