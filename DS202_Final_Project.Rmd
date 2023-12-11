@@ -320,14 +320,13 @@ plotly_scatter <- long_data %>%
   add_markers(marker = list(size = 10)) %>%
   layout(title = "Interactive Scatter Plot: Un-Employed vs. Disability Status",
          xaxis = list(title = "Un-Employed"),
-         yaxis = list(title = "Value"),
+         yaxis = list(title = "Number of People"),
          hovermode = "closest")
 
 # Show the interactive plot
 plotly_scatter
 ```
-
-
+From the above graph we can infer that t=
 ```{r,warning=FALSE}
 
 
