@@ -110,7 +110,8 @@ ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentag
 ```
 **Inference for the above garph**
 
-
+The bar chart depict the distribution of educational attainment by state, represented as a percentage of the total population within each state. From the graph, we can infer that certain states have a higher percentage of individuals with specific levels of education for instance the states with larger populations, such as California, Texas, Florida, and New York, exhibit the highest numbers in educational attainment across all levels, from below 9th grade to graduate or professional degrees. 
+This suggests a diverse educational demand and a corresponding supply of educational institutions and job opportunities that require various levels of education. California stands out with the highest numbers in every category, reflecting its vast and diverse educational landscape. While the prevalence of higher education degrees in states like Illinois denotes a strong higher education system, the significant figures for those with less than a high school diploma highlight ongoing challenges in educational access and retention in these heavily populated states.
 
 
 ```{r,message=FALSE}
