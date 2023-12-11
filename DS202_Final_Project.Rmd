@@ -232,6 +232,7 @@ plotly_scatter
 ```
 
 The plot shows the number of people in each education level vs the number of unemployed in that state. The one difference that we can see is in the slope of the different age groups (the different color lines).The steepest one being the people with high school level of eductaion. And the lowest being the number of people with the education below 9th grade.
+
 ```{r,warning=FALSE}
 # Assuming 'merged_data' is your merged dataset with employment and housing information
 # Assuming 'ggplot2' is already loaded
@@ -270,7 +271,7 @@ plot <- ggplot(long_data, aes_string(x = X_variable, y = "value", color = "varia
   theme_minimal() + # Minimalist theme
   labs(title = "Scatter Plots of Various Age vs Un-Employed Rate",
        x = "Number of Unemployed",
-       y = "Value") +
+       y = "Total popluation value") +
   scale_y_continuous(labels = scales::comma) +
   scale_x_continuous(labels = scales::comma) +
   theme(plot.title = element_text(hjust = 0.5), # Center the title
@@ -280,12 +281,10 @@ plotly_plot <- ggplotly(plot)
 print(plotly_plot)
 
 ```
-
+From the above graph we can infer that people who are between 18 years to 34 are the least 
 
 ```{r,warning=FALSE}
-# Load the plotly library
-library(plotly)
-library(dplyr)
+
 
 plotly_scatter <- merged_data %>%
   plot_ly(x = ~`Owner Occupied`, y = ~UnemploymentRate, text = ~NAME, mode = "markers") %>%
@@ -303,11 +302,7 @@ plotly_scatter
 ```
 
 ```{r,warning=FALSE}
-# Load the plotly and dplyr libraries
-library(plotly)
-library(dplyr)
 
-# Assuming your data frame is named 'merged_data'
 
 X_variable <- "Unemployed"
 Y_variables <- c("Total With Disabilities", "No Disability")
@@ -331,11 +326,7 @@ plotly_scatter
 ```
 
 ```{r,warning=FALSE}
-library(plotly)
-library(dplyr)
 
-# Assuming 'merged_data' is your data frame and it contains columns 
-#"U.S. citizen", "Not a U.S. citizen"
 
 # Create an interactive scatter plot
 plotly_scatter <- merged_data %>%
