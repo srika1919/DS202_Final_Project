@@ -55,9 +55,7 @@ merged_data <- merged_data[, !(names(merged_data) %in% columns_to_drop)]
 
 ```
 
-### **Title**
-
-**"Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"**
+## **"Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"**
 
 
 
@@ -160,6 +158,8 @@ library(knitr)
 kable(rounded_correlation_matrix)
 ```
 
+The above table shows the correlation between all the variables from all the tables we took for the study. This table is particularly useful to do the first pick of which variables will be good to compare with each other. There is one thing we should be careful about when we take inferences from this table. Some variables are representing almost the samething so we should not take those variables for drawing conclusions.
+
 ```{r}
 # Assuming 'correlation_matrix' is your correlation matrix
 employment_correlations <- correlation_matrix["EmploymentRate", ]
@@ -223,30 +223,27 @@ plotly_scatter <- long_data %>%
   add_markers(marker = list()) %>%
   layout(title = "Interactive Scatter Plot: Un-Employed vs. Education Levels",
          xaxis = list(title = "Un-Employed"),
-         yaxis = list(title = "Value"),
+         yaxis = list(title = "Number of People"),
          hovermode = "closest")
 
 # Show the interactive plot
 plotly_scatter
 
-
-
-
 ```
 
-
+The plot shows the number of people in each education level vs the number of unemployed in that state. The one difference that we can see is in the slope of the different age groups (the different color lines).The steepest one being the people with high school level of eductaion. And the lowest being the number of people with the education below 9th grade.
 ```{r,warning=FALSE}
 # Assuming 'merged_data' is your merged dataset with employment and housing information
 # Assuming 'ggplot2' is already loaded
 
 # Create a scatter plot
-ggplot(merged_data, aes(x = `Owner Occupied`, y = EmploymentRate)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(title = "Correlation between Owner-Occupied Housing and Employment Rate",
-       x = "Percentage of Owner-Occupied Housing",
-       y = "Employment Rate") +
-  theme_minimal()
+# ggplot(merged_data, aes(x = `Owner Occupied`, y = EmploymentRate)) +
+#   geom_point() +
+#   geom_smooth(method = "lm") +
+#   labs(title = "Correlation between Owner-Occupied Housing and Employment Rate",
+#        x = "Percentage of Owner-Occupied Housing",
+#        y = "Employment Rate") +
+#   theme_minimal()
 
 ```
 

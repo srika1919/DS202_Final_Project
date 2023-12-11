@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # [Part 1]{.underline}
 
-## Title
-
 #### "Socio-Economic Factors Influencing Employment in the United States: A Comprehensive State-by-State Analysis"
 
 ## **Authors**
