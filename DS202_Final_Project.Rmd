@@ -326,7 +326,7 @@ plotly_scatter <- long_data %>%
 # Show the interactive plot
 plotly_scatter
 ```
-From the above graph we can infer that t=
+From the above graph we can infer that the people with disabilities and people without disabilities have equal number of oppourtunities.
 ```{r,warning=FALSE}
 
 
