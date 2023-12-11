@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Education
 
+As a data science student, I'm captivated by how education influences economic and societal progress. My analysis focuses on how higher education correlates with improved job prospects and financial stability. With the wealth of educational data available for longitudinal study, I'm keen to understand and potentially shape educational policy. I'm especially interested in how education imparts essential skills for the modern workforce and promotes adaptability in a tech-driven world. Ultimately, my work delves into education's role in fostering individual growth and its potential to drive societal change.
+
 ```{r,message=FALSE}
 #Neha
 #Education - K201501
@@ -32,58 +34,9 @@ df2_labeled <- df2 %>%
 df2_wide <- df2_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
 ```
-**Exploratory Data Analysis (EDA)**
 
-```{r,message=FALSE}
-# Ensure necessary libraries are installed and loaded
-if (!require("ggplot2")) install.packages("ggplot2")
-if (!require("tidyr")) install.packages("tidyr")
-library(ggplot2)
-library(tidyr)
-
-# Convert df2_wide to long format
-df2_long <- df2_wide %>%
-  gather(key = "Education_Level", value = "Count", -NAME)
-
-# Plotting the distribution of each education level across states
-ggplot(df2_long, aes(x = NAME, y = Count, fill = Education_Level)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "Distribution of Education Levels across States", 
-       x = "State", 
-       y = "Count")
-
-```
 **Exploratory Data Analysis (EDA)** based on percentage
 
-```{r,message=FALSE}
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-
-# Convert df2_wide to long format
-df2_long <- df2_wide %>%
-  gather(key = "Education_Level", value = "Count", -NAME)
-
-# Calculate total count for each state
-df2_long <- df2_long %>%
-  group_by(NAME) %>%
-  mutate(Total = sum(Count)) %>%
-  ungroup()
-
-# Calculate the percentage
-df2_long <- df2_long %>%
-  mutate(Percentage = (Count / Total) * 100)
-
-# Plotting the distribution of each education level across states as a percentage
-ggplot(df2_long, aes(x = NAME, y = Percentage, fill = Education_Level)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "Percentage Distribution of Education Levels across States", 
-       x = "State", 
-       y = "Percentage")
-
-```
 ```{r,message=FALSE}
 library(ggplot2)
 library(tidyr)
@@ -155,6 +108,11 @@ ggplot(df2_long, aes(x = reorder(NAME, -Education_Total_students), y = Percentag
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
  
 ```
+**Inference for the above garph**
+
+
+
+
 ```{r,message=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional degree_Percentage`, mean), y = `Education_Graduate_professional degree_Percentage`)) +
   geom_bar(stat = "identity") +
@@ -183,7 +141,8 @@ ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percenta
        y = "Percentage of people with Bachelors level degree)")
 
 ```
+**Inference for above Three Graphs**
 
-
+The above three bar charts illustrate the distribution of various education levels across different states. The first chart likely represents the percentage of the population with a bachelor's degree, showing a gradual increase in educational attainment towards District of columbia states. The second chart appears to show the distribution of master's degrees, which, while following a similar pattern, reflects lower percentages indicative of the reduced number of individuals who pursue postgraduate education. The third chart, presumably depicting high school diploma holders, presents a more pronounced variability, culminating in a steep increase for the last few states. This suggests a greater disparity in high school graduation rates across states. Generally, states with higher percentages of bachelor's and master's degree holders also have a high percentage of high school diploma holders, indicating possible correlations between state education policies and the value placed on education.
 
 ------------------------------------------------------------------------
