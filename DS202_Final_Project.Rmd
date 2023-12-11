@@ -281,7 +281,7 @@ plotly_plot <- ggplotly(plot)
 print(plotly_plot)
 
 ```
-From the above graph we can infer that people who are between 18 years to 34 are the least 
+From the above graph we can infer that people who are between 18 years to 34 are the least unemployed amoung various states when compared to the other ages, with a few outliers. Age 55 to 64 are the most employed due to them being aged, due to retirement etc.
 
 ```{r,warning=FALSE}
 
@@ -344,14 +344,18 @@ plotly_scatter <- merged_data %>%
 plotly_scatter
 
 ```
+From the above graph, we can infer that, in each state, the number of people unemployed who are US citizen is more compared to who are not a US citizen. This could be due to a varity of reasons, few of them are:
+- Number of Non-US citizens are less compared to US citizens
+- Few companies employ people who have great GPA, academic performance, extracurrical activities and internation students who come to study in US tend to do more compared to a resident as they have more respponsibiltes on their shlolders as shown by a study conducted by Pew Research.
+This could also infers that many Non-US citizens in US, who get a job after studies or who come directly on a work visa tend to get a job and they stay stable for a period of time.
 
 ```{r,warning=FALSE}
-ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
-  geom_point() +
-  geom_smooth(method=lm) +
-  labs(title="Disability Rate vs. Employment Rate",
-       x="Disability Rate",
-       y="Employment Rate")
+# ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
+#   geom_point() +
+#   geom_smooth(method=lm) +
+#   labs(title="Disability Rate vs. Employment Rate",
+#        x="Disability Rate",
+#        y="Employment Rate")
 
 ```
 
