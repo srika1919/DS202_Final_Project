@@ -31,6 +31,8 @@ library(maps)
 
 ## Disabilities
 
+People with disabilities face significant challenges in finding and maintaining employment. These challenges include lack of accessibility, workplace accommodations, and negative societal attitudes. They may also have limited access to suitable job opportunities that cater to their unique needs, leading to high rates of unemployment or underemployment. Misconceptions and biases about disabilities can lead to discriminatory practices, preventing individuals with disabilities from utilizing their skills and abilities to their full potential in the workforce. To address these challenges, it is essential to enhance inclusivity, raise awareness about the capabilities of individuals with disabilities, and encourage workplace accommodations. By doing so, we can unlock the potential of a broader talent pool and create workplaces that embrace diversity, ultimately fostering a more inclusive and supportive environment for people with disabilities in the workforce.
+
 ```{r,message=FALSE}
 #Abhay
 #Disabilities - K201803

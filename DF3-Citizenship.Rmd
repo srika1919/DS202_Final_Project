@@ -13,6 +13,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Citizenship
 
+
+Citizenship status significantly influences employment prospects, with non-citizens often facing unique challenges in the job market. Legal restrictions and specific job requirements tied to citizenship can limit access to certain professions, hindering career opportunities and advancement for non-citizens. Employers may encounter administrative complexities when hiring individuals without citizenship, potentially impacting their hiring decisions. Discrimination based on immigration status can further exacerbate challenges for non-citizens in securing meaningful employment. Balancing national security considerations with the principles of equal employment opportunities is crucial to fostering inclusive workplaces that recognize and harness the skills and contributions of individuals, irrespective of their citizenship status. Efforts to promote fair employment policies and combat biases contribute to creating a more equitable job market for all.
+
 ```{r,message=FALSE,warning=FALSE}
 #Esha
 #Citizenship - K200501
