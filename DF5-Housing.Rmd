@@ -15,6 +15,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Housing
 
+Housing plays a pivotal role in influencing employment outcomes for individuals, as the accessibility, affordability, and stability of housing can significantly impact job opportunities and career advancement. Housing affordability directly affects an individual's financial well-being, and high housing costs relative to income may force individuals to allocate a substantial portion of their earnings to housing, leaving less for other essential needs. In some cases, individuals may face the challenge of commuting long distances due to housing affordability issues, which can impact their ability to secure and maintain employment. Moreover, stable and secure housing can contribute to a positive work environment, enabling individuals to focus on their careers without the stress and uncertainty associated with inadequate or unstable housing situations. Policies and initiatives that address housing affordability, promote stable living conditions, and encourage equitable urban development can play a crucial role in supporting individuals in their pursuit of meaningful and sustainable employment opportunities.
+
 ```{r,message=FALSE}
 #Niharika
 # Housing - K202502
