@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 #install.packages("tidycensus")
 # Load necessary libraries
 library(tidycensus)
@@ -29,7 +29,7 @@ library(maps)
 
 ## Employment
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 #Abhay
 #Employment - K202301 for 2021
 
@@ -62,7 +62,7 @@ df1_wide <- df1_labeled %>%
 
 ```
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 # Calculate employment rates
 df1_wide <- df1_wide %>%
   mutate(

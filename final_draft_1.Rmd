@@ -126,7 +126,7 @@ We shortlisted it based on ACS 2021, inclusive for all states in United States.
     | Self-care difficulty    | Total with self care difficulty |
     | No Disability           | Total without disabilities      |
 
-```{r, child=c('DS202_Final_Project.Rmd')}
+```{r, child=c('DS202_Final_Project.Rmd'),message=FALSE}
 ```
 
 # [Part 3]{.underline}
@@ -186,8 +186,7 @@ ggplot(long_data, aes(x = NAME, y = Employed, fill = HousingType)) +
 
 ```
 
-The bar chart titled "Employed Individuals vs States by Housing Type" displays a comparison of employed individuals in various U.S. states, differentiated by housing type---owner occupied versus renter occupied.
-As I analyze the chart, I observe that in most states, the number of employed individuals living in owner-occupied housing is higher than those in renter-occupied housing.
+The bar chart titled "Employed Individuals vs States by Housing Type" displays a comparison of employed individuals in various U.S. states, differentiated by housing type---owner occupied versus renter occupied.In most states, the number of employed individuals living in owner-occupied housing is higher than those in renter-occupied housing.
 This could suggest a correlation between home ownership and employment status, which may be due to a variety of economic and social factors, such as the stability that home ownership can provide or the possibility that employed individuals have a higher purchasing power to buy homes.
 Notably, in states like California and Texas, the bars representing owner-occupied housing are significantly taller, which might reflect a combination of high employment rates and a culture or economy that favors home ownership.
 On the other hand, the District of Columbia stands out with a higher proportion of employed individuals in renter-occupied housing, which could reflect urban real estate trends where renting is more common due to high property costs or lifestyle choices.

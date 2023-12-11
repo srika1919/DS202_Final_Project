@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 As a data science student, I'm captivated by how education influences economic and societal progress. My analysis focuses on how higher education correlates with improved job prospects and financial stability. With the wealth of educational data available for longitudinal study, I'm keen to understand and potentially shape educational policy. I'm especially interested in how education imparts essential skills for the modern workforce and promotes adaptability in a tech-driven world. Ultimately, my work delves into education's role in fostering individual growth and its potential to drive societal change.
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 #Neha
 #Education - K201501
 df2 <- get_acs(geography = "state", 
@@ -37,7 +37,7 @@ df2_wide <- df2_labeled %>%
 
 **Exploratory Data Analysis (EDA)** based on percentage
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 library(ggplot2)
 library(tidyr)
 library(dplyr)
@@ -84,7 +84,7 @@ for (plot in plots) {
 
 ```
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 df2_percentages <- df2_wide %>%
   mutate(
     `Education_Below_9th grade_Percentage` = `Education_Below_9th grade` / Education_Total_students * 100,
@@ -114,7 +114,7 @@ The bar chart depict the distribution of educational attainment by state, repres
 This suggests a diverse educational demand and a corresponding supply of educational institutions and job opportunities that require various levels of education. California stands out with the highest numbers in every category, reflecting its vast and diverse educational landscape. While the prevalence of higher education degrees in states like Illinois denotes a strong higher education system, the significant figures for those with less than a high school diploma highlight ongoing challenges in educational access and retention in these heavily populated states.
 
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional degree_Percentage`, mean), y = `Education_Graduate_professional degree_Percentage`)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
@@ -123,7 +123,7 @@ ggplot(df2_percentages, aes(x = reorder(NAME,`Education_Graduate_professional de
        y = "Percentage of people with graduate level degree)")
 
 ```
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Percentage, mean), y = Education_High_school_graduate_Percentage)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
@@ -133,7 +133,7 @@ ggplot(df2_percentages, aes(x = reorder(NAME,Education_High_school_graduate_Perc
 
 
 ```
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percentage, mean), y = Education_Bachelors_degree_Percentage)) +
   geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
@@ -142,6 +142,7 @@ ggplot(df2_percentages, aes(x = reorder(NAME,Education_Bachelors_degree_Percenta
        y = "Percentage of people with Bachelors level degree)")
 
 ```
+
 **Inference for above Three Graphs**
 
 The above three bar charts illustrate the distribution of various education levels across different states. The first chart likely represents the percentage of the population with a bachelor's degree, showing a gradual increase in educational attainment towards District of columbia states. The second chart appears to show the distribution of master's degrees, which, while following a similar pattern, reflects lower percentages indicative of the reduced number of individuals who pursue postgraduate education. The third chart, presumably depicting high school diploma holders, presents a more pronounced variability, culminating in a steep increase for the last few states. This suggests a greater disparity in high school graduation rates across states. Generally, states with higher percentages of bachelor's and master's degree holders also have a high percentage of high school diploma holders, indicating possible correlations between state education policies and the value placed on education.

@@ -204,7 +204,7 @@ correlation_df <- data.frame(
 ```
 
 
-```{r}
+```{r,warning=FALSE}
 # Load the plotly and dplyr libraries
 library(plotly)
 library(dplyr)
@@ -233,7 +233,9 @@ plotly_scatter
 
 
 ```
-```{r}
+
+
+```{r,warning=FALSE}
 # Assuming 'merged_data' is your merged dataset with employment and housing information
 # Assuming 'ggplot2' is already loaded
 
@@ -247,7 +249,9 @@ ggplot(merged_data, aes(x = `Owner Occupied`, y = EmploymentRate)) +
   theme_minimal()
 
 ```
-```{r}
+
+
+```{r,warning=FALSE}
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -279,7 +283,9 @@ plotly_plot <- ggplotly(plot)
 print(plotly_plot)
 
 ```
-```{r}
+
+
+```{r,warning=FALSE}
 # Load the plotly library
 library(plotly)
 library(dplyr)
@@ -299,7 +305,7 @@ plotly_scatter
 
 ```
 
-```{r}
+```{r,warning=FALSE}
 # Load the plotly and dplyr libraries
 library(plotly)
 library(dplyr)
@@ -327,7 +333,7 @@ plotly_scatter <- long_data %>%
 plotly_scatter
 ```
 
-```{r}
+```{r,warning=FALSE}
 library(plotly)
 library(dplyr)
 
@@ -351,7 +357,7 @@ plotly_scatter
 
 ```
 
-```{r}
+```{r,warning=FALSE}
 ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
   geom_point() +
   geom_smooth(method=lm) +

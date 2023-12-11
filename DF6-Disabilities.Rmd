@@ -58,7 +58,7 @@ df6_labeled <- df6 %>%
 # Reshape the data so that state names are rows and variable labels are columns
 df6_wide <- df6_labeled %>%
   pivot_wider(names_from = label, values_from = estimate, id_cols = NAME)
-df6_wide
+#df6_wide
 
 # df6_wide now has states as rows and the descriptive variable labels as columns
 
