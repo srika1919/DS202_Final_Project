@@ -293,13 +293,15 @@ plotly_scatter <- merged_data %>%
          xaxis = list(title = "Percentage of Owner-Occupied Housing"),
          yaxis = list(title = "Unemployment Rate (%)"),
          hovermode = "closest") %>%
-  add_annotations(text = ~NAME, x = ~`Owner Occupied`, y = ~UnemploymentRate, showarrow = FALSE)
+  add_annotations(text ="", x = ~`Owner Occupied`, y = ~UnemploymentRate, showarrow = FALSE)
 
 # Show the interactive plot
 plotly_scatter
 
 
 ```
+
+The above plotly plot shows the percentage of owner-occupied houses vs unemployment rate for each state.Each point represents and a state and we can hover over the point to get the corresponding state name and exact value of unemployment rate and percentage of owner occupied houses. Although we cannot see any clear pattern we can see that some points corresponding to Florida Texas and California have higher percentage of owner occupied housing compared to the otehr states the other states.
 
 ```{r,warning=FALSE}
 
@@ -325,6 +327,7 @@ plotly_scatter <- long_data %>%
 plotly_scatter
 ```
 
+
 ```{r,warning=FALSE}
 
 
@@ -348,6 +351,7 @@ From the above graph, we can infer that, in each state, the number of people une
 - Number of Non-US citizens are less compared to US citizens
 - Few companies employ people who have great GPA, academic performance, extracurrical activities and internation students who come to study in US tend to do more compared to a resident as they have more respponsibiltes on their shlolders as shown by a study conducted by Pew Research.
 This could also infers that many Non-US citizens in US, who get a job after studies or who come directly on a work visa tend to get a job and they stay stable for a period of time.
+
 
 ```{r,warning=FALSE}
 # ggplot(merged_data, aes(x=DisabilityRate, y=EmploymentRate)) +
