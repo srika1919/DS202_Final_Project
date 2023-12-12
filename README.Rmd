@@ -2,7 +2,10 @@
 title: "DS 202 Final Project Report"
 author: "Abhay, Srika, Neha, Esha, Niharika"
 date: "2023-11-12"
-output: html_document
+
+output: github_document
+always_allow_html: true
+
 editor_options: 
   markdown: 
     wrap: sentence
