@@ -3,8 +3,7 @@ title: "DS 202 Final Project Report"
 author: "Abhay, Srika, Neha, Esha, Niharika"
 date: "2023-11-12"
 
-output: github_document
-always_allow_html: true
+output: html_document
 
 editor_options: 
   markdown: 
