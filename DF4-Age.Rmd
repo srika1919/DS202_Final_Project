@@ -1,6 +1,6 @@
 ---
 title: "DF4-Age"
-author: "Abhay Prasanna Rao"
+author: "Srika Raja"
 date: "2023-12-02"
 output: html_document
 ---
@@ -14,9 +14,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Age is one of the important social factor which affects the job market. Employers may discriminate against older workers, believing them to be less productive, adaptable, or tech-savvy. This can lead to age bias in hiring and promotion practices, affecting older workers' job opportunities.Younger workers may be willing to accept lower wages than older workers, making them more cost-effective for employers. Contradistinction in some fields older workers often have decades of experience and accumulated wisdom in their field, making them valuable assets to any team. They may have a deeper understanding of industry trends, protocols, and best practices, leading to better problem-solving and decision-making skills. Due to their experience and expertise, older workers may require less training than younger colleagues, saving employers time and resources.
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 #Srika
 #Age - K200104
+library(tidycensus)
+library(dplyr)
+library(tidyr)
 df4 <- get_acs(geography = "state", 
                 table = "K200104", 
                 year = 2021,
@@ -38,7 +41,7 @@ df4_wide <- df4_labeled %>%
 
 ```
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 library (plotly)
 df4_percentages <- df4_wide %>%
   mutate(
